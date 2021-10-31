@@ -68,6 +68,34 @@
 			</section>
 
 			<!-- Project section -->
+			<section id="projects">
+				<p>PROJECTS</p>
+				
+				<div class="project-container">	
+					<div class="project-img">
+						<img src="{% static 'landing_page/pics/laptop_520.png' %}" width="520">
+						<img src="{% static 'landing_page/pics/workboard_414.png' %}" class="project-screenshot">
+					</div>
+
+					<div class="project-info">
+						<p class="project-title">Workboard 2021</p>
+						<ul class="project-tools inline-list text-muted">
+							<li>Python</li>
+							<li>Django</li>
+							<li>JavaScript</li>
+							<li>HTML</li>
+							<li>CSS</li>
+							<li>Bootstrap</li>
+							<li>API</li>
+						</ul>
+						<p class="project-description">Workboard is a project managing application. Users can create project boards with different columns and move their tasks between them.</p>
+						<a href="{% url 'workboard:guest-path' %}" target="_blank" class="project-btn">View Workboard</a>
+					</div>
+				</div>
+
+
+			
+			</section>
 
 			<section id="footer">
 				<table id="contact-info">

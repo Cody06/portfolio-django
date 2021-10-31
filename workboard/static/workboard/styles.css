@@ -1,0 +1,272 @@
+body {
+	background-color: lightblue;
+}
+
+button:focus {	/* remove blue border around all buttons when clicking on them */
+	outline: none;
+}
+/*____________________________________Register + Login page____________________________________*/
+.auth-form {
+	margin-top: 20px;
+	padding: 20px;
+	border: 1px solid darkgrey;
+	border-radius: 10px;
+	box-shadow: 10px 10px 5px #aaaaaa; /* h-offset v-offset blur */
+	text-align: center;	/* center all inputs in the form */
+	background-color: #f1f1f1;
+}
+.auth-form input {
+	margin: 5px 0px;
+	width: 200px;
+}
+.auth-form form {
+	margin-bottom: 5px;
+}
+
+/*____________________________________Index page style____________________________________*/
+.flex-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+#create-board-form-btn {
+	width: 300px;
+	padding: 5px;
+	margin: 20px 0px;	/* top-bottom right-left */
+	border: none;
+	border-radius: 10px;
+	font-size: large;
+	color: white;
+	background-color: #4285F4;
+	box-shadow: 2px 2px 5px #aaaaaa;
+}
+#create-board-form-btn:hover { background-color: #2674f2; }
+
+#create-board-form {
+	display: none;		/* Have the form initially hidden */
+	background-color: #f1f1f1;
+	width: 400px;
+	padding: 5px;
+	border-radius: 10px;
+	box-shadow: 10px 10px 5px #aaaaaa;
+	position: absolute;		/* Need absolute since using absolute for child #close-form-btn */
+	left: 50vw;				/* Left margin of the form is at 50% of the window */
+	margin-left: -200px;	/* The middle of the form is at the middle of the window */
+	z-index: 1;
+}
+#create-board-form h5 {	/* Select only the header child of the form */
+	text-align: center;
+	margin-top: 10px;
+}
+
+.form-input { margin-bottom: 10px; } /* Add some spacing between the form's inputs */
+
+.center-btn {
+	text-align: center;
+	margin-bottom: 10px;
+}
+#close-form-btn {	/* Position close form <button> 'X' in the top right corner */
+	border: none;
+	background-color: transparent;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}
+#close-form-btn:hover { color: red; }
+
+.boards-list {
+	padding: 0;			/* remove indentation from ul */
+	list-style: none;	/* remove bullet points */
+}
+
+.active-list-item { background-color: #34A853; }
+.active-list-item:hover { background-color: #2a8943; }
+
+.archived-list-item { background-color: #8C8C8C; }
+.archived-list-item:hover { background-color: #737373; }
+.boards-list button {
+	color: white;
+	font-size: large;
+	text-align: left;
+	margin-bottom: 8px;
+	padding: 8px;
+	width: 100%;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px #aaaaaa;
+}
+.timestamp { font-size: 0.8rem; }
+/*____________________________________Board page style____________________________________*/
+#board-header {
+	height: 40px;
+	margin: 5px;
+	padding: 5px;
+}
+
+#editing-title {
+	display: none;
+}
+.inline-block {
+	display: inline-block;
+}
+
+#board-title {
+	text-decoration: underline;
+}
+
+.edit-board-btn, .archive-btns {
+	display: none;
+}
+
+#board-div {
+	margin: 5px;
+	display: flex; /* positions the large add column btn in the same row as the columns */
+	flex-wrap: wrap;
+}
+
+#empty-board-msg {
+	display: none;	/* Initially hidden */
+}
+/* #### Separate these ones in different blocks */
+#add-col-popup, #edit-col-popup, #edit-card-popup {
+	display: none;
+	background-color: #d9d9d9;
+	width: 400px;
+	height: 200px;
+	padding: 5px;
+	border-radius: 10px;
+	box-shadow: 10px 10px 5px #aaaaaa;
+	/* Position (fixed) in the high middle of the screen on top of the document */
+	position: fixed; 	/* Need fixed since using absolute for child #close-form-btn */
+	top: 25%;				/* 50% below the top of the document */
+	margin-top: -100px;		/* Position the middle of the element at 25% */
+	left: 50vw;				/* Align the left edge of the element at 50% of the window */
+	margin-left: -200px;	/* Move left margin back the halfway mark (half-width of the element 400/2) */
+	z-index: 2;				/* Position on top of document elements */
+}
+#add-col-popup h5, #edit-col-popup h5 { margin-top: 5px}
+#board-div input[type="text"] { font-size: 0.9rem; }
+#board-div input[type="submit"] { margin-top: 10px; }
+
+#add-col-btn-lg {	/* Large "+ Add column" button at the rightmost position of all existing columns */
+	display: none;
+	height: 80px;
+	width: 300px;
+	margin-left: 5px;
+	border: 1px dashed grey;
+	border-radius: 5px;
+}
+#add-col-btn-lg:hover { 
+	color: green;
+	border: 1px solid grey;
+}
+
+/*____________________________________Columns style____________________________________*/
+#cols-div {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;	/* make the column as tall as the number of cards inside */
+	align-content: center;
+
+}
+.col-div {
+	background-color: #f2f2f2;
+	border-radius: 5px;
+	width: 300px;
+	position: relative; 	/* Need relative since using absolute for child .col-buttons */
+	margin-left: 5px;
+	margin-bottom: 5px;		/* for when columns are stacked on each other */
+	overflow-y:  auto; 		/* Adding the scroll property */
+	padding-bottom: 10px;
+	min-height: 110px;		/* Empty column should be taller than the add column button */
+}
+
+.col-div > h5 {	/* Column's title */
+	padding: 5px 5px 5px 10px;
+	background-color: #d9d9d9;
+}
+
+.col-buttons {			/* Position column's buttons top right corner */
+	position: absolute;
+	top: 0px;
+	right: 2px;
+	display: flex;
+}
+
+.col-buttons button {
+	border: none;
+	height: 34px;	/* Same height as the column's header */
+	padding: 5px;
+	background-color: transparent;
+}
+
+.col-buttons > button:hover, .dropbtn:hover, .card-div > button:hover {
+	color: lightblue;
+}
+
+.dropdown {		/* Column's drop down menu when pressing ... - needed to position the dropdown content */
+	position: relative;
+}
+.dropdown-content {	
+	display: none;
+	position: absolute;
+	right: 0px;			/* Aligning menu to the right edge */
+	z-index: 1;
+}
+.dropdown-content button {
+	width: 130px;
+	background-color: #bfbfbf;
+	text-align: left;
+	border: none;
+
+}
+.dropdown-content button:hover { background-color: lightblue; }
+
+/* Use JS to add this class to the .dropdown-content container when user clicks on dropdown button */
+.show {display: block;}	
+
+#add-card-div { margin: 0px 5px; }  /* top-bottom right-left */
+
+#add-card-div input[type="submit"], #add-card-div button {
+	margin-top: 5px;
+	width: 141px;	/* make each button almost half the width of the parent */
+}
+
+/*____________________________________Cards style____________________________________*/
+.card-div {
+	position: relative;
+	background-color: white;
+	padding: 5px;
+	margin: 0px 5px 7px 5px; /* top right bottom left */
+	border: 1px solid grey;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px #aaaaaa;
+}
+
+.card-buttons {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	border: none;
+	background-color: transparent;
+}
+.card-buttons > .dropdown > .dropbtn {
+	border: none;
+	background-color: transparent;
+}
+
+.card-div > p {	width: 87%; } /* ensure text area in card doesn't overlap with ... button */
+
+.card-creator {
+	font-size: 0.9rem;
+	color: #737373;
+}
+
+/* Change mouse cursor when hovering over a draggable */
+.draggable {
+	cursor: move;
+}
+
+.draggable.dragging { /* Select any draggable with the dragging class */
+	opacity: 0.5;
+}

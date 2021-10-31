@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Workboard{% block title %}{% endblock %}</title>
+		<!-- Add Bootstrap + CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" href="{% static 'workboard/styles.css' %}">
+		<!-- Add JavaScript -->
+		{% block script %}
+		{% endblock %}
+	</head>
+	<body>
+
+		<nav class="navbar navbar-expand navbar-light bg-light"><!-- Format navbar using Bootstrap -->
+			
+			<span class="navbar-brand">WorkBoard</span>
+			
+			<ul class="navbar-nav ml-auto">	<!-- Remove bullet points and add spaces between the links -->
+				{% if user.is_authenticated %}
+					<li class="nav-item">
+						<a class="nav-link text-center"><strong>{{ user.username }}</strong></a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'workboard:guest-view' %}" title="View Projects">Home</a>
+					</li>
+
+					<li id="log-out" class="nav-item">
+						<a class="nav-link" href="{% url 'workboard:logout' %}" title="End session">Log Out</a>
+					</li>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'login' %}" title="Go to Login page">Log In</a>
+					</li class="nav-item">
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'register' %}" title="Go to Register page">Register</a>
+					</li>
+				{% endif %}
+			</ul>
+		
+		</nav>
+
+		{% block body %}
+		{% endblock %}
+	</body>
+</html>
