@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charste="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Portfolio{% block title %}{% endblock %}</title>
+		<!-- Add icon logo in the tab bar -->
+		<link rel="sortcut icon" href="{% static 'landing_page/pics/CM_logo.png' %}">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" href="{% static 'landing_page/styles.css' %}">
+		<script src="{% static 'landing_page/index.js' %}"></script>
+	</head>	
+	<body>
+		<nav>
+			<div id="main-logo">Cody Miu</div>
+			
+			<ul class="navbar-list inline-list">	<!-- Remove bullet points and add spaces between the links -->
+				<li>
+					<a class="navbar-link" href="#projects" title="View Projects">Projects</a>
+				</li>
+				<li>
+					<button class="navbar-link" id="resume-btn">Resume</button>
+				</li>
+				<li>
+					<a class="navbar-link" href="#footer" title="Contact info">Contact</a>
+				</li>
+			</ul>
+		
+		</nav>
+
+		<div id="pdf-container">
+			<iframe src="{% static 'landing_page/Cody_Miu_Developer_Resume.pdf' %}"></iframe>
+		</div>
+
+		<div id="main-container">
+			
+			<section id="header">
+				
+				<div id="title" class="css-typing">
+					<h1>Full Stack Developer<span id="red-dot">.</span></h1>
+				</div>
+
+				<p id="tools">Python | Django | JavaScript | React | HTML | CSS | Bootstrap | SQL</p>
+
+				<div id="intro">
+					<blockquote><q>If it's imaginable, then it can be built.</q></blockquote>
+					<p>I'm a Full Stack Developer passionate about building applications with tools such as Python, Django JavaScript, React, HTML, CSS and many other.</p>
+				</div>
+
+
+				<div id="logo-links">
+					<a href="https://github.com/Cody06" target="_blank">
+						<img src="{% static 'landing_page/pics/github_square_50.png' %}" width="50" alt="Github link">
+					</a>
+					<a href="http://www.linkedin.com/in/cody-miu" target="_blank">
+						<img src="{% static 'landing_page/pics/linkedin_square_50.png' %}" width="50"alt="LinkedIn link">
+					</a>
+				</div>
+
+				<div id="header-img">
+					<!--<img src="{% static 'landing_page/laptop.png' %}">-->
+				
+
+				</div>
+
+			</section>
+
+			<!-- Project section -->
+
+			<section id="footer">
+				<table id="contact-info">
+					<tr>
+						<th colspan="2">Get in touch</th>
+					<tr>
+						<td><img src="{% static 'landing_page/pics/location_pointer_24.png' %}"></td>
+						<td>Montreal, QC <br>Canada</td>
+					</tr>
+					<tr>
+						<td><img src="{% static 'landing_page/pics/email_24.png' %}"></td>
+						<td>cody.miu@gmail.com</td>
+					</tr>
+						<td><img src="{% static 'landing_page/pics/linkedin_round_24.png' %}"></td>
+						<td><a href="http://www.linkedin.com/in/cody-miu" target="_blank">linkedin.com/in/cody-miu</a></td>
+					</tr>
+				</table>
+			</section>
+		</div>
+	</body>
+</html>

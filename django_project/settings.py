@@ -31,9 +31,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'landing_page',             # Step 1. Start by installing the app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.humanize',  # Format large numbers with comma 1/3 (Used for commerce app)
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -80,6 +82,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'landing_page.User'           # Add this to prevent clashing errors with the Models
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -104,14 +107,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+# Change the following settings for Eastern Time            # Optional step (changing timezone)
+TIME_ZONE = 'US/Eastern'   # Default: TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False             # Default: USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,0 +1,274 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;	/* smooth scrolling when navigating to an element */
+}
+
+body {
+	display: flex;		/* mostly to center the PDF view */
+	justify-content: center;
+}
+
+.gray-font { font-color: gray; }
+
+nav {
+	background-color: #353A40;  
+	box-shadow: 0 5px 5px #aaaaaa;
+	height: 48px;
+	width: 100vw;
+	position: fixed;
+	top: 0;
+	z-index: 1;
+}
+.inline-list {
+	list-style-type: none;	/* Remove bullet points */
+	margin: 0;				/* remove browser's default */	
+	padding: 0;
+	display: flex;			/* display list items on one line */
+}
+#main-logo {
+	color: #F2AA4CFF;		/* orange */
+	display: inline;
+	font-size: 32px;
+	margin-left: 20px;
+}
+.navbar-list {
+	height: 48px;
+	align-items: center;	/* align on Y axis */
+	float: right;
+}
+.navbar-link {
+	color: white;
+	margin-right: 40px;
+}
+.navbar-link:hover { color: #F2AA4CFF; }
+
+#resume-btn {
+	border: none;
+	background-color: transparent;
+}
+#resume-btn:hover { text-decoration: underline; }
+#resume-btn:focus { outline: none; }	/* Remove outline after pressing button */
+
+#pdf-container {
+	position: fixed;
+	top: 70px;
+	display: none;
+	z-index: 1;
+}
+
+#pdf-container iframe {
+	width: 80vw;
+	height: 90vh;
+	margin: auto;
+	border-radius: 8px;
+	border: none;
+}
+
+#main-container {
+	max-width: 1200px; /* 1280px or 1920px */
+	margin: auto;
+}
+/*__________________________________________HEADER__________________________________________*/
+#header {
+	padding: 10px;
+	height: 600px;
+	position: relative;
+	border: 1px solid orange;
+}
+#title {
+	max-width: 500px;
+	margin: 150px auto 0px auto;
+	border: 1px solid red;
+}
+
+@keyframes move {
+	from { top: -200px; }
+	to { top: 0px; }
+}
+
+#red-dot {
+	color: red;
+	position: relative;
+	animation-name: move;
+	animation-duration: 3s;
+	animation-fill-mode: forwards;
+}
+#tools {
+	max-width: 580px;
+	margin: 20px auto 0px auto;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid red;
+}
+#intro {
+	margin-top: 50px;
+	max-width: 580px;
+	border: 1px solid red;
+	letter-spacing: 1px;
+}
+
+#logo-links {
+	width: 500px;
+	border: 1px solid red;
+}
+#logo-links img {
+	margin-left: 20px;
+	border: 1px solid red;
+}
+#logo-links img:hover {
+	/* Apply orange filter to image */
+	filter: invert(57%) sepia(72%) saturate(1781%) hue-rotate(3deg) brightness(110%) contrast(104%);;
+}
+#logo-links a:hover {
+	text-decoration: none;	/* without this there is an added line next to the image */
+}
+
+#header-img {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 1px solid red;
+}
+/*__________________________________________PROJECTS__________________________________________*/
+#projects {
+	border: 1px solid orange;
+}
+#projects > p {
+	text-align: center;
+	font-size: 1.4rem;
+	letter-spacing: 1px;
+	color: #a6a6a6;
+}
+.project-container {
+	min-height: 400px;		/* laptop-img height (300) + 20px for padding */
+	margin: 15px;
+	padding: 8px;
+	border-radius: 8px;
+	box-shadow: 0 5px 5px #aaaaaa;
+	display: flex;
+	flex-wrap: wrap;
+	background-color: rgb(250, 250, 250);
+}
+
+.project-img {
+	width: 55%;
+	min-width: 520px;
+	height: 300px;
+	margin: auto;
+	display: inline-block;
+	/*border: 1px solid red;*/
+}
+
+.project-screenshot {	/* place screenshot in the middle of the laptop screen */
+	border-radius: 10px 10px 0px 0px;
+	margin-top: -340px;
+	margin-left: 53px;
+}
+
+.project-info {
+	width: 45%;
+	height: 300px;
+	margin: auto;
+}
+
+.project-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+.project-tools li {
+	font-size: 0.9rem;
+	margin-right: 5px;
+	background-color: #e6e6e6;
+	border-radius: 10px;
+	padding: 3px;
+}
+.project-description {
+	margin: 20px 0px;
+}
+.project-btn {
+	background-color: #353A40;
+	color: white;
+	border-radius: 20px;
+	padding: 10px;
+}
+
+.project-btn:hover {
+	background-color: #F2AA4CFF; 
+	text-decoration: none;
+	color: white;
+}
+/*__________________________________________FOOTER__________________________________________*/
+#footer {
+	border: 1px solid orange;
+	padding: 10px 0px 50px 0px;
+	color: #a6a6a6;
+}
+
+#contact-info {
+	margin: auto;	/* no need for width since table's width is as large as its contents */
+}
+#contact-info th { 
+	font-size: 1.4rem;
+	padding: 10px 0px; 
+	text-align: center;
+}
+#contact-info td { padding: 5px 5px; }
+
+#contact-info a {
+	color: #a6a6a6;
+}
+
+/* Typing text animation - source: https://css-tricks.com/snippets/css/typewriter-effect/ */
+.css-typing h1 {
+	font-family: Courier, monospace;
+	font-weight: bold;
+  	border-right: .15em solid orange;
+  	white-space: nowrap;
+  	overflow: hidden;
+}
+.css-typing h1:nth-child(1) {	/* select the firs element in the class */
+  	width: 500px;				/* movement length of the typing bar */
+  	-webkit-animation: type 1.5s steps(40, end);
+  	animation: type 1.5s steps(40, end);
+  	-webkit-animation-fill-mode: forwards;
+  	animation-fill-mode: forwards;
+}
+
+@keyframes type {
+  	0% {
+    	width: 0;
+  	}
+  	99.9% {
+    	border-right: .15em solid orange;
+  	}
+  	100% {
+    	border: none;
+  	}
+}
+
+@-webkit-keyframes type {
+  	0% {
+    	width: 0;
+  	}
+  	99.9% {
+    	border-right: .15em solid orange;
+  	}
+  	100% {
+    	border: none;
+  	}
+}
+
+@keyframes blink {
+  	50% {
+    	border-color: transparent;
+  	}
+}
+@-webkit-keyframes blink {
+  	50% {
+    	border-color: tranparent;
+  	}
+}
