@@ -1,0 +1,51 @@
+.body {
+	padding: 10px;
+	font-size: normal;
+}
+
+.div-border {
+	border: 1px solid lightgray;
+	padding: 10px;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.ligthgray-text { color: lightgray; }
+
+/* Center the table */
+table {	
+	width: 300px;
+	margin: auto;
+}
+td { text-align: center; }
+
+#follow-table { width: 70%;	}	/* Approach the followers and following text together under the user's name */
+
+.follow-data { font-size: 80%; }
+
+#follow-btn, #unfollow-btn {
+	width: 80px;
+	border: none;
+	border-radius: 15px;
+}
+
+/* Remove blue border when clicking on the button */
+#follow-btn:focus, #unfollow-btn:focus { outline: 0; }
+
+#follow-btn { background-color: SkyBlue;  }
+
+.edit-btn {
+	border: none;
+	background-color: #e6e6e6;
+}
+
+.edit-btn:hover {
+	background-color: #a6a6a6;
+}
+
+.like-btn {
+	border: none;
+	padding: 0px;
+	border-radius: 25px;	/* make the button round */
+	background-color: transparent;
+}

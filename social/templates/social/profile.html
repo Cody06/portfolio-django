@@ -1,0 +1,94 @@
+<!-- This is the profile page of each user -->
+{% extends "social/layout.html" %}
+{% load static %}
+
+{% block body %}
+	<table id="profile-page-header">
+		<tr>
+			<td><h3>{{ userProfileObject.username }}'s profile</h3></td>
+			<td>
+				<!-- Show the follow/unfollow button for a user that is not the one logged in -->
+			    {% if loggedUser.username != userProfileObject.username %}
+			    
+			    	<!-- Show the follow or unfollow btn, given if the user is already followed -->
+			    	{% if isFollowing %}
+			    		<button id="unfollow-btn" value="{{ userProfileObject.username }}">Unfollow</button>
+			    	{% else %}
+						<button id="follow-btn" value="{{ userProfileObject.username }}">Follow</button>
+			    	{% endif %}
+					
+				{% endif %}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table id="follow-table">
+					<tr>
+						<td class="follow-data"><b>{{ userProfileObject.number_of_followers }}</b></td>
+						<td class="follow-data"><b>{{ userProfileObject.number_of_followings }}</b></td>
+					</tr>
+					<tr>
+						<td class="follow-data">followers</td>
+						<td class="follow-data">following</td>
+					</tr>
+				</table>
+			</td>
+			<td></td>
+		</tr>
+	</table>
+
+	{% if loggedUser.username == userProfileObject.username %}
+        <div id="new-post-view" class="div-border">
+            <h4>New Post</h4>
+
+            <form id="new-post-form">
+                <!--{% csrf_token %} WILL IMPLEMENT THIS LATER exempt for now-->
+                <textarea id="new-post" class="form-control" maxlength="280"></textarea>
+                <input type="submit" class="btn btn-primary btn-sm" value="Post">
+            </form>
+        </div>
+    {% endif %}
+
+	{% for post in userPosts%}
+        <div class="div-border">
+            <p><b>{{ post.creator.username }}</b></p>
+            <!-- Show the edit button if the profile's page belongs to the logged user -->
+            {% if loggedUser.username == userProfileObject.username %}
+                <button data-postid="{{post.id}}" class="edit-btn">Edit</button>
+            {% endif %}
+            <div id="postID-{{post.id}}">{{ post.post }}</div>
+            <div class="ligthgray-text">{{ post.timestamp }}</div>
+            <div>
+                <button data-postid="{{post.id}}" class="like-btn">
+                    <img src="../../static/social/like-logo.png" alt="Like logo" width="20">
+                </button>
+                <span id="likesID-{{post.id}}" class="ligthgray-text">{{ post.likes }}</span>
+             </div>
+            <div>Comment</div>
+        </div>
+    {% endfor %} 
+
+    {% if displayPagination %}
+        <!-- Source: https://docs.djangoproject.com/en/3.0/topics/pagination/ -->
+        <nav aria-label="Page navigation between posts">
+            <!-- Aligning the pagination components in the middle with flexbox -->
+            <ul class="pagination justify-content-center">  
+                {% if userPosts.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ userPosts.previous_page_number }}">&laquo;</a></li>
+                {% endif %}
+
+                    <li class="page-item"><a class="page-link" href="#">{{ userPosts.number }}</a></li>
+
+                {% if userPosts.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ userPosts.next_page_number }}">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ userPosts.paginator.num_pages }}">last</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'social/social.js' %}"></script>
+{% endblock %}

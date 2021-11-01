@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'landing_page',             # Step 1. Start by installing the app
+    'e_commerce',
+    'mail_client',
+    'social',
     'workboard',
     'django.contrib.admin',
     'django.contrib.auth',

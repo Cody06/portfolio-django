@@ -1,0 +1,51 @@
+{% extends "social/layout.html" %}
+{% load static %}
+
+{% block body %}
+	<h3>Posts from people you follow:</h3>
+
+	{% for post in users_we_follow_posts %}
+          <div class="div-border">
+               <p>
+                    <a href="{% url 'social:profile-page' post.creator.username %}">
+                         <b>{{ post.creator.username }}</b>
+                    </a>
+               </p>
+               <div>{{ post.post }}</div>
+               <div class="ligthgray-text">{{ post.timestamp }}</div>
+               <div>
+                    <button data-postid="{{post.id}}" class="like-btn">
+                         <img src="../../static/social/like-logo.png" alt="Like logo" width="20">
+                    </button>
+                    <span id="likesID-{{post.id}}" class="ligthgray-text">{{ post.likes }}</span>
+               </div>
+               <div>Comment</div>
+          </div>
+    {% empty %}
+    	<p>You are not following anyone.</p>
+    {% endfor %}
+
+    {% if displayPagination %}
+     <nav aria-label="Page navigation between posts">
+          <!-- Aligning the pagination components in the middle with flexbox -->
+          <ul class="pagination justify-content-center">  
+               {% if users_we_follow_posts.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ users_we_follow_posts.previous_page_number }}">&laquo;</a></li>
+               {% endif %}
+
+               <li class="page-item"><a class="page-link" href="#">{{ users_we_follow_posts.number }}</a></li>
+
+               {% if users_we_follow_posts.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ users_we_follow_posts.next_page_number }}">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ users_we_follow_posts.paginator.num_pages }}">last</a></li>
+               {% endif %}
+          </ul>
+     </nav>
+     {% endif %}
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'social/social.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,48 @@
+textarea {
+    min-height: 400px;
+}
+
+table {
+    width: 100%;
+}
+
+tr {
+    border: 1px solid black;
+}
+
+tr:hover {  
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.email-tr-read {
+    background-color: lightgrey;    /* add grey background to all read emails */
+}
+
+td {
+    padding: 5px;
+}
+
+.row-sender {
+    font-weight: bold;
+    width: 200px;
+}
+
+.row-subject {
+
+}
+
+.row-timestamp {
+    color: grey;
+    width: 200px;
+    text-align: right;
+}
+
+#email-meta {
+    padding-left: 0px;  /* Remove automatic padding from list */
+}
+
+#email-meta li {
+    list-style-type: none;
+}
+

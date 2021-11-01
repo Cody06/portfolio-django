@@ -1,0 +1,61 @@
+<!-- Similar to listing.html, but it does not have the forms -->
+{% extends "commerce/layout.html" %} 
+{% load humanize %}
+
+{% block title %}
+	Auctions - {{listing.title }}
+{% endblock %}
+
+{% block body %}
+	<h2>Listing: {{ listing.title }}{% if not listing.active %} (CLOSED){% endif %}</h2> 
+    <br>
+	
+    {% if listing.image_URL %} <!-- Show image if it was provided -->
+    	<img src="{{ listing.image_URL}}" alt="{{ listing.title }}" width="200">
+    {% else %}
+    	<img src="../static/commerce/No_image_available.png" alt="No image" width="200">
+    {% endif %}
+
+    {% if listing.description %}
+    	<p>{{ listing.description }}</p>
+    {% endif %}
+
+    <!-- Check if we display the starting or current bid -->
+    {% if listing.current_bid == 0 %}
+        <h2>${{ listing.starting_bid|intcomma }}</h2><!-- Format large numbers with comma 2/3-->
+    {% else %}
+        <h2>${{ listing.current_bid|intcomma }}</h2><!-- Format large numbers with comma 2/3-->
+    {% endif %}
+    
+
+    <p>
+        {{ listing.number_of_bids }} bid(s) so far.
+        {% if listing.number_of_bids == 0 %}
+            Start bidding.
+        {% else %}
+            <b>{{ highestBid.user.username }}</b> has the highest bid
+        {% endif %}
+    </p>
+
+    <h3>Details</h3>
+    <ul>
+    	<li>Listed by: {{ listing.seller.username }}</li>
+        {% if listing.category %}
+    	   <li>Category: {{ listing.category }}</li>
+        {% endif %}
+    </ul>
+
+    <hr>
+    <h3>Comments Section</h3>
+    <h4 style="margin:10px 0px">Other comments:</h4>
+
+    {% for comment in comments %}
+        <div style="boder:1px solid lightgrey;">
+            <h6>{{ comment.user.username }} <span style="font-size: 80%;color: grey;">- {{ comment.date }}</span></h6>
+            <p>{{ comment.comment }}</p>
+        </div>
+    {% empty %}
+        <p>Comment section is empty.</p>
+    {% endfor %}
+
+{% endblock %}

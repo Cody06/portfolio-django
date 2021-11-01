@@ -1,0 +1,12 @@
+{% extends "commerce/layout.html" %}
+
+{% block body %}
+
+	<h2>Create a new listing:</h2>
+	<form action="{% url 'commerce:create-listing' %}" method="post">
+		{% csrf_token %}
+		{{ create_listing_form.as_p }}
+		<input type="submit" value="Post Listing">
+	</form>
+		
+{% endblock %}

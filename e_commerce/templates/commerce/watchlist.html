@@ -1,0 +1,46 @@
+{% extends "commerce/layout.html" %}
+{% load humanize %}
+
+{% block body %}
+    <h2>Your saved items:</h2>
+
+    <table style="width: 100%;">
+
+        {% for item in watchlist %}
+        
+            <tr style="border: 1px solid lightgrey;">
+                <td style="width:30%; text-align: center">  <!-- Align images in the middle -->
+                    {% if item.listing.image_URL %} <!-- Show image if it was provided -->
+                        <img src="{{ item.listing.image_URL}}" alt="{{ item.listing.title }}" width="200">
+                    {% else %}
+                        <img src="static/commerce/No_image_available.png" alt="No image" width="200">
+                    {% endif %}
+                </td>
+                <td>
+                    <p><b><a href="{% url 'commerce:listing' item.listing.id %}" style="text-decoration:none;">
+                        {{ item.listing.title }}{% if not item.listing.active %} (CLOSED){% endif %}
+                    </a></b></p>
+
+                    <!-- Check if we display the starting or current bid -->
+                    {% if item.listing.current_bid == 0 %}
+                        <p><b>Price:</b> ${{ item.listing.starting_bid|intcomma }}</p><!-- Format large numbers with comma 2/3-->
+                    {% else %}
+                        <p><b>Price:</b> ${{ item.listing.current_bid|intcomma }}</p><!-- Format large numbers with comma 2/3-->
+                    {% endif %}
+                    
+                    {% if item.listing.description %}
+                        <p>{{ item.listing.description }}</p>
+                    {% endif %}
+                    <p>Seller: {{ item.listing.seller.username }}</p>
+                    {% if item.listing.category %}
+                        <p>Category: {{ item.listing.category }}</p>
+                    {% endif %}
+                </td>
+            </tr>
+            
+            {% empty %} <!-- Show this message if there are no active listings -->
+                <p>There are no saved items in your watchlist.</p>
+        
+        {% endfor %}
+    </table>
+{% endblock %}
