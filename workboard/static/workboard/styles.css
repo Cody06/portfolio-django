@@ -5,6 +5,7 @@ body {
 button:focus {	/* remove blue border around all buttons when clicking on them */
 	outline: none;
 }
+
 /*____________________________________Register + Login page____________________________________*/
 .auth-form {
 	margin-top: 20px;
@@ -49,7 +50,8 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	padding: 5px;
 	border-radius: 10px;
 	box-shadow: 10px 10px 5px #aaaaaa;
-	position: absolute;		/* Need absolute since using absolute for child #close-form-btn */
+	position: fixed;		/* Need absolute since using absolute for child #close-form-btn */
+	top: 80px;
 	left: 50vw;				/* Left margin of the form is at 50% of the window */
 	margin-left: -200px;	/* The middle of the form is at the middle of the window */
 	z-index: 1;
@@ -127,7 +129,7 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 #empty-board-msg {
 	display: none;	/* Initially hidden */
 }
-/* #### Separate these ones in different blocks */
+
 #add-col-popup, #edit-col-popup, #edit-card-popup {
 	display: none;
 	background-color: #d9d9d9;
@@ -138,15 +140,15 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	box-shadow: 10px 10px 5px #aaaaaa;
 	/* Position (fixed) in the high middle of the screen on top of the document */
 	position: fixed; 	/* Need fixed since using absolute for child #close-form-btn */
-	top: 25%;				/* 50% below the top of the document */
-	margin-top: -100px;		/* Position the middle of the element at 25% */
+	top: 80px;
 	left: 50vw;				/* Align the left edge of the element at 50% of the window */
 	margin-left: -200px;	/* Move left margin back the halfway mark (half-width of the element 400/2) */
 	z-index: 2;				/* Position on top of document elements */
 }
+
 #add-col-popup h5, #edit-col-popup h5 { margin-top: 5px}
-#board-div input[type="text"] { font-size: 0.9rem; }
-#board-div input[type="submit"] { margin-top: 10px; }
+
+.popup-submit { margin-top: 10px; }
 
 #add-col-btn-lg {	/* Large "+ Add column" button at the rightmost position of all existing columns */
 	display: none;
@@ -221,9 +223,6 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 
 }
 .dropdown-content button:hover { background-color: lightblue; }
-
-/* Use JS to add this class to the .dropdown-content container when user clicks on dropdown button */
-.show {display: block;}	
 
 #add-card-div { margin: 0px 5px; }  /* top-bottom right-left */
 

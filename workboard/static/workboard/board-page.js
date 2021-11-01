@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 		}
 	});
-	close_dropdown();
+//	close_dropdown();
 });
 
 function show_edit_title() {
@@ -155,20 +155,21 @@ function getDragAfterElement(container, mouse_pos_y) {
 	}, { offset: Number.NEGATIVE_INFINITY }).element; // .element to reduce only the element and not also the offset
 }
 
-function close_dropdown() {
+//function close_dropdown() {
 	/* Close dropdown menu when if user clicks outside of it */
-	window.onclick = function(event) {
-		if (!event.target.matches('.dropbtn')) {	// if user clicks outside the dropdown
-			let dropdowns = document.getElementsByClassName("dropdown-content");
-			for (let i = 0; i < dropdowns.length; i++) {
-	  			let openDropdown = dropdowns[i];
-	  			if (openDropdown.classList.contains('show')) { // #### REWRITE THIS
-	    			openDropdown.classList.remove('show');
-	  			}
-			}
-		}
-	}
-}
+//	window.onclick = function(event) {
+//		if (!event.target.matches('.dropbtn')) {	// if user clicks outside the dropdown
+//			let dropdowns = document.getElementsByClassName("dropdown-content");
+//			for (let i = 0; i < dropdowns.length; i++) {
+//	  			let openDropdown = dropdowns[i];
+// #### CORRECT THIS ####################################################################
+//	  			if (openDropdown.classList.contains('show')) { // #### REWRITE THIS
+//	    			openDropdown.classList.remove('show');
+//	  			}
+//			}
+//		}
+//	}
+//}
 
 function load_board() {
 	/* Create the board's columns and cards */
@@ -268,8 +269,9 @@ function hide_buttons() {
 //______________________________________________COLUMNS
 function add_col_form() {
  	/* Show the add column form */
-	hide_empty_board_msg();		// hide the empty board message	
-	show_add_column_form();		// show popup form
+	hide_empty_board_msg();
+	show_add_column_form();
+	blur_background();	
 
 	// Create the column and save it in the database
 	document.querySelector('#create-col-form').addEventListener('submit', save_col);	
@@ -315,7 +317,7 @@ function create_col_HTML(col_id, col_name) {
 			<button onclick="add_card(${col_id})" title="Add a card to this column">+</button>
 		
 			<div class="dropdown">
-			 	<button onclick="show_drop_down_col(${col_id})" class="dropbtn">&#183;&#183;&#183;</button>
+			 	<button onclick="show_dropdown_col(${col_id})" class="dropbtn">&#183;&#183;&#183;</button>
 			 	
 			 	<div id="dropdown-col-${col_id}" class="dropdown-content">
 			 		<button onclick="col_options(${col_id}, 'edit')">Edit column</button><br>
@@ -329,8 +331,27 @@ function create_col_HTML(col_id, col_name) {
 	return COL_DIV;
 }
 // ###### THIS MIGHT BE THE PROBLEM WITH THE DROPDOWN MENU (check landing_page/index.js)
-function show_drop_down_col(col_id) {
-	document.querySelector(`#dropdown-col-${col_id}`).classList.toggle('show');
+function show_dropdown_col(col_id) {
+	console.log("#### SHOW DROP DOWN COL - START");
+	let dropdown = document.querySelector(`#dropdown-col-${col_id}`);
+	console.log(dropdown);
+	console.log(`display: ${dropdown.style.display}`);
+
+	if (dropdown.style.display === 'none') {
+		console.log('no display')
+		dropdown.style.display = 'block'
+	}
+	else if (dropdown.style.display === "") {
+		console.log('empty-string;');
+		dropdown.style.display = 'block';
+	}
+	else {
+		console.log('block display');
+		dropdown.style.display = 'none';
+	}
+	console.log(dropdown);
+	console.log("#### SHOW DROP DOWN COL - END");
+	//document.querySelector(`#dropdown-col-${col_id}`).classList.toggle('show');
 }
 
 function col_options(col_id, action) {
@@ -338,6 +359,7 @@ function col_options(col_id, action) {
 	const COL_NAME = document.querySelector(`#col-header-${col_id}`).innerHTML; // get the existing column's name
 	if (action == 'edit') {
 		document.querySelector('#edit-col-popup').style.display = 'block';			// show edit popup
+		blur_background();
 		document.querySelector('#edit-col-header').innerHTML = `Edit: ${COL_NAME}`;	// add some text to the popup	
 		document.querySelector('#edit-col-name-input').placeholder = COL_NAME;		// add existing column name
 
@@ -457,7 +479,7 @@ function create_card_HTML(cards, index) {
 
 		<div class="card-buttons">
 			<div class="dropdown">		
-				<button onclick="show_drop_down_card(${card_id})" class="dropbtn">&#183;&#183;&#183;</button>
+				<button onclick="show_dropdown_card(${card_id})" class="dropbtn">&#183;&#183;&#183;</button>
 				
 				<div id="dropdown-card-${card_id}" class="dropdown-content">
 					<button onclick="card_options(${card_id}, 'edit')">Edit card</button><br>
@@ -488,8 +510,27 @@ function create_card_HTML(cards, index) {
 	return CARD_DIV;
 }
 
-function show_drop_down_card(card_id) {
-	document.querySelector(`#dropdown-card-${card_id}`).classList.toggle('show');
+function show_dropdown_card(card_id) {
+	console.log("#### SHOW DROP DOWN CARD - START");
+	let dropdown = document.querySelector(`#dropdown-card-${card_id}`);
+	console.log(dropdown);
+	console.log(`display: ${dropdown.style.display}`);
+
+	if (dropdown.style.display === 'none') {
+		console.log('no display')
+		dropdown.style.display = 'block'
+	}
+	else if (dropdown.style.display === "") {
+		console.log('empty-string;');
+		dropdown.style.display = 'block';
+	}
+	else {
+		console.log('block display');
+		dropdown.style.display = 'none';
+	}
+	console.log(dropdown);
+	console.log("#### SHOW DROP DOWN CARD - END");
+	//document.querySelector(`#dropdown-col-${col_id}`).classList.toggle('show');
 }
 
 function card_options(card_id, action) {
@@ -546,7 +587,7 @@ function close_form() {
 	document.querySelector('#add-col-popup').style.display = 'none';
 	document.querySelector('#edit-col-popup').style.display = 'none';
 	document.querySelector('#edit-card-popup').style.display = 'none';
-
+	unblur_background();
 	empty_board_or_not_btn();	// display the correct button
 }
 
@@ -584,6 +625,14 @@ function show_add_column_form() {
 	document.querySelector('#add-col-popup').style.display = 'block';
 }
 
+function blur_background() {
+	document.querySelector('#board-header').style.filter = 'blur(8px)';
+	document.querySelector('#board-div').style.filter = 'blur(8px)';
+}
+function unblur_background() {
+	document.querySelector('#board-header').style.filter = 'blur(0px)';
+	document.querySelector('#board-div').style.filter = 'blur(0px)';
+}
 // Practice code
 	// This has a lot of errors for the drag and drop function (className doesn't get updated after dragend)
 	/*for (let i = 0, num_cards = draggables.length; i < num_cards; i++) {

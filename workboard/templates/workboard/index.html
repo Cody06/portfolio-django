@@ -5,44 +5,44 @@
 
 {% block body %}
 {% if user.is_authenticated %}
+<div id="create-board-form">
+	<h5>Create new board</h5><button id="close-form-btn">x</button>
+	<hr>
+	<!-- Create a new board, show the form only when button is clicked -->
+	<form action="{% url 'workboard:create-board' %}" method="post">
+		{% csrf_token %}
+		
+		<div class="form-input">
+			<label><strong>Board title</strong></label>
+			<input type="text" name="board_title" class="form-control"
+				placeholder="Board title" maxlength="50" required>
+		</div>
+
+		<div class="form-input">
+			<label><strong>Description</strong> (optional)</label>
+			<textarea name="board_description" class="form-control" maxlength="300" rows="3"></textarea>
+		</div>
+
+		<!--<div> #### To implement at a later date
+			<h6><strong>Visibility</strong></h6>
+			
+			<input type="radio" id="board_public" name="visibility" value="True">
+			<label for="board_public">Public</label><br>
+
+			<input type="radio" id="board_private" name="visibility" value="False" checked>
+			<label for="board_private">Private</label><br>
+		</div>-->
+		<div class="center-btn">
+		<input type="submit" class="btn btn-primary" value="Create Board">
+		</div>
+	</form>
+</div>
+
 <div class="flex-container">
 	<div class="flexbox-item">
 
 		<div id="new-board-btn">
 			<button id="create-board-form-btn">New Board</button>
-		</div>
-
-		<div id="create-board-form">
-			<h5>Create new board</h5><button id="close-form-btn">x</button>
-			<hr>
-			<!-- Create a new board, show the form only when button is clicked -->
-			<form action="{% url 'workboard:create-board' %}" method="post">
-				{% csrf_token %}
-				
-				<div class="form-input">
-					<label><strong>Board title</strong></label>
-					<input type="text" name="board_title" class="form-control"
-						placeholder="Board title" maxlength="50" required>
-				</div>
-
-				<div class="form-input">
-					<label><strong>Description</strong> (optional)</label>
-					<textarea name="board_description" class="form-control" maxlength="300" rows="3"></textarea>
-				</div>
-
-				<!--<div> #### To implement at a later date
-					<h6><strong>Visibility</strong></h6>
-					
-					<input type="radio" id="board_public" name="visibility" value="True">
-					<label for="board_public">Public</label><br>
-
-					<input type="radio" id="board_private" name="visibility" value="False" checked>
-					<label for="board_private">Private</label><br>
-				</div>-->
-				<div class="center-btn">
-				<input type="submit" class="btn btn-primary" value="Create Board">
-				</div>
-			</form>
 		</div>
 		
 		<div id="more-boards">

@@ -4,7 +4,7 @@
 {% block title %} - Board Page{% endblock %}
 
 {% block body %}
-<div id="board-header">
+<section id="board-header">
 	
 	<div id="editing-title">
 		<div class="inline-block">
@@ -41,36 +41,13 @@
 	</div>
 	
 	<!--<div>{{ board_obj.timestamp }}</div>-->
-</div>
+</section>
 
-<div id="board-div">
+<section id="board-div">
 
 	<div id="empty-board-msg">
 		<h6>This board has no columns or cards.</h6>
 		<button id="add-col-btn" class="add-col-form-btn btn btn-primary btn-sm">Add a column</button>
-	</div>
-
-	<div id="add-col-popup">
-		<h5>Add a column</h5><button id="close-form-btn" onclick="close_form()">x</button>
-		<hr>
-		<form id="create-col-form" method="post">
-			{% csrf_token %}
-			<h6>Column name</h6>
-			<input type="text" id="col-name-input" class="form-control" autofocus 
-				placeholder="Enter a column name (To Do, In Progress, Done)" maxlength="30" required>
-			<input type="submit" id="create-col-btn" class="btn btn-primary btn-sm" value="Create column">
-		</form>
-	</div>
-
-	<div id="edit-col-popup">
-		<h5 id="edit-col-header"></h5><button id="close-form-btn" onclick="close_form()">x</button>
-		<hr>
-		<form id="edit-col-form" method="post">
-			{% csrf_token %}
-			<h6>Column name</h6>
-			<input type="text" id="edit-col-name-input" class="form-control" maxlength="30" required>
-				<input type="submit" class="btn btn-warning btn-sm" value="Update column">
-		</form>
 	</div>
 
 	<div id="edit-card-popup">
@@ -88,7 +65,30 @@
 	<div>
 		<button id="add-col-btn-lg" class="add-col-form-btn">+ Add column</button>
 	</div>
+</section>
 
+<!-- POP-UPS -->
+<div id="add-col-popup">
+	<h5>Add a column</h5><button id="close-form-btn" onclick="close_form()">x</button>
+	<hr>
+	<form id="create-col-form" method="post">
+		{% csrf_token %}
+		<h6>Column name</h6>
+		<input type="text" id="col-name-input" class="form-control" autofocus 
+			placeholder="Enter a column name (To Do, In Progress, Done)" maxlength="30" required>
+		<input type="submit" id="create-col-btn" class="btn btn-primary btn-sm popup-submit" value="Create column">
+	</form>
+</div>
+
+<div id="edit-col-popup">
+	<h5 id="edit-col-header"></h5><button id="close-form-btn" onclick="close_form()">x</button>
+	<hr>
+	<form id="edit-col-form" method="post">
+		{% csrf_token %}
+		<h6>Column name</h6>
+		<input type="text" id="edit-col-name-input" class="form-control" maxlength="30" required>
+			<input type="submit" class="btn btn-warning btn-sm popup-submit" value="Update column">
+	</form>
 </div>
 
 {% endblock %}
