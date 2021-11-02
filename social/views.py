@@ -32,6 +32,31 @@ def index(request):
         "displayPagination": areMoreThanTenItems(allPosts)
     })
 
+#________________________________________________________GUEST
+def guest_path(request):
+    # Check if guest account already exists
+    try:
+        guest = User.objects.get(username='guest')
+        print(" - Guest account exists")
+    except User.DoesNotExist:
+        print(" - Guest account does NOT exist")
+        return HttpResponse("Guest account does not exist")
+    login(request, guest)
+    return HttpResponseRedirect(reverse('social:guest-view'))    # ensure we redirect to the index of workboard
+
+
+def guest_view(request):
+    if request.user.is_authenticated:
+        logged_user = User.objects.get(pk=request.user.id)
+        personal_boards = Board.objects.filter(creator=logged_user, archived=False)
+        archived_boards = Board.objects.filter(creator=logged_user, archived=True)
+        return render(request, 'social/index.html', {
+            'personal_boards': personal_boards,
+            'archived_boards': archived_boards
+        })
+    else:
+        return HttpResponse("Could not show guest view")
+
 
 def profile_page(request, username):
     """ This renders the user's profile page """

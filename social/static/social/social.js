@@ -37,7 +37,7 @@ function edit_post() {
 
 
 function save_edited_post(postID) {
-	fetch(`/save-edited-post/${postID}`, {
+	fetch(`/social/save-edited-post/${postID}`, {
 		method: 'POST',
 		body: JSON.stringify({
 			editedPost: document.querySelector(`#edited-post-${postID}`).value
@@ -51,7 +51,7 @@ function like_post() {
 	document.querySelectorAll('.like-btn').forEach(button =>
 		button.onclick = function() {
 			const postID = this.dataset.postid;
-			fetch(`/like-post/${postID}`, {
+			fetch(`/social/like-post/${postID}`, {
 				method: 'PUT',
 			})
 			.then(response => response.json())	// Use this to format the response
@@ -68,20 +68,21 @@ function send_post(event) {
 	if (newPost === "") {
 		alert("Cannot create an empty post.");
 	}
-
-	// Send new post through a POST request to the /posts route
-	fetch('/save-new-post', {
-		method: 'POST',
-		body: JSON.stringify({
-			newPost: newPost
+	else {
+		// Send new post through a POST request to the /posts route
+		fetch('/social/save-new-post', {
+			method: 'POST',
+			body: JSON.stringify({
+				newPost: newPost
+			})
 		})
-	})
+	}
 }
 
 
 function follow_user(event) {
 	// event.target.value returns the value of the event that triggered this function
-	fetch('/follow', {
+	fetch('/social/follow', {
 		method: 'POST',
 		body: JSON.stringify({
 			newFollowing: event.target.value
@@ -94,7 +95,7 @@ function follow_user(event) {
 
 
 function unfollow_user(event) {
-	fetch('/unfollow', {
+	fetch('/social/unfollow', {
 		method: 'POST',
 		body: JSON.stringify({
 			removeFollowing: event.target.value

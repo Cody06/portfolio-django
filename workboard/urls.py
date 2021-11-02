@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
 	path('', views.index, name='index'),						# normal path
 	path('guest-path', views.guest_path, name='guest-path'),		# guest path
-	path('guest', views.guest_view, name='guest-view'),
+	path('guest-view', views.guest_view, name='guest-view'),
 	path('logout', views.logout_view, name='logout'),
 
 	# Index page paths

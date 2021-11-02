@@ -19,7 +19,14 @@ def index(request):
 	print("- workboard index()")
 	print(request.user)
 	# Get all personal boards if user is logged in
-	return HttpResponse("- workboard home Original")
+	logged_user = User.objects.get(pk=request.user.id)
+	personal_boards = Board.objects.filter(creator=logged_user, archived=False)
+	archived_boards = Board.objects.filter(creator=logged_user, archived=True)
+	return render(request, 'workboard/index.html', {
+		'personal_boards': personal_boards,
+		'archived_boards': archived_boards
+	})
+	#return HttpResponse("- workboard home Original")
 
 #________________________________________________________GUEST
 def guest_path(request):
