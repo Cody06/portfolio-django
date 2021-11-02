@@ -331,25 +331,17 @@ function create_col_HTML(col_id, col_name) {
 }
 // ###### THIS MIGHT BE THE PROBLEM WITH THE DROPDOWN MENU (check landing_page/index.js)
 function show_dropdown_col(col_id) {
-	console.log("#### SHOW DROP DOWN COL - START");
 	let dropdown = document.querySelector(`#dropdown-col-${col_id}`);
-	console.log(dropdown);
-	console.log(`display: ${dropdown.style.display}`);
 
 	if (dropdown.style.display === 'none') {
-		console.log('no display')
 		dropdown.style.display = 'block'
 	}
 	else if (dropdown.style.display === "") {
-		console.log('empty-string;');
 		dropdown.style.display = 'block';
 	}
 	else {
-		console.log('block display');
 		dropdown.style.display = 'none';
 	}
-	console.log(dropdown);
-	console.log("#### SHOW DROP DOWN COL - END");
 }
 
 function col_options(col_id, action) {
@@ -494,7 +486,6 @@ function create_card_HTML(cards, index) {
 
 function show_dropdown_card(card_id) {
 	let dropdown = document.querySelector(`#dropdown-card-${card_id}`);
-	console.log(`display: ${dropdown.style.display}`);
 
 	if (dropdown.style.display === 'none') {
 		dropdown.style.display = 'block'
