@@ -28,10 +28,6 @@ td {
     width: 200px;
 }
 
-.row-subject {
-
-}
-
 .row-timestamp {
     color: grey;
     width: 200px;
@@ -46,3 +42,10 @@ td {
     list-style-type: none;
 }
 
+#compose-form textarea {
+    min-height: 200px;
+}
+
+#compose-form input[type="submit"] {
+    margin-top: 10px;
+}

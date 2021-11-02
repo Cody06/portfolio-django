@@ -12,7 +12,6 @@ from .models import Email
 
 
 def index(request):
-
     # Authenticated users view their inbox
     if request.user.is_authenticated:
         return render(request, "mail_client/inbox.html")
@@ -22,10 +21,21 @@ def index(request):
         return HttpResponseRedirect(reverse("mail_client:login"))
 
 
+def guest_path(request):
+    # Check if guest account already exists
+    try:
+        guest = User.objects.get(username='guest')
+        print(" - Guest account exists")
+    except User.DoesNotExist:
+        print(" - Guest account does NOT exist")
+        return HttpResponse("Guest account does not exist")
+    login(request, guest)
+    return HttpResponseRedirect(reverse('mail_client:index'))    # ensure we redirect to the index of workboard
+
+
 @csrf_exempt
 @login_required
 def compose(request):
-
     # Composing a new email must be via POST
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)

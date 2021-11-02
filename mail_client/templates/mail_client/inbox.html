@@ -1,6 +1,8 @@
 {% extends "mail_client/layout.html" %}
 {% load static %}
 
+{% block title %} - {{request.user.username}} {% endblock%}
+
 {% block body %}
     <h2>{{ request.user.email }}</h2>
 
@@ -18,6 +20,9 @@
     </div>
 
     <div id="compose-view">
+        {% if error %}
+            <div>{{ error }}</div>
+        {% endif %}
         <h3>New Email</h3>
         <!-- Use onsubmit="return false" to not reload the page after submit was pressed (helps later redirecting to sent)-->
         <form id="compose-form" onsubmit="return false">
@@ -25,10 +30,10 @@
                 From: <input disabled class="form-control" id="sender" value="{{ request.user.email }}">
             </div>
             <div class="form-group">
-                To: <input id="compose-recipients" class="form-control">
+                To: <input id="compose-recipients" class="form-control" required>
             </div>
             <div class="form-group">
-                <input class="form-control" id="compose-subject" placeholder="Subject">
+                <input class="form-control" id="compose-subject" placeholder="Subject" required>
             </div>
             <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
             <input type="submit" class="btn btn-primary">

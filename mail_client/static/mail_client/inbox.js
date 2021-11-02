@@ -60,7 +60,16 @@ function send_email(event) {
         body: form_body
     })
   })
-  .then(response => load_mailbox('sent'));  // Load the user's sent mailbox
+  .then(response => response.json())
+  .then(result => {
+    //console.log(result);  // uncomment to test for errors
+    if (result.hasOwnProperty('error')) {
+      alert(result['error']);
+    }
+    else {
+      load_mailbox('sent');
+    }  
+  });
 }
 
 //________________________________________________________ Display mailbox

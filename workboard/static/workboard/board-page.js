@@ -329,7 +329,7 @@ function create_col_HTML(col_id, col_name) {
 	`;
 	return COL_DIV;
 }
-// ###### THIS MIGHT BE THE PROBLEM WITH THE DROPDOWN MENU (check landing_page/index.js)
+
 function show_dropdown_col(col_id) {
 	let dropdown = document.querySelector(`#dropdown-col-${col_id}`);
 
