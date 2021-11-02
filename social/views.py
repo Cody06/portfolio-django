@@ -18,7 +18,7 @@ from datetime import datetime
 
 def index(request):
     """ This renders the All Posts page """
-    allPosts = Post.objects.order_by("-timestamp").all()
+    allPosts = Post.objects.order_by('-timestamp').all()
 
     # Adding the paginator - source: https://docs.djangoproject.com/en/3.0/topics/pagination/
     paginator = Paginator(allPosts, 10) # Show 10 posts per page
@@ -49,7 +49,7 @@ def profile_page(request, username):
     """ This renders the user's profile page """
     userObject = User.objects.get(username=username)    # This is the user from where the page was linked
 
-    userPosts = Post.objects.filter(creator=userObject).order_by("-timestamp")
+    userPosts = Post.objects.filter(creator=userObject).order_by('-timestamp')
     paginator = Paginator(userPosts, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -137,7 +137,7 @@ def following_page(request, username):
         users_we_follow.append(user.following)
 
     # Get all the posts of the users we are following (many-to-many) in reverse chronological order
-    users_we_follow_posts = Post.objects.filter(creator__in=users_we_follow).order_by("-timestamp")
+    users_we_follow_posts = Post.objects.filter(creator__in=users_we_follow).order_by('-timestamp')
     
     # Adding the paginator
     paginator = Paginator(users_we_follow_posts, 10)

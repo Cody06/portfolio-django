@@ -1,9 +1,7 @@
 {% extends "commerce/layout.html" %}
 {% load humanize %}<!-- Format large numbers with comma 1/3 (settings.py for 3/3)-->
 
-{% block title %}
-	Auctions - {{listing.title }}
-{% endblock %}
+{% block title %} - Listing: {{listing.title }} {% endblock %}
 
 {% block body %}
 	<h2>Listing: {{ listing.title }}{% if not listing.active %} (CLOSED){% endif %}</h2> 

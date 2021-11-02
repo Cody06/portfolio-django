@@ -149,7 +149,7 @@ def col_options(request, col_id):
 def cards(request, col_id):
 	if request.method == 'GET':		# get the cards from the database
 		# Get the <QuerySet [<Card object>, <Card object>] in ascending order, ("-position") would be for descending
-		cards_for_column = Card.objects.filter(column=Column.objects.get(pk=col_id)).order_by("position")
+		cards_for_column = Card.objects.filter(column=Column.objects.get(pk=col_id)).order_by('position')
 		return JsonResponse([card.serialize() for card in cards_for_column], safe=False) # Return an array of JASON data
 
 	elif request.method == 'POST': 		# save the card in the database

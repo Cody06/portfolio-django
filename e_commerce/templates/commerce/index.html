@@ -1,6 +1,8 @@
 {% extends "commerce/layout.html" %}
 {% load humanize %}<!-- Format large numbers with comma 1/3 (add the app in settings.py for 3/3)-->
 
+{% block title %}{% endblock %}
+
 {% block body %}
     {% if page == "category" %}
         <h2>Listings in {{ category }}</h2>

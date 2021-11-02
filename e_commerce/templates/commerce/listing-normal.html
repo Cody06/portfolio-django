@@ -2,9 +2,7 @@
 {% extends "commerce/layout.html" %} 
 {% load humanize %}
 
-{% block title %}
-	Auctions - {{listing.title }}
-{% endblock %}
+{% block title %} - Listing: {{listing.title }} {% endblock %}
 
 {% block body %}
 	<h2>Listing: {{ listing.title }}{% if not listing.active %} (CLOSED){% endif %}</h2> 

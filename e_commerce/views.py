@@ -16,7 +16,7 @@ def index(request):
     """
     This is the active listing page.
     """
-    listings = Listing.objects.all()
+    listings = Listing.objects.order_by('-creation_date').all()
     try:    # Run this if we have an userId (created after user logged in)
         print(f"Index userID: {request.session['userID']}")
         return render(request, "commerce/index.html", {
@@ -28,6 +28,17 @@ def index(request):
             "listings": listings
         })
 
+def guest_path(request):
+    # Check if guest account already exists
+    try:
+        guest = User.objects.get(username='guest')
+        print(" - Guest account exists")
+    except User.DoesNotExist:
+        print(" - Guest account does NOT exist")
+        return HttpResponse("Guest account does not exist")
+    login(request, guest)
+    request.session["userID"] = guest.id              # Save the user's id in the session
+    return HttpResponseRedirect(reverse('commerce:index'))    # ensure we redirect to the index of workboard
 
 def getUserListingWins(request):
     """
@@ -71,7 +82,7 @@ class ListingForm(forms.Form):
                     required=False)   
     category = forms.ModelChoiceField(
                     label='Category (Optional)',
-                    queryset=Category.objects.all(),
+                    queryset=Category.objects.order_by('name').all(),
                     required=False)
 
 
@@ -81,7 +92,7 @@ def create_listing(request):
     This lets the user create a new listing by getting the input from the form, Django does 
     the error checking and then store it in the database.
     """
-    categories = Category.objects.all() 
+    categories = Category.objects.order_by('name').all() 
 
     if request.method == "POST":
         # Take the user's data submitted and save it as a form
@@ -259,7 +270,7 @@ def categories(request):
     """
     Renders the categories page.
     """
-    categories = Category.objects.all()
+    categories = Category.objects.order_by('name').all()
     return render(request, "commerce/categories-list.html", {
         "categories": categories # Pass the Category QuerySet
     })
