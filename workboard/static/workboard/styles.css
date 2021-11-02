@@ -12,8 +12,8 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	padding: 20px;
 	border: 1px solid darkgrey;
 	border-radius: 10px;
-	box-shadow: 10px 10px 5px #aaaaaa; /* h-offset v-offset blur */
-	text-align: center;	/* center all inputs in the form */
+	box-shadow: 10px 10px 5px #aaaaaa; 	/* h-offset v-offset blur */
+	text-align: center;					/* center all inputs in the form */
 	background-color: #f1f1f1;
 }
 .auth-form input {
@@ -50,7 +50,7 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	padding: 5px;
 	border-radius: 10px;
 	box-shadow: 10px 10px 5px #aaaaaa;
-	position: fixed;		/* Need absolute since using absolute for child #close-form-btn */
+	position: fixed;		/* Need fixed since using absolute for child #close-form-btn */
 	top: 80px;
 	left: 50vw;				/* Left margin of the form is at 50% of the window */
 	margin-left: -200px;	/* The middle of the form is at the middle of the window */
@@ -139,7 +139,7 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	border-radius: 10px;
 	box-shadow: 10px 10px 5px #aaaaaa;
 	/* Position (fixed) in the high middle of the screen on top of the document */
-	position: fixed; 	/* Need fixed since using absolute for child #close-form-btn */
+	position: fixed; 		/* Need fixed since using absolute for child #close-form-btn */
 	top: 80px;
 	left: 50vw;				/* Align the left edge of the element at 50% of the window */
 	margin-left: -200px;	/* Move left margin back the halfway mark (half-width of the element 400/2) */

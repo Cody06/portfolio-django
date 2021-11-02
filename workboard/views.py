@@ -15,18 +15,17 @@ from .models import Board, Column, Card
 
 # Create your views here.
 def index(request):
-	# This is the main page as per the project
-	print("- workboard index()")
-	print(request.user)
 	# Get all personal boards if user is logged in
-	logged_user = User.objects.get(pk=request.user.id)
-	personal_boards = Board.objects.filter(creator=logged_user, archived=False)
-	archived_boards = Board.objects.filter(creator=logged_user, archived=True)
-	return render(request, 'workboard/index.html', {
-		'personal_boards': personal_boards,
-		'archived_boards': archived_boards
-	})
-	#return HttpResponse("- workboard home Original")
+	if request.user.is_authenticated:
+		logged_user = User.objects.get(pk=request.user.id)
+		personal_boards = Board.objects.filter(creator=logged_user, archived=False)
+		archived_boards = Board.objects.filter(creator=logged_user, archived=True)
+		return render(request, 'workboard/index.html', {
+			'personal_boards': personal_boards,
+			'archived_boards': archived_boards
+		})
+	else:	# Redirect to the login page
+		return HttpResponseRedirect(reverse('login'))
 
 #________________________________________________________GUEST
 def guest_path(request):
@@ -40,6 +39,7 @@ def guest_path(request):
 		return HttpResponse("Guest account does not exist")
 	login(request, guest)
 	return HttpResponseRedirect(reverse('workboard:guest-view'))	# ensure we redirect to the index of workboard
+
 
 def guest_view(request):
 	if request.user.is_authenticated:
@@ -197,6 +197,7 @@ def cards(request, col_id):
 	else:
 		return JsonResponse({'error': "Cannot access cards"})
 
+#________________________________________________________DRAG AND DROP
 @csrf_exempt
 def drag_and_drop(request):
 	if request.method == 'PUT':
@@ -325,6 +326,54 @@ def drag_and_drop(request):
 	else:
 		return JsonResponse({'error': "Could not update the card's position"}, status=400)
 
+#________________________________________________________LOGIN, LOGOUT, REGSITER
+def login_view(request):
+	if request.method == 'POST':
+
+		# Attempt to sing user in
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(request, username=username, password=password)
+
+		# check if authentication successful
+		if user is not None:
+			login(request, user)
+			return HttpResponseRedirect(reverse('workboard:index'))
+		else:
+			return render(request, 'workboard/login.html', {
+				'message': "Invalid username and/or password."
+			})
+	else:
+		return render(request, 'workboard/login.html')
+	
+
 def logout_view(request):
 	logout(request)
-	return HttpResponseRedirect(reverse('index'))	# Redirect to landing page
+	return HttpResponseRedirect(reverse('workboard:login'))
+
+
+def register_view(request):
+	if request.method == 'POST':	# route reached via POST
+		username = request.POST['username']
+		email = request.POST['email']
+
+		# Ensure password matches confirmation
+		password = request.POST['password']
+		confirmation = request.POST['confirmation']
+		if password != confirmation:
+			return render(request, 'workboard/register.html', {
+				'message': "Passwords don't match."
+			})
+
+		# Attempt to create new user
+		try:
+			user = User.objects.create_user(username, email, password)
+			user.save()
+		except IntegrityError:
+			return render(request, 'workboard/register.html', {
+				'message': "Username already exists."
+			})
+		login(request, user)
+		return HttpResponseRedirect(reverse('workboard:index'))	# go to index page by using the named URL 'index'
+	else: 												# route reached via GET
+		return render(request, 'workboard/register.html')

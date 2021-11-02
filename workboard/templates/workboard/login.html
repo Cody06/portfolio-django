@@ -1,0 +1,21 @@
+{% extends 'workboard/layout.html' %}
+
+{% block title %} - Log In{% endblock %}
+
+{% block body %}
+	<!--{% if message %}
+        <div class="alert alert-primary" role="alert">{{ message }}</div>
+    {% endif %}-->
+
+	<div class="flex-container">
+		<div class="auth-form">
+			<form action="{% url 'workboard:login' %}" method="post">
+				{% csrf_token %}
+				<input type="text" name="username" placeholder="Username" required><br>
+				<input type="password" name="password" placeholder="Password" required><br>
+				<input type="submit" value="Log In" class="btn btn-success">
+			</form>
+			First time here? <a href="{% url 'workboard:register' %}">Create new account.</a>
+		</div>
+	</div>
+{% endblock %}

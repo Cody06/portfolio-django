@@ -45,7 +45,7 @@ td { text-align: center; }
 
 .like-btn {
 	border: none;
+	outline: none !important; /* remove outline when clicking the like button */
 	padding: 0px;
-	border-radius: 25px;	/* make the button round */
-	background-color: transparent;
+	background-color: transparent;			
 }

@@ -42,20 +42,7 @@ def guest_path(request):
         print(" - Guest account does NOT exist")
         return HttpResponse("Guest account does not exist")
     login(request, guest)
-    return HttpResponseRedirect(reverse('social:guest-view'))    # ensure we redirect to the index of workboard
-
-
-def guest_view(request):
-    if request.user.is_authenticated:
-        logged_user = User.objects.get(pk=request.user.id)
-        personal_boards = Board.objects.filter(creator=logged_user, archived=False)
-        archived_boards = Board.objects.filter(creator=logged_user, archived=True)
-        return render(request, 'social/index.html', {
-            'personal_boards': personal_boards,
-            'archived_boards': archived_boards
-        })
-    else:
-        return HttpResponse("Could not show guest view")
+    return HttpResponseRedirect(reverse('social:index'))    # ensure we redirect to the index of workboard
 
 
 def profile_page(request, username):

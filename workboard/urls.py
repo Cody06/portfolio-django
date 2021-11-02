@@ -5,7 +5,10 @@ urlpatterns = [
 	path('', views.index, name='index'),						# normal path
 	path('guest-path', views.guest_path, name='guest-path'),		# guest path
 	path('guest-view', views.guest_view, name='guest-view'),
+
+	path('login', views.login_view, name='login'),
 	path('logout', views.logout_view, name='logout'),
+	path('register', views.register_view, name='register'),
 
 	# Index page paths
 	path('create-board', views.create_board, name="create-board"),

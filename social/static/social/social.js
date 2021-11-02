@@ -76,6 +76,9 @@ function send_post(event) {
 				newPost: newPost
 			})
 		})
+		.then(response => {
+			location.reload();
+		})
 	}
 }
 

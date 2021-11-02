@@ -1,0 +1,24 @@
+{% extends 'workboard/layout.html' %}
+
+{% block title %} - Register{% endblock %}
+
+{% block body %}
+
+    {% if message %}
+        <div class="alert alert-primary" role="alert">{{ message }}</div>
+    {% endif %}
+
+	<div class="flex-container">
+		<div class="auth-form">
+			<form action="{% url 'workboard:register' %}" method="post">
+				{% csrf_token %}
+				<input type="text" autofocus name="username" placeholder="Username" required><br>
+				<input type="text" name="email" placeholder="Email"><br>
+				<input type="password" name="password" placeholder="Password" required><br>
+				<input type="password" name="confirmation" placeholder="Confirm password" required><br>
+				<input type="submit" value="Register" class="btn btn-primary">
+			</form>
+			Already have an account? <a href="{% url 'workboard:login' %}">Log In here.</a>
+		</div>
+	</div>
+{% endblock %}
