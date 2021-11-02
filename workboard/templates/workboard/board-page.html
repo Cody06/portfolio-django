@@ -50,16 +50,6 @@
 		<button id="add-col-btn" class="add-col-form-btn btn btn-primary btn-sm">Add a column</button>
 	</div>
 
-	<div id="edit-card-popup">
-		<h5>Edit note</h5><button id="close-form-btn" onclick="close_form()">x</button>
-		<form id="edit-card-form" method="post">
-			{% csrf_token %}
-			<h6>Note</h6>
-			<textarea id="edit-card-text-input" class="form-control h-25" maxlength="300" required></textarea><!-- h-25: max height of 25%-->
-				<input type="submit" class="btn btn-warning btn-sm" value="Save note">
-		</form>
-	</div>
-
 	<div id="cols-div"></div>
 
 	<div>
@@ -88,6 +78,16 @@
 		<h6>Column name</h6>
 		<input type="text" id="edit-col-name-input" class="form-control" maxlength="30" required>
 			<input type="submit" class="btn btn-warning btn-sm popup-submit" value="Update column">
+	</form>
+</div>
+
+<div id="edit-card-popup">
+	<h5>Edit card</h5><button id="close-form-btn" onclick="close_form()">x</button>
+	<form id="edit-card-form" method="post">
+		{% csrf_token %}
+		<h6>Card</h6>
+		<textarea id="edit-card-text-input" class="form-control h-25" maxlength="300" required></textarea><!-- h-25: max height of 25%-->
+			<input type="submit" class="btn btn-warning btn-sm popup-submit" value="Save card">
 	</form>
 </div>
 

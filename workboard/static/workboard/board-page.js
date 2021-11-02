@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 		}
 	});
-//	close_dropdown();
+	close_dropdown();
 });
 
 function show_edit_title() {
@@ -155,21 +155,20 @@ function getDragAfterElement(container, mouse_pos_y) {
 	}, { offset: Number.NEGATIVE_INFINITY }).element; // .element to reduce only the element and not also the offset
 }
 
-//function close_dropdown() {
+function close_dropdown() {
 	/* Close dropdown menu when if user clicks outside of it */
-//	window.onclick = function(event) {
-//		if (!event.target.matches('.dropbtn')) {	// if user clicks outside the dropdown
-//			let dropdowns = document.getElementsByClassName("dropdown-content");
-//			for (let i = 0; i < dropdowns.length; i++) {
-//	  			let openDropdown = dropdowns[i];
-// #### CORRECT THIS ####################################################################
-//	  			if (openDropdown.classList.contains('show')) { // #### REWRITE THIS
-//	    			openDropdown.classList.remove('show');
-//	  			}
-//			}
-//		}
-//	}
-//}
+	window.onclick = function(event) {
+		if (!event.target.matches('.dropbtn')) {	// if user clicks outside the dropdown
+			let dropdowns = document.getElementsByClassName("dropdown-content");
+			for (let i = 0; i < dropdowns.length; i++) {
+	  			let openDropdown = dropdowns[i];
+				if (openDropdown.style.display == 'block') {
+					openDropdown.style.display = 'none';
+				}
+			}
+		}
+	}
+}
 
 function load_board() {
 	/* Create the board's columns and cards */
@@ -351,7 +350,6 @@ function show_dropdown_col(col_id) {
 	}
 	console.log(dropdown);
 	console.log("#### SHOW DROP DOWN COL - END");
-	//document.querySelector(`#dropdown-col-${col_id}`).classList.toggle('show');
 }
 
 function col_options(col_id, action) {
@@ -404,7 +402,6 @@ function col_options(col_id, action) {
 			console.log('Column NOT deleted');
 		}
 	}
-	document.querySelector(`#dropdown-col-${col_id}`).style.display = 'none';
 }
 
 //______________________________________________CARDS
@@ -476,7 +473,6 @@ function create_card_HTML(cards, index) {
 	CARD_DIV.className = 'card-div draggable';	// the card will be a draggable element
 	CARD_DIV.setAttribute('draggable', true);	// make the card draggable
 	CARD_DIV.innerHTML = `
-
 		<div class="card-buttons">
 			<div class="dropdown">		
 				<button onclick="show_dropdown_card(${card_id})" class="dropbtn">&#183;&#183;&#183;</button>
@@ -492,45 +488,23 @@ function create_card_HTML(cards, index) {
 		<p id="card-text-${card_id}">${card_text}</p>
 		<p class="card-creator">creator: <strong>${card_creator}</strong></p>
 	`;
-	/* TESTING PURPOSES
-		CARD_DIV.innerHTML = `
-		<div class="dropdown">
-			<button onclick="show_drop_down_card(${card_id})" class="dropbtn">&#183;&#183;&#183;</button>
-			<div id="dropdown-card-${card_id}" class="dropdown-content">
-				<button onclick="card_options(${card_id}, 'edit')">Edit card</button><br>
-				<button onclick="card_options(${card_id}, 'delete')">Delete card</button>
-			</div>
-		</div>
 
-		<p id="card-text-${card_id}">${card_position} - ${card_text}</p>
-		<p>card id: ${card_id}</p>
-		<p id="initial-col-${card_column_id}">initial col: ${card_column_id}</p>
-		<p>creator: <strong>${card_creator}</strong></p>
-	`;*/
 	return CARD_DIV;
 }
 
 function show_dropdown_card(card_id) {
-	console.log("#### SHOW DROP DOWN CARD - START");
 	let dropdown = document.querySelector(`#dropdown-card-${card_id}`);
-	console.log(dropdown);
 	console.log(`display: ${dropdown.style.display}`);
 
 	if (dropdown.style.display === 'none') {
-		console.log('no display')
 		dropdown.style.display = 'block'
 	}
 	else if (dropdown.style.display === "") {
-		console.log('empty-string;');
 		dropdown.style.display = 'block';
 	}
 	else {
-		console.log('block display');
 		dropdown.style.display = 'none';
 	}
-	console.log(dropdown);
-	console.log("#### SHOW DROP DOWN CARD - END");
-	//document.querySelector(`#dropdown-col-${col_id}`).classList.toggle('show');
 }
 
 function card_options(card_id, action) {
@@ -538,6 +512,7 @@ function card_options(card_id, action) {
 	let existing_note = document.querySelector(`#card-text-${card_id}`).innerHTML;
 	if (action == 'edit') {
 		document.querySelector('#edit-card-popup').style.display = 'block';
+		blur_background();
 		document.querySelector('#edit-card-text-input').value = existing_note;
 
 		document.querySelector('#edit-card-form').addEventListener('submit', function() {
