@@ -20,7 +20,15 @@ nav {
 	position: fixed;
 	top: 0;
 	z-index: 1;
+	animation: navbar_animation;
+	animation-duration: 1s;
 }
+
+@keyframes navbar_animation {
+	from { top: -48px }
+	to { top: 0px }
+}
+
 .inline-list {
 	list-style-type: none;	/* Remove bullet points */
 	margin: 0;				/* remove browser's default */	
@@ -85,6 +93,14 @@ nav {
 	max-width: 1200px; /* 1280px or 1920px */
 	margin: auto;
 }
+.fade-in-animation {
+	animation: fade_in;
+	animation-duration: 4s;
+}
+@keyframes fade_in {
+	from { opacity: 0% }
+	to { opacity:100% }
+}
 /*__________________________________________HEADER__________________________________________*/
 #header {
 	padding: 10px;
@@ -115,21 +131,12 @@ nav {
 	margin: 20px auto 0px auto;
 	padding: 10px;
 	text-align: center;
-	animation: display_animation;
-	animation-duration: 3s;
-}
-@keyframes display_animation {
-	from { color: white; }
-	to { color: black; }
 }
 
 #intro {
 	margin-top: 50px;
 	max-width: 580px;
 	letter-spacing: 1px;
-	animation: display_animation;
-	animation-duration: 3s;
-	/*border: 1px solid red;*/
 }
 
 #logo-links {
@@ -196,8 +203,6 @@ nav {
 	align-items: center;  					/* vertical alignment */
 	background-color: rgb(250, 250, 250);
 	position: relative;
-	animation: slide_on_screen;
-	animation-duration: 1s;
 }
 
 /*.project-container:nth-child(odd) {
