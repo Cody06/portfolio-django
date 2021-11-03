@@ -20,9 +20,7 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	margin: 5px 0px;
 	width: 200px;
 }
-.auth-form form {
-	margin-bottom: 5px;
-}
+.auth-form form { margin-bottom: 5px; }
 
 /*____________________________________Index page style____________________________________*/
 .flex-container {
@@ -86,6 +84,7 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 
 .archived-list-item { background-color: #8C8C8C; }
 .archived-list-item:hover { background-color: #737373; }
+
 .boards-list button {
 	color: white;
 	font-size: large;
@@ -105,20 +104,13 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	padding: 5px;
 }
 
-#editing-title {
-	display: none;
-}
-.inline-block {
-	display: inline-block;
-}
+#editing-title { display: none; }
 
-#board-title {
-	text-decoration: underline;
-}
+.inline-block { display: inline-block; }
 
-.edit-board-btn, .archive-btns {
-	display: none;
-}
+#board-title { text-decoration: underline; }
+
+.edit-board-btn, .archive-btns { display: none; }
 
 #board-div {
 	margin: 5px;
@@ -126,9 +118,7 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	flex-wrap: wrap;
 }
 
-#empty-board-msg {
-	display: none;	/* Initially hidden */
-}
+#empty-board-msg { display: none;	/* Initially hidden */ }
 
 #add-col-popup, #edit-col-popup, #edit-card-popup {
 	display: none;

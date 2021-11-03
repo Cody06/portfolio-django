@@ -33,6 +33,7 @@
 
 		<div id="pdf-container">
 			<iframe src="{% static 'landing_page/Cody_Miu_Developer_Resume.pdf' %}"></iframe>
+			<img src="{% static 'landing_page/pics/close-btn_24.png' %}" width="24" alt="X">
 		</div>
 
 		<div id="main-container">
@@ -89,8 +90,10 @@
 							<li>API</li>
 						</ul>
 						<p class="project-description">Workboard is a project managing application. Users can create project boards with different columns and move their tasks between them.</p>
-						<a href="" class="preview-btn">Preview</a>
-						<a href="{% url 'workboard:guest-path' %}" target="_blank" class="project-btn">Visit Workboard</a>
+						<div class="project-btns">
+							<a href="" class="preview-btn">Preview</a>
+							<a href="{% url 'workboard:guest-path' %}" target="_blank" class="project-btn">Visit Workboard</a>
+						</div>
 					</div>
 				</div>
 				<!--____________________________ Social ____________________________-->
@@ -110,8 +113,10 @@
 							<li>Bootstrap</li>
 						</ul>
 						<p class="project-description">This platform allows users to create posts and follow other users. An implementation of the "like" button is also present.</p>
-						<a href="" class="preview-btn">Preview</a>
-						<a href="{% url 'social:guest-path' %}" target="_blank" class="project-btn">Visit Social</a>
+						<div class="project-btns">
+							<a href="" class="preview-btn">Preview</a>
+							<a href="{% url 'social:guest-path' %}" target="_blank" class="project-btn">Visit Social</a>
+						</div>
 					</div>
 				</div>
 				<!--____________________________ Email ____________________________-->
@@ -132,8 +137,10 @@
 							<li>API</li>
 						</ul>
 						<p class="project-description">This is an email client where users can send, receive and archive emails through a built-in API. The application focuses on User Interfaces where everything runs on one html page.</p>
-						<a href="" class="preview-btn">Preview</a>
-						<a href="{% url 'mail_client:guest-path' %}" target="_blank" class="project-btn">Visit Email</a>
+						<div class="project-btns">
+							<a href="" class="preview-btn">Preview</a>
+							<a href="{% url 'mail_client:guest-path' %}" target="_blank" class="project-btn">Visit Email</a>
+						</div>
 					</div>
 				</div>
 				<!--____________________________ E-Commerce ____________________________-->
@@ -154,8 +161,10 @@
 							<li>Bootstrap</li>
 						</ul>
 						<p class="project-description">This is an e-commerce platform where users can post items for auction or bid on posted ones. A comment section is also implemented.</p>
-						<a href="{% url 'commerce:guest-path' %}" target="_blank" class="project-btn">View E-Commerce</a>
-						<a href="" class="preview-btn">Preview</a>
+						<div class="project-btns">
+							<a href="" class="preview-btn">Preview</a>
+							<a href="{% url 'commerce:guest-path' %}" target="_blank" class="project-btn">View E-Commerce</a>
+						</div>
 					</div>
 				</div>				
 			</section>
