@@ -41,6 +41,8 @@ nav {
 	font-size: 32px;
 	margin-left: 20px;
 }
+#main-logo { cursor: default; } /* prevent mouse from changing when hovering over text */
+
 .navbar-list {
 	height: 48px;
 	align-items: center;	/* align on Y axis */
@@ -101,12 +103,24 @@ nav {
 	from { opacity: 0% }
 	to { opacity:100% }
 }
+
+.up-down-animation:hover {	/* up down animation when hovering over element */
+	animation: up_down;		
+	animation-duration: 350ms;
+	animation-fill-mode: forwards;
+}
+@keyframes up_down {
+	0% {top: 0px}
+	50% {top: -5px}
+	100% {top: 0px}
+}
 /*__________________________________________HEADER__________________________________________*/
 #header {
 	padding: 10px;
 	height: 600px;
 	position: relative;
 }
+#header:hover { cursor: default; } /* prevent mouse from changing when hovering over text */
 
 #title {
 	max-width: 500px;
@@ -144,6 +158,16 @@ nav {
 	position: relative;
 	/*border: 1px solid red;*/
 }
+
+#logo-links a {
+	margin-left: 20px;
+}
+#logo-links a:hover {
+	/* Apply orange filter to image */
+	filter: invert(57%) sepia(72%) saturate(1781%) hue-rotate(3deg) brightness(110%) contrast(104%);
+	text-decoration: none; /* without this there is an added line next to the image */
+}
+
 /* Animate each logo link at a different speed */
 #logo-links a:nth-child(1) {
 	position: relative;
@@ -165,17 +189,9 @@ nav {
 }
 
 #logo-links img {
-	margin-left: 20px;
+	position: relative;
 }
-#logo-links img:hover {
-	/* Apply orange filter to image */
-	filter: invert(57%) sepia(72%) saturate(1781%) hue-rotate(3deg) brightness(110%) contrast(104%);;
-}
-#logo-links a:hover {
-	text-decoration: none;	/* without this there is an added line next to the image */
-}
-
-#header-img {
+#header-img { /* #### Not sure this is implemented */
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -203,6 +219,7 @@ nav {
 	align-items: center;  					/* vertical alignment */
 	background-color: rgb(250, 250, 250);
 	position: relative;
+	transition: 350ms; 			/* use this when adding the attribute 'transform' */
 }
 
 /*.project-container:nth-child(odd) {
@@ -225,16 +242,8 @@ nav {
 }*/
 
 .project-container:hover {
-	background-color: #ebf6f9;   /* very light blue */
-	animation: project_focus;
-	animation-duration: 350ms;
-	animation-fill-mode: forwards;
-}
-
-@keyframes project_focus {
-	0% {top: 0px}
-	50% {top: -5px}
-	100% {top: 0px}
+	background-color: #ebf6f9;   	/* very light blue */
+	transform: scale(1.02);				/* enlarge the element */
 }
 
 .project-img {
@@ -262,16 +271,27 @@ nav {
 	font-size: 1.5rem;
 	font-weight: bold;
 }
+.project-title span {
+	font-size: 0.8rem;
+	font-weight: normal;
+	color: white;
+	background-color: #353A40;
+	border-radius: 5px;
+	margin-left: 10px;
+	padding: 3px;
+	vertical-align: middle;
+}
+
 .project-tools li {
 	font-size: 0.8rem;
-	margin-right: 5px;
 	background-color: #f0f0f0;
-	border-radius: 10px;
+	border-radius: 5px;
+	margin-right: 5px;
 	padding: 3px;
 }
-.project-description {
-	margin: 30px 0px 35px 0px;
-}
+
+.project-description { margin: 30px 0px 35px 0px; }
+
 .project-btn {
 	background-color: white;
 	color: black;
