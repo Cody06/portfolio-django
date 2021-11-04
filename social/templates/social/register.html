@@ -10,7 +10,8 @@
         <div>{{ message }}</div>
     {% endif %}
 
-    <form action="{% url 'social:register' %}" method="post">
+    <!-- DISABLED REGISTER <form action="{% url 'social:register' %}" method="post"> -->
+        <form>
         {% csrf_token %}
         <div class="form-group">
             <input class="form-control" autofocus type="text" name="username" placeholder="Username">

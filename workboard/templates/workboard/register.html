@@ -10,7 +10,8 @@
 
 	<div class="flex-container">
 		<div class="auth-form">
-			<form action="{% url 'workboard:register' %}" method="post">
+			<!-- DISABLED REGISTER <form action="{% url 'workboard:register' %}" method="post"> -->
+				<form>
 				{% csrf_token %}
 				<input type="text" autofocus name="username" placeholder="Username" required><br>
 				<input type="text" name="email" placeholder="Email"><br>

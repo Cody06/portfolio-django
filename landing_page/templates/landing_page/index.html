@@ -88,7 +88,7 @@
 						<p class="project-description">Workboard is a project managing application. Users can create project boards with different columns and move their tasks between them.</p>
 						<div class="project-btns">
 							<a href="{% static 'landing_page/gallery_workboard/workboard-1.png' %}" data-lightbox="workboard-set" data-title="Workboard Home Page" class="preview-btn">Preview</a>
-							<a href="" class="project-btn">Visit Workboard</a>
+							<a href="{% url 'workboard:guest-path' %}" target="_blank" class="project-btn">Visit Workboard</a>
 						</div>
 					</div>
 				</div>
@@ -111,7 +111,7 @@
 						<p class="project-description">This platform allows users to create posts and follow other users. An implementation of the "like" button is also present.</p>
 						<div class="project-btns">
 							<a href="{% static 'landing_page/gallery_social/social-1.png' %}" data-lightbox="social-set" data-title="Social Home Page" class="preview-btn">Preview</a>
-							<a href="" class="project-btn">Visit Social</a>
+							<a href="{% url 'social:guest-path' %}" target="_blank" class="project-btn">Visit Social</a>
 						</div>
 					</div>
 				</div>
@@ -135,7 +135,7 @@
 						<p class="project-description">This is an email client where users can send, receive and archive emails through a built-in API. The application focuses on User Interfaces where everything runs on one html page.</p>
 						<div class="project-btns">
 							<a href="{% static 'landing_page/gallery_mail_client/email-1.png' %}" data-lightbox="email-set" data-title="Email Home Page - Inbox" class="preview-btn">Preview</a>
-							<a href="" class="project-btn">Visit Email</a>
+							<a href="{% url 'mail_client:guest-path' %}" target="_blank" class="project-btn">Visit Email</a>
 						</div>
 					</div>
 				</div>
@@ -158,7 +158,7 @@
 						<p class="project-description">This is an e-commerce platform where users can post items for auction or bid on posted ones. A comment section is also implemented.</p>
 						<div class="project-btns">
 							<a href="{% static 'landing_page/gallery_commerce/commerce-1.png' %}" data-lightbox="commerce-set" data-title="E-Commerce Home Page" class="preview-btn">Preview</a>
-							<a href="" class="project-btn">View E-Commerce</a>
+							<a href="{% url 'commerce:guest-path' %}" target="_blank" class="project-btn">View E-Commerce</a>
 						</div>
 					</div>
 				</div>				
