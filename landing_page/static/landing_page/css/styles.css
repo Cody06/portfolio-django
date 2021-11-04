@@ -31,12 +31,12 @@ nav {
 
 .inline-list {
 	list-style-type: none;	/* Remove bullet points */
-	margin: 0;				/* remove browser's default */	
+	margin: 0;							/* remove browser's default */	
 	padding: 0;
-	display: flex;			/* display list items on one line */
+	display: flex;					/* display list items on one line */
 }
 #main-logo {
-	color: #F2AA4CFF;		/* orange */
+	color: #F2AA4CFF;				/* orange */
 	display: inline;
 	font-size: 32px;
 	margin-left: 20px;
@@ -251,7 +251,7 @@ nav {
 	height: 300px;
 	display: inline-block;
 }
-.project-screenshot {	/* place screenshot in the middle of the laptop screen */
+.project-screenshot {			/* place screenshot in the middle of the laptop screen */
 	border-radius: 10px 10px 0px 0px;
 	margin-top: -340px;
 	margin-left: 53px;
@@ -299,7 +299,6 @@ nav {
 	border-radius: 25px;
 	padding: 15px;
 	margin-left: 10px;
-
 }
 
 .project-btn:hover {
@@ -320,6 +319,10 @@ nav {
 	background-color: #F2AA4CFF; 
 	color: white;
 }
+
+#prefiew-images {
+	display: none;
+}
 /*__________________________________________FOOTER__________________________________________*/
 #footer {
 	/*border: 1px solid orange;*/
@@ -328,7 +331,7 @@ nav {
 }
 
 #contact-info {
-	margin: auto;	/* no need for width since table's width is as large as its contents */
+	margin: auto;			/* no need for width since table's width is as large as its contents */
 }
 #contact-info th { 
 	font-size: 1.4rem;

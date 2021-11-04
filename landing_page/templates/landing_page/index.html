@@ -10,10 +10,14 @@
 		<link rel="sortcut icon" href="{% static 'landing_page/pics/cm-logo.png' %}">
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link rel="stylesheet" href="{% static 'landing_page/styles.css' %}">
-		<script src="{% static 'landing_page/index.js' %}"></script>
+		
+		<link rel="stylesheet" href="{% static 'landing_page/css/lightbox.min.css' %}">
+		<link rel="stylesheet" href="{% static 'landing_page/css/styles.css' %}">
+		
+		<script src="{% static 'landing_page/js/index.js' %}"></script>
 	</head>	
 	<body>
+
 		<nav>
 			<div id="main-logo">Cody Miu</div>
 			
@@ -28,12 +32,11 @@
 					<a class="navbar-link" href="#footer" title="Contact info">Contact</a>
 				</li>
 			</ul>
-		
 		</nav>
 
 		<div id="pdf-container">
 			<iframe src="{% static 'landing_page/Cody_Miu_Developer_Resume.pdf' %}"></iframe>
-			<img src="{% static 'landing_page/pics/close-btn_24.png' %}" width="24" alt="X">
+			<img src="{% static 'landing_page/logos/close-btn_24.png' %}" width="24" alt="X">
 		</div>
 
 		<div id="main-container">
@@ -54,19 +57,17 @@
 
 				<div id="logo-links">
 					<a href="https://github.com/Cody06" target="_blank" >
-						<img src="{% static 'landing_page/pics/github_square_50.png' %}" width="50" 
+						<img src="{% static 'landing_page/logos/github_square_50.png' %}" width="50" 
 						alt="Github link" class="up-down-animation">
 					</a>
 					<a href="http://www.linkedin.com/in/cody-miu" target="_blank">
-						<img src="{% static 'landing_page/pics/linkedin_square_50.png' %}" width="50"
+						<img src="{% static 'landing_page/logos/linkedin_square_50.png' %}" width="50"
 						alt="LinkedIn link" class="up-down-animation">
 					</a>
 				</div>
 
 				<div id="header-img">
 					<!--<img src="{% static 'landing_page/laptop.png' %}">-->
-				
-
 				</div>
 
 			</section>
@@ -77,8 +78,8 @@
 				<!--____________________________ Workboard ____________________________-->
 				<div class="project-container up-down-animation">	
 					<div class="project-img">
-						<img src="{% static 'landing_page/pics/laptop_520.png' %}" width="520">
-						<img src="{% static 'landing_page/pics/workboard_414.png' %}" class="project-screenshot">
+						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" width="520">
+						<img src="{% static 'landing_page/imgs/workboard_414.png' %}" class="project-screenshot">
 					</div>
 					<div class="project-info">
 						<p class="project-title">Workboard <span>2021</span></p>
@@ -92,17 +93,18 @@
 							<li>API</li>
 						</ul>
 						<p class="project-description">Workboard is a project managing application. Users can create project boards with different columns and move their tasks between them.</p>
+						
 						<div class="project-btns">
-							<a href="" class="preview-btn">Preview</a>
-							<a href="{% url 'workboard:guest-path' %}" target="_blank" class="project-btn">Visit Workboard</a>
+							<a href="{% static 'landing_page/gallery_workboard/workboard-1.png' %}" data-lightbox="workboard-set" data-title="Workboard Home Page" class="preview-btn">Preview</a>
+							<!--<a href="{% url 'workboard:guest-path' %}" target="_blank" class="project-btn">Visit Workboard</a>-->
 						</div>
 					</div>
 				</div>
 				<!--____________________________ Social ____________________________-->
 				<div class="project-container up-down-animation">	
 					<div class="project-img">
-						<img src="{% static 'landing_page/pics/laptop_520.png' %}" width="520">
-						<img src="{% static 'landing_page/pics/social_414.png' %}" class="project-screenshot">
+						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" width="520">
+						<img src="{% static 'landing_page/imgs/social_414.png' %}" class="project-screenshot">
 					</div>
 					<div class="project-info">
 						<p class="project-title">Social Networking Platform <span>2021</span></p>
@@ -116,16 +118,16 @@
 						</ul>
 						<p class="project-description">This platform allows users to create posts and follow other users. An implementation of the "like" button is also present.</p>
 						<div class="project-btns">
-							<a href="" class="preview-btn">Preview</a>
-							<a href="{% url 'social:guest-path' %}" target="_blank" class="project-btn">Visit Social</a>
+							<a href="{% static 'landing_page/gallery_social/social-1.png' %}" data-lightbox="social-set" data-title="Social Home Page" class="preview-btn">Preview</a>
+							<!--<a href="{% url 'social:guest-path' %}" target="_blank" class="project-btn">Visit Social</a>-->
 						</div>
 					</div>
 				</div>
 				<!--____________________________ Email ____________________________-->
 				<div class="project-container up-down-animation">	
 					<div class="project-img">
-						<img src="{% static 'landing_page/pics/laptop_520.png' %}" width="520">
-						<img src="{% static 'landing_page/pics/email_414.png' %}" class="project-screenshot">
+						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" width="520">
+						<img src="{% static 'landing_page/imgs/email_414.png' %}" class="project-screenshot">
 					</div>
 					<div class="project-info">
 						<p class="project-title">Email Client <span>2021</span></p>
@@ -140,16 +142,16 @@
 						</ul>
 						<p class="project-description">This is an email client where users can send, receive and archive emails through a built-in API. The application focuses on User Interfaces where everything runs on one html page.</p>
 						<div class="project-btns">
-							<a href="" class="preview-btn">Preview</a>
-							<a href="{% url 'mail_client:guest-path' %}" target="_blank" class="project-btn">Visit Email</a>
+							<a href="{% static 'landing_page/gallery_mail_client/email-1.png' %}" data-lightbox="email-set" data-title="Email Home Page - Inbox" class="preview-btn">Preview</a>
+							<!--<a href="{% url 'mail_client:guest-path' %}" target="_blank" class="project-btn">Visit Email</a>-->
 						</div>
 					</div>
 				</div>
 				<!--____________________________ E-Commerce ____________________________-->
 				<div class="project-container up-down-animation">	
 					<div class="project-img">
-						<img src="{% static 'landing_page/pics/laptop_520.png' %}" width="520">
-						<img src="{% static 'landing_page/pics/commerce_414.png' %}" class="project-screenshot">
+						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" width="520">
+						<img src="{% static 'landing_page/imgs/commerce_414.png' %}" class="project-screenshot">
 					</div>
 
 					<div class="project-info">
@@ -164,8 +166,8 @@
 						</ul>
 						<p class="project-description">This is an e-commerce platform where users can post items for auction or bid on posted ones. A comment section is also implemented.</p>
 						<div class="project-btns">
-							<a href="" class="preview-btn">Preview</a>
-							<a href="{% url 'commerce:guest-path' %}" target="_blank" class="project-btn">View E-Commerce</a>
+							<a href="{% static 'landing_page/gallery_commerce/commerce-1.png' %}" data-lightbox="commerce-set" data-title="E-Commerce Home Page" class="preview-btn">Preview</a>
+							<!--<a href="{% url 'commerce:guest-path' %}" target="_blank" class="project-btn">View E-Commerce</a>-->
 						</div>
 					</div>
 				</div>				
@@ -174,23 +176,51 @@
 			<a href="{% url 'login' %}">Log In</a>
 			<a href="{% url 'register' %}">Register</a>
 
+			<!-- All images when clicking preview -->
+			<div id="preview-images">
+			<a href="{% static 'landing_page/gallery_workboard/workboard-2.png' %}" data-lightbox="workboard-set" data-title="Create a new board"></a>
+			<a href="{% static 'landing_page/gallery_workboard/workboard-3.png' %}" data-lightbox="workboard-set" data-title="Board Page (empty view)"></a>
+			<a href="{% static 'landing_page/gallery_workboard/workboard-4.png' %}" data-lightbox="workboard-set" data-title="Add a new column"></a>
+			<a href="{% static 'landing_page/gallery_workboard/workboard-5.png' %}" data-lightbox="workboard-set" data-title="Board with columns and cards"></a>
+			<a href="{% static 'landing_page/gallery_workboard/workboard-6.png' %}" data-lightbox="workboard-set" data-title="Edit column's name"></a>
+			<a href="{% static 'landing_page/gallery_workboard/workboard-7.png' %}" data-lightbox="workboard-set" data-title="Edit card's contents"></a>
+			<a href="{% static 'landing_page/gallery_workboard/workboard-8.png' %}" data-lightbox="workboard-set" data-title="Drag and drop cards between columns"></a>
+			<a href="{% static 'landing_page/gallery_workboard/workboard-9.png' %}" data-lightbox="workboard-set"
+			data-title="Archive board"></a>
+
+			<a href="{% static 'landing_page/gallery_social/social-2.png' %}" data-lightbox="social-set" data-title="User's profile"></a>
+			<a href="{% static 'landing_page/gallery_social/social-3.png' %}" data-lightbox="social-set" data-title="Other user's profile"></a>
+			<a href="{% static 'landing_page/gallery_social/social-4.png' %}" data-lightbox="social-set" data-title="User's following list"></a>
+
+			<a href="{% static 'landing_page/gallery_mail_client/email-2.png' %}" data-lightbox="email-set" data-title="Email view"></a>
+			<a href="{% static 'landing_page/gallery_mail_client/email-3.png' %}" data-lightbox="email-set" data-title="Compose new email"></a>
+			<a href="{% static 'landing_page/gallery_mail_client/email-4.png' %}" data-lightbox="email-set" data-title="Email view with replies"></a>
+			<a href="{% static 'landing_page/gallery_mail_client/email-5.png' %}" data-lightbox="email-set" data-title="List of sent emails"></a>
+
+			<a href="{% static 'landing_page/gallery_commerce/commerce-2.png' %}" data-lightbox="commerce-set" data-title="Categories List"></a>
+			<a href="{% static 'landing_page/gallery_commerce/commerce-3.png' %}" data-lightbox="commerce-set" data-title="Items selected by category"></a>
+			<a href="{% static 'landing_page/gallery_commerce/commerce-4.png' %}" data-lightbox="commerce-set" data-title="Item's page"></a>
+			<a href="{% static 'landing_page/gallery_commerce/commerce-5.png' %}" data-lightbox="commerce-set" data-title="Create new listing"></a>
+			</div>
 			<section id="footer" class="fade-in-animation">
 				<table id="contact-info">
 					<tr>
 						<th colspan="2">Get in touch</th>
 					<tr>
-						<td><img src="{% static 'landing_page/pics/location_pointer_24.png' %}"></td>
+						<td><img src="{% static 'landing_page/logos/location_pointer_24.png' %}"></td>
 						<td>Montreal, QC <br>Canada</td>
 					</tr>
 					<tr>
-						<td><img src="{% static 'landing_page/pics/email_24.png' %}"></td>
+						<td><img src="{% static 'landing_page/logos/email_24.png' %}"></td>
 						<td><a href="mailto: cody.miu@gmail.com" target="_blank">cody.miu@gmail.com</a></td>
 					</tr>
-						<td><img src="{% static 'landing_page/pics/linkedin_round_24.png' %}"></td>
+						<td><img src="{% static 'landing_page/logos/linkedin_round_24.png' %}"></td>
 						<td><a href="http://www.linkedin.com/in/cody-miu" target="_blank">linkedin.com/in/cody-miu</a></td>
 					</tr>
 				</table>
 			</section>
 		</div>
 	</body>
+	<script src="{% static 'landing_page/js/lightbox-plus-jquery.min.js' %}"></script>
 </html>
+<!-- Preview images is done with Lightbox source: https://lokeshdhakar.com/projects/lightbox2/ -->
