@@ -4,7 +4,7 @@
 }
 
 html {
-  scroll-behavior: smooth;	/* smooth scrolling when navigating to an element */
+  scroll-behavior: smooth;	/* smooth scrolling when redirected to an element */
 }
 
 body {
@@ -75,6 +75,7 @@ nav {
 	border-radius: 8px;
 	border: none;
 }
+
 #pdf-container img {
 	position: absolute;
 	margin-left: 5px;
@@ -104,7 +105,8 @@ nav {
 	to { opacity:100% }
 }
 
-.up-down-animation:hover {	/* up down animation when hovering over element */
+/* Up down animation when hovering over element (element needs position: relative;) */
+.up-down-animation:hover {	
 	animation: up_down;		
 	animation-duration: 350ms;
 	animation-fill-mode: forwards;
@@ -156,7 +158,6 @@ nav {
 #logo-links {
 	width: 500px;
 	position: relative;
-	/*border: 1px solid red;*/
 }
 
 #logo-links a {
@@ -188,15 +189,8 @@ nav {
 	100% {left: 0px; }
 }
 
-#logo-links img {
-	position: relative;
-}
-#header-img { /* #### Not sure this is implemented */
-	position: absolute;
-	top: 0;
-	right: 0;
-	border: 1px solid red;
-}
+#logo-links img { position: relative; } /* used for up and down movement when hovering over */
+
 /*__________________________________________PROJECTS__________________________________________*/
 #projects {
 	/*border: 1px solid orange;*/
@@ -208,7 +202,6 @@ nav {
 	color: #a6a6a6;
 }
 .project-container {
-	/*max-height: 400px;		/* laptop-img height (300) + 20px for padding */
 	margin: 30px 15px;
 	padding: 40px 15px;
 	border-radius: 8px;
@@ -222,7 +215,7 @@ nav {
 	transition: 350ms; 			/* use this when adding the attribute 'transform' */
 }
 
-/*.project-container:nth-child(odd) {
+/*.project-container:nth-child(odd) {	#### Might implement later
 	animation: slide_from_left;
 	animation-duration: 1s;
 	animation-iteration-count: 0;
@@ -325,7 +318,6 @@ nav {
 }
 /*__________________________________________FOOTER__________________________________________*/
 #footer {
-	/*border: 1px solid orange;*/
 	padding: 10px 0px 50px 0px;
 	color: #a6a6a6;
 }
