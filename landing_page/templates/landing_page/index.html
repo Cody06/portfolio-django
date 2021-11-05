@@ -41,11 +41,12 @@
 
 		<div id="main-container">		
 			<section id="header">
-				<div id="title" class="css-typing">
-					<h1>Full Stack Developer<span id="red-dot">.</span></h1>
-				</div>
 
-				<p id="tools" class="fade-in-animation">Python | Django | JavaScript | React | HTML | CSS | Bootstrap | SQL</p>
+				<div id="title-container">
+					<h1 id="title">Full Stack Developer<span id="red-dot">.</span></h1>
+	
+					<p id="tools" class="fade-in-animation">Python | Django | JavaScript | React | HTML | CSS | Bootstrap | SQL</p>
+				</div>
 
 				<div id="intro" class="fade-in-animation">
 					<blockquote><q>If it's imaginable, then it can be built.</q></blockquote>
@@ -155,10 +156,10 @@
 							<li>CSS</li>
 							<li>Bootstrap</li>
 						</ul>
-						<p class="project-description">This is an e-commerce platform where users can post items for auction or bid on posted ones. A comment section is also implemented.</p>
+						<p class="project-description">This is an e-commerce platform where users can post items for auction and bid on posted ones. A comment section is also implemented.</p>
 						<div class="project-btns">
 							<a href="{% static 'landing_page/gallery_commerce/commerce-1.png' %}" data-lightbox="commerce-set" data-title="E-Commerce Home Page" class="preview-btn">Preview</a>
-							<a href="{% url 'commerce:guest-path' %}" target="_blank" class="project-btn">View E-Commerce</a>
+							<a href="{% url 'commerce:guest-path' %}" target="_blank" class="project-btn">Visit E-Commerce</a>
 						</div>
 					</div>
 				</div>				
