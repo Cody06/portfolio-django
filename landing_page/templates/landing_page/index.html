@@ -44,8 +44,7 @@
 
 				<div id="title-container">
 					<h1 id="title">Full Stack Developer<span id="red-dot">.</span></h1>
-	
-					<p id="tools" class="fade-in-animation">Python | Django | JavaScript | React | HTML | CSS | Bootstrap | SQL</p>
+					<p id="tools">Python | Django | JavaScript | React | HTML | CSS | Bootstrap | SQL</p>
 				</div>
 
 				<div id="intro" class="fade-in-animation">
@@ -70,45 +69,53 @@
 			<section id="projects" class="fade-in-animation">
 				<p>PROJECTS</p>
 				<!--____________________________ Workboard ____________________________-->
-				<div class="project-container up-down-animation">	
+				<div class="project-container up-down-animation">
+
 					<div class="project-img">
-						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" width="520">
-						<img src="{% static 'landing_page/imgs/workboard_414.png' %}" class="project-screenshot">
+						<!--<img src="{% static 'landing_page/imgs/laptop_520.png' %}" width="520" class="laptop-img">-->
+						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" class="laptop-img">
+						<div class="screenshot-position">
+							<img src="{% static 'landing_page/imgs/workboard_414.png' %}" class="project-screenshot">
+						</div>
 					</div>
+
 					<div class="project-info">
 						<p class="project-title">Workboard <span>2021</span></p>
-						<ul class="project-tools inline-list text-muted">
-							<li>Python</li>
-							<li>Django</li>
-							<li>JavaScript</li>
-							<li>HTML</li>
-							<li>CSS</li>
-							<li>Bootstrap</li>
-							<li>API</li>
-						</ul>
+						<div class="project-tools text-muted">
+							<div>Python</div>
+							<div>Django</div>
+							<div>JavaScript</div>
+							<div>HTML</div>
+							<div>CSS</div>
+							<div>Bootstrap</div>
+							<div>API</div>
+						</div>
 						<p class="project-description">Workboard is a project managing application. Users can create project boards with different columns and move their tasks between them.</p>
 						<div class="project-btns">
 							<a href="{% static 'landing_page/gallery_workboard/workboard-1.png' %}" data-lightbox="workboard-set" data-title="Workboard Home Page" class="preview-btn">Preview</a>
 							<a href="{% url 'workboard:guest-path' %}" target="_blank" class="project-btn">Visit Workboard</a>
 						</div>
 					</div>
+
 				</div>
 				<!--____________________________ Social ____________________________-->
 				<div class="project-container up-down-animation">	
 					<div class="project-img">
-						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" width="520">
-						<img src="{% static 'landing_page/imgs/social_414.png' %}" class="project-screenshot">
+						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" class="laptop-img">
+						<div class="screenshot-position">
+							<img src="{% static 'landing_page/imgs/social_414.png' %}" class="project-screenshot">
+						</div>
 					</div>
 					<div class="project-info">
 						<p class="project-title">Social Networking Platform <span>2021</span></p>
-						<ul class="project-tools inline-list text-muted">
-							<li>Python</li>
-							<li>Django</li>
-							<li>JavaScript</li>
-							<li>HTML</li>
-							<li>CSS</li>
-							<li>Bootstrap</li>
-						</ul>
+						<div class="project-tools text-muted">
+							<div>Python</div>
+							<div>Django</div>
+							<div>JavaScript</div>
+							<div>HTML</div>
+							<div>CSS</div>
+							<div>Bootstrap</div>
+						</div>
 						<p class="project-description">This platform allows users to create posts and follow other users. An implementation of the "like" button is also present.</p>
 						<div class="project-btns">
 							<a href="{% static 'landing_page/gallery_social/social-1.png' %}" data-lightbox="social-set" data-title="Social Home Page" class="preview-btn">Preview</a>
@@ -119,20 +126,22 @@
 				<!--____________________________ Email ____________________________-->
 				<div class="project-container up-down-animation">	
 					<div class="project-img">
-						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" width="520">
-						<img src="{% static 'landing_page/imgs/email_414.png' %}" class="project-screenshot">
+						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" class="laptop-img">
+						<div class="screenshot-position">
+							<img src="{% static 'landing_page/imgs/email_414.png' %}" class="project-screenshot">
+						</div>
 					</div>
 					<div class="project-info">
 						<p class="project-title">Email Client <span>2021</span></p>
-						<ul class="project-tools inline-list text-muted">
-							<li>Python</li>
-							<li>Django</li>
-							<li>JavaScript</li>
-							<li>HTML</li>
-							<li>CSS</li>
-							<li>Bootstrap</li>
-							<li>API</li>
-						</ul>
+						<div class="project-tools text-muted">
+							<div>Python</div>
+							<div>Django</div>
+							<div>JavaScript</div>
+							<div>HTML</div>
+							<div>CSS</div>
+							<div>Bootstrap</div>
+							<div>API</div>
+						</div>
 						<p class="project-description">This is an email client where users can send, receive and archive emails through a built-in API. The application focuses on User Interfaces where everything runs on one html page.</p>
 						<div class="project-btns">
 							<a href="{% static 'landing_page/gallery_mail_client/email-1.png' %}" data-lightbox="email-set" data-title="Email Home Page - Inbox" class="preview-btn">Preview</a>
@@ -143,19 +152,21 @@
 				<!--____________________________ E-Commerce ____________________________-->
 				<div class="project-container up-down-animation">	
 					<div class="project-img">
-						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" width="520">
-						<img src="{% static 'landing_page/imgs/commerce_414.png' %}" class="project-screenshot">
+						<img src="{% static 'landing_page/imgs/laptop_520.png' %}" class="laptop-img">
+						<div class="screenshot-position">
+							<img src="{% static 'landing_page/imgs/commerce_414.png' %}" class="project-screenshot">
+						</div>
 					</div>
 					<div class="project-info">
 						<p class="project-title">E-Commerce Platform <span>2021</span></p>
-						<ul class="project-tools inline-list text-muted">
-							<li>Python</li>
-							<li>Django</li>
-							<li>JavaScript</li>
-							<li>HTML</li>
-							<li>CSS</li>
-							<li>Bootstrap</li>
-						</ul>
+						<div class="project-tools text-muted">
+							<div>Python</div>
+							<div>Django</div>
+							<div>JavaScript</div>
+							<div>HTML</div>
+							<div>CSS</div>
+							<div>Bootstrap</div>
+						</div>
 						<p class="project-description">This is an e-commerce platform where users can post items for auction and bid on posted ones. A comment section is also implemented.</p>
 						<div class="project-btns">
 							<a href="{% static 'landing_page/gallery_commerce/commerce-1.png' %}" data-lightbox="commerce-set" data-title="E-Commerce Home Page" class="preview-btn">Preview</a>
@@ -205,7 +216,7 @@
 						<td><a href="mailto: cody.miu@gmail.com" target="_blank">cody.miu@gmail.com</a></td>
 					</tr>
 						<td><img src="{% static 'landing_page/logos/linkedin_round_24.png' %}"></td>
-						<td><a href="http://www.linkedin.com/in/cody-miu" target="_blank">linkedin.com/in/cody-miu</a></td>
+						<td><a href="http://www.linkedin.com/in/cody-miu" target="_blank">LinkedIn</a></td>
 					</tr>
 				</table>
 			</section>

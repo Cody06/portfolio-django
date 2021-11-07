@@ -1,15 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
+
 :root {   /* custom properties (variables) */
 	--gray-color: #353A40;
 	--orange-color:  #F2AA4CFF;
 	--bg-color: white;
 	
-	--typewriterSpeed: 3s;
+	--typewriterSpeed: 3s;   
 	--typewriterDelay: 1s;			/* delay until the typewriter animation starts */
 	--num-of-chars: 21;					/* text length */
-	--typewriterDuration: 4s; 	/* typewriterSpeed + 1s initial delay */
+	--typewriterDuration: calc(var(--typewriterSpeed) + var(--typewriterDelay));
 	--caret-blink-speed: 530ms; /* text cursor blink speed */
 
 	--red-dot-delay: 3500ms;		/* have the red dot drop right after the last character */
+
+	--fadeInSpeed: 3s;
+
+	--project-card-color: rgb(250, 250, 250);
 }
 
 * {
@@ -24,7 +30,6 @@ html {
 body {
 	display: flex;		/* this centers the PDF view */
 	justify-content: center;
-	border: 1px solid green;
 }
 
 nav {
@@ -105,15 +110,10 @@ nav {
 	50% {transform: rotate(90deg);}  /* rotate 90 degrees and back */
 }
 
-#main-container {
-	max-width: 1200px; /* 1280px or 1920px */
-	margin: auto;
-}
 /*__________________________________________HEADER__________________________________________*/
 #header {
 	padding: 10px;
-	height: 600px;
-	position: relative;
+	min-height: 600px;
 }
 #header:hover { cursor: default; } /* prevent mouse from changing when hovering over text */
 
@@ -122,13 +122,17 @@ nav {
 	display: flex;
 	flex-flow: column;
 	align-items: center;
+
+	/*border: 1px solid red;*/
 }
 
 #title {
-	font-family: Courier, monospace;
+	font-family: 'Source Code Pro', monospace;
 	font-weight: bold;
 	position: relative;
 	/*white-space: nowrap; /* prevent the title to wrap */
+
+	/*border: 1px solid green;*/
 }
 
 #red-dot {
@@ -138,21 +142,16 @@ nav {
 		dot_appear var(--red-dot-delay), /* show after typewriter finished */
 		dot_drop 2s var(--red-dot-delay);
 }
-@keyframes dot_appear {
-	0% { color: transparent; }
-	99.9% {color: transparent; }
-	100% { color: red; }
-}
-@keyframes dot_drop {
-	from { top: -150px; }
-	to { top: 0px; }
-}
 
 #tools {
 	max-width: 580px;
-	margin: 20px auto 0px auto;
 	padding: 10px;
 	text-align: center;
+	opacity: 0%;
+	transform: translateY(3rem); /* start from a lower position */
+	animation: fadeInUp var(--fadeInSpeed) var(--typewriterDuration) forwards;
+
+	/*border: 1px solid green;*/
 }
 
 #intro {
@@ -161,8 +160,10 @@ nav {
 	letter-spacing: 1px;
 }
 
-#logo-links a {
+#logo-links a { 
 	margin-left: 20px;
+	width: 100%;
+	height: auto;
 }
 #logo-links a:hover {
 	/* Apply orange filter to image */
@@ -173,31 +174,18 @@ nav {
 /* Animate each logo link at a different speed */
 #logo-links a:nth-child(1) {
 	position: relative;
-	animation: 
-		stay_hidden var(--typewriterDuration),
-		slide_left 2s var(--typewriterDuration);
+	opacity: 0%;	/* keep it hidden */
+	animation: slide_left 2s var(--typewriterDuration) forwards;
 }
 #logo-links a:nth-child(2) {
 	position: relative;
-	animation: 
-		stay_hidden var(--typewriterDuration),
-		slide_left 1s var(--typewriterDuration);
-}
-@keyframes slide_left {
-	0% { 
-		left: -200px;
-		opacity: 0%;
-	}
-	40% { opacity:100%; }
-	100% {left: 0px; }
+	opacity: 0%;
+	animation: slide_left 1s var(--typewriterDuration) forwards;
 }
 
 #logo-links img { position: relative; } /* used for up and down movement when hovering over */
 
 /*__________________________________________PROJECTS__________________________________________*/
-#projects {
-	/*border: 1px solid orange;*/
-}
 #projects > p {
 	text-align: center;
 	font-size: 1.4rem;
@@ -213,7 +201,7 @@ nav {
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-items: center;  					/* vertical alignment */
-	background: rgb(250, 250, 250);
+	background: var(--project-card-color);
 	position: relative;
 	transition: 350ms; 			/* use this when adding the attribute 'transform' */
 }
@@ -223,25 +211,35 @@ nav {
 	transform: scale(1.02);			/* enlarge the element */
 }
 
-.project-img {
-	width: 520px;
-	height: 300px;
-	display: inline-block;
+.project-img { position: relative; }
+
+.laptop-img {
+	max-width: 100%;	/* make image size responsive */
+	height: auto;
 }
-.project-screenshot {			/* place screenshot in the middle of the laptop screen */
+.screenshot-position {	/* place screenshot in the middle of the laptop screen */
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding-left: 10.19%;   /* (520-414)/2 = 53px on each side 53/520 = 10.19% */
+	padding-right: 10.19%;
+	padding-top: 2%;
+}
+.project-screenshot {			
+	max-width: 100%;
+	height: auto;
 	border-radius: 10px 10px 0px 0px;
-	margin-top: -340px;
-	margin-left: 53px;
 }
 
 .project-info {
 	height: 300px;
-	width: 45%;
-	min-width: 393px;
+	width: 45%;        /* #### THIS WILL NEED SOME WORK */
 	padding-left: 10px;
 	display: flex;
 	flex-flow: column;
 	justify-content: center;
+
+/*border: 1px solid blue;*/
 }
 
 .project-title {
@@ -258,16 +256,39 @@ nav {
 	padding: 3px;
 	vertical-align: middle;
 }
-
-.project-tools li {
+.project-tools {
+	display: flex;
+	flex-wrap: wrap;
+}
+.project-tools div {
 	font-size: 0.8rem;
 	background: #f0f0f0;
 	border-radius: 5px;
 	margin-right: 5px;
+	margin-bottom: 5px;		/* Used for when wrapping around */
 	padding: 3px;
 }
 
 .project-description { margin: 30px 0px 35px 0px; }
+
+.project-btns {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.preview-btn {
+	background: var(--gray-color);
+	color: white;
+	border-radius: 25px;
+	padding: 15px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+.preview-btn:hover {
+	text-decoration: none;
+	background: var(--orange-color); 
+	color: white;
+}
 
 .project-btn {
 	background: white;
@@ -275,7 +296,8 @@ nav {
 	border: 1px solid black;
 	border-radius: 25px;
 	padding: 15px;
-	margin-left: 10px;
+	margin-bottom: 5px;
+	white-space: nowrap; /* prevent button text to wrap */
 }
 
 .project-btn:hover {
@@ -284,22 +306,7 @@ nav {
 	color: var(--orange-color);
 }
 
-.preview-btn {
-	background: var(--gray-color);
-	color: white;
-	border-radius: 25px;
-	padding: 15px;
-}
-
-.preview-btn:hover {
-	text-decoration: none;
-	background: var(--orange-color); 
-	color: white;
-}
-
-#prefiew-images {
-	display: none;
-}
+#preview-images { display: none; }
 /*__________________________________________FOOTER__________________________________________*/
 #footer {
 	padding: 10px 0px 50px 0px;
@@ -316,22 +323,22 @@ nav {
 }
 #contact-info td { padding: 5px 5px; }
 
-#contact-info a {
-	color: #a6a6a6;
-}
+#contact-info a { color: #a6a6a6; }
 
 /*__________________________________________MOBILE RESPONSIVENESS__________________________________________*/
-@media (max-width: 540px) {  /* [..., 580px] */
-	/* Add hamburger menu */
-	nav {
-		background: red;
-	}
-	#title-animation {
-		height: 98px;
-	}
-
+@media (max-width: 1011px) {
 	body {
-		background: lightblue;
+		/* background-color: lightblue; TESTING PURPOSES */
+	}
+	.project-info {
+		width: 90%;
+		height: 110%;
+	}
+	.project-title {
+		margin-top: 10px;
+	}
+	.project-btns {
+		justify-content: center;
 	}
 }
 
@@ -339,7 +346,7 @@ nav {
 
 /*_____________________TYPEWRITER_____________________*/
 #title::before, #title::after { /* pseudo element */
-	content: ''; 	/* need empty content to work */ 
+	content: ''; 									/* need empty content to work */ 
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -354,7 +361,7 @@ nav {
 		typewriter var(--typewriterSpeed) steps(var(--num-of-chars)) var(--typewriterDelay) forwards; 
 }
 
-#title::after {		/* this is the caret "text cursor" */
+#title::after {			/* this is the caret "text cursor" */
 	width: 0.125em;		/* width needs to be relative to the text in case it changes */
 	background: var(--orange-color);
 	animation: 
@@ -380,16 +387,12 @@ nav {
 }
 /*_____________________FADE IN_____________________*/
 .fade-in-animation {
+	opacity: 0%;	/* keep it hidden */
 	animation: 
-		stay_hidden var(--typewriterDuration),	/* stays hidden for the duration of the typewriter */
-		fade_in 3s var(--typewriterDuration);		/* then it fades in (delay based on the first animation) */
+		fade_in var(--fadeInSpeed) var(--typewriterDuration) forwards;		/* then it fades in (delay based on the first animation) */
 }
-@keyframes stay_hidden {
-	from { opacity: 0%}
-	to { opacity: 0%}
-}
+
 @keyframes fade_in {
-	from { opacity: 0% }
 	to { opacity: 100% }
 }
 
@@ -403,4 +406,32 @@ nav {
 	0% {top: 0px}
 	50% {top: -5px}
 	100% {top: 0px}
+}
+/*_____________________SLIDE FROM LEFT_____________________*/
+@keyframes slide_left {
+	0% { 
+		left: -200px;
+		opacity: 0%;
+	}
+	40% { opacity: 100%; }
+	100% { 
+		left: 0px; 
+		opacity: 100%}
+}
+/*_____________________FADE IN UP_____________________*/
+@keyframes fadeInUp {
+	to {
+		opacity: 100%;
+		transform: translateY(0); 	/* move to normal position */
+	}
+}
+/*_____________________TITLE DOT_____________________*/
+@keyframes dot_appear {
+	0% { color: transparent; }
+	99.9% {color: transparent; }
+	100% { color: red; }
+}
+@keyframes dot_drop {
+	from { top: -150px; }
+	to { top: 0px; }
 }
