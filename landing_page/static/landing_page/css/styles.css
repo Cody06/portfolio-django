@@ -5,8 +5,8 @@
 	--orange-color:  #F2AA4CFF;
 	--bg-color: white;
 	
-	--typewriterSpeed: 1s;   	/* change back to 3s and 1s */
-	--typewriterDelay: 0s;			/* delay until the typewriter animation starts */
+	--typewriterSpeed: 3s;   	/* change back to 3s and 1s */
+	--typewriterDelay: 1s;			/* delay until the typewriter animation starts */
 	--num-of-chars: 21;					/* text length */
 	--typewriterDuration: calc(var(--typewriterSpeed) + var(--typewriterDelay));
 	--caret-blink-speed: 530ms; /* text cursor blink speed */
@@ -343,7 +343,7 @@ nav {
 	box-shadow: 0 5px 5px #ccc;
 }
 #dropdown-content button {
-	padding: 5px 20px;
+	padding: 10px 40px;
 	border: none;
 	background: var(--gray-color);
 	color: white;
