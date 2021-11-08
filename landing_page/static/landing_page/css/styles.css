@@ -5,8 +5,8 @@
 	--orange-color:  #F2AA4CFF;
 	--bg-color: white;
 	
-	--typewriterSpeed: 3s;   
-	--typewriterDelay: 1s;			/* delay until the typewriter animation starts */
+	--typewriterSpeed: 1s;   	/* change back to 3s and 1s */
+	--typewriterDelay: 0s;			/* delay until the typewriter animation starts */
 	--num-of-chars: 21;					/* text length */
 	--typewriterDuration: calc(var(--typewriterSpeed) + var(--typewriterDelay));
 	--caret-blink-speed: 530ms; /* text cursor blink speed */
@@ -326,10 +326,44 @@ nav {
 #contact-info a { color: #a6a6a6; }
 
 /*__________________________________________MOBILE RESPONSIVENESS__________________________________________*/
-@media (max-width: 1011px) {
-	body {
-		/* background-color: lightblue; TESTING PURPOSES */
-	}
+#dropdown { 
+	display: none; 
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+#dropdown-btn {
+	border: none;
+	background: transparent;
+}
+#dropdown-content {
+	display: none;
+	position: absolute; /* align dropdown menu to the right */
+	right: 0px;
+	box-shadow: 0 5px 5px #ccc;
+}
+#dropdown-content button {
+	padding: 5px 20px;
+	border: none;
+	background: var(--gray-color);
+	color: white;
+}
+#dropdown-content button:nth-child(3) {
+	border-radius: 0px 0px 5px 5px;
+}
+.flex {
+	display: flex;
+	flex-direction: column;
+}
+
+#mobile-resume-btn {
+
+	/*border: none;
+	border-top: 1px solid var(--gray-color);
+	border-bottom: 1px solid var(--gray-color);*/
+}
+
+@media (max-width: 1011px) { /* used to adjust project's card */
 	.project-info {
 		width: 90%;
 		height: 110%;
@@ -340,6 +374,11 @@ nav {
 	.project-btns {
 		justify-content: center;
 	}
+}
+
+@media (max-width: 560px) {	/* used to adjust navbar's menu */
+	.navbar-list { display: none; }
+	#dropdown { display: block; }
 }
 
 /*__________________________________________ANIMATIONS__________________________________________*/

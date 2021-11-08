@@ -1,12 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
 	document.querySelector('#resume-btn').addEventListener('click', show_resume);
 
+	const DROPDOWN_BTN = document.querySelector('#dropdown-btn');
+	if (DROPDOWN_BTN !== null) { DROPDOWN_BTN.addEventListener('click', show_dropdown); }
 	close_resume();
 
+	const PROJECTS_BTN = document.querySelector('#projects-btn');
+	if (PROJECTS_BTN !== null) { PROJECTS_BTN.addEventListener('click', scroll_to_projects); }
+
+	const MOBILE_RESUME_BTN = document.querySelector('#mobile-resume-btn');
+	if (MOBILE_RESUME_BTN !== null) { MOBILE_RESUME_BTN.addEventListener('click', show_resume); }
+
+	const CONTACT_BTN = document.querySelector('#contact-btn');
+	if (CONTACT_BTN !== null) { CONTACT_BTN.addEventListener('click', scroll_to_contact); }
 	//typewriter();
 });
 
+function show_dropdown() {
+
+	const DROPDOWN_CONTENT = document.querySelector('#dropdown-content');
+
+	if (DROPDOWN_CONTENT.style.display == 'none' || DROPDOWN_CONTENT.style.display == "") {
+		DROPDOWN_CONTENT.style.display = 'block';
+	}
+	else {
+		DROPDOWN_CONTENT.style.display = 'none';
+	}
+}
+
+function scroll_to_projects() {
+	document.querySelector('#dropdown-content').style.display = 'none'; /* hide dropdown content after clicking button */
+	document.getElementById("projects").scrollIntoView();
+}
+
+function scroll_to_contact() {
+	document.querySelector('#dropdown-content').style.display = 'none';
+	document.getElementById("footer").scrollIntoView();
+}
+
 function show_resume() {
+	document.querySelector('#dropdown-content').style.display = 'none';
+	console.log("Show resume");
 	/* Show resume and blur background */
 	const pdf_container = document.querySelector('#pdf-container');
 	const main_container = document.querySelector('#main-container');
@@ -33,7 +67,9 @@ function close_resume() {
 		console.log(event.target)
 		const pdf_container = document.querySelector('#pdf-container');
 		// clicking on the pdf-container doesn't return anything (if true, we clicked outside)
-		if (event.target && !event.target.matches('#resume-btn')) {	
+		// clicking on any of the matches is not considered clicking outside the pdf container
+		if ( event.target && !event.target.matches('#resume-btn') && !event.target.matches('#projects-btn') 
+			&& !event.target.matches('#mobile-resume-btn') && !event.target.matches('#contact-btn') ) {	
 			console.log('Clicked outside pdf-container');
 			document.querySelector('#pdf-container').style.display = 'none';
 			document.querySelector('#main-container').style.filter = 'blur(0px)';
