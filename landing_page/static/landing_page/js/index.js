@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	const CONTACT_BTN = document.querySelector('#contact-btn');
 	if (CONTACT_BTN !== null) { CONTACT_BTN.addEventListener('click', scroll_to_contact); }
-	//typewriter();
 });
 
 function show_dropdown() {
@@ -75,42 +74,6 @@ function close_resume() {
 			document.querySelector('#main-container').style.filter = 'blur(0px)';
 		}
 	}
-}
-
-/* Typewriter animation with line break */
-// set up text to print, each item in array is new line
-let aText = new Array("Full Stack Developer");
-let iSpeed = 100; // time delay of print out
-let iIndex = 0; // start printing array at this position
-let iArrLength = aText[0].length; // the length of the text array
-let iScrollAt = 20; // start scrolling up at this many lines
- 
-let iTextPos = 0; // initialize text position
-let sContents = ''; // initialize contents variable
-let iRow; // initialize current row
- 
-function typewriter() {
-	sContents =  ' ';
- 	iRow = Math.max(0, iIndex-iScrollAt);
- 	let destination = document.querySelector('#title');
- 
-	while (iRow < iIndex) {
-  		sContents += aText[iRow++] + '<br />';
- 	}
- 
- 	destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "|";
- 
- 	if (iTextPos++ == iArrLength) {
-  		iTextPos = 0;
-  		iIndex++;
-
-  		if (iIndex != aText.length) {
-  			iArrLength = aText[iIndex].length;
-   			setTimeout("typewriter()", 500);
-  		}
- 	} else {
-  		setTimeout("typewriter()", iSpeed);
- 	}
 }
 
 

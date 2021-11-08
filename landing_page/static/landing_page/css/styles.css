@@ -5,7 +5,7 @@
 	--orange-color:  #F2AA4CFF;
 	--bg-color: white;
 	
-	--typewriterSpeed: 3s;   	/* change back to 3s and 1s */
+	--typewriterSpeed: 3s;
 	--typewriterDelay: 1s;			/* delay until the typewriter animation starts */
 	--num-of-chars: 21;					/* text length */
 	--typewriterDuration: calc(var(--typewriterSpeed) + var(--typewriterDelay));
@@ -48,7 +48,7 @@ nav {
 }
 
 .inline-list {
-	list-style-type: none;	/* Remove bullet points */
+	list-style-type: none;	/* remove bullet points */
 	margin: 0;							/* remove browser's default */	
 	padding: 0;
 	display: flex;					/* display list items on one line */
@@ -122,17 +122,12 @@ nav {
 	display: flex;
 	flex-flow: column;
 	align-items: center;
-
-	/*border: 1px solid red;*/
 }
 
 #title {
 	font-family: 'Source Code Pro', monospace;
 	font-weight: bold;
 	position: relative;
-	/*white-space: nowrap; /* prevent the title to wrap */
-
-	/*border: 1px solid green;*/
 }
 
 #red-dot {
@@ -233,13 +228,11 @@ nav {
 
 .project-info {
 	height: 300px;
-	width: 45%;        /* #### THIS WILL NEED SOME WORK */
+	width: 45%;
 	padding-left: 10px;
 	display: flex;
 	flex-flow: column;
 	justify-content: center;
-
-/*border: 1px solid blue;*/
 }
 
 .project-title {
@@ -326,6 +319,45 @@ nav {
 #contact-info a { color: #a6a6a6; }
 
 /*__________________________________________MOBILE RESPONSIVENESS__________________________________________*/
+@media (min-width: 561px) {
+	/*_____________________TYPEWRITER_____________________ (Single line) */
+	#title::before, #title::after { /* pseudo element */
+		content: ''; 									/* need empty content to work */ 
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	#title::before {	/* text is initially behind a background colored ribbon */
+		background: var(--bg-color);
+		animation: 
+			typewriter var(--typewriterSpeed) steps(var(--num-of-chars)) var(--typewriterDelay) forwards; 
+	}
+
+	#title::after {			/* this is the caret "text cursor" */
+		width: 0.125em;		/* width needs to be relative to the text in case it changes */
+		background: var(--orange-color);
+		animation: 
+			typewriter var(--typewriterSpeed) steps(var(--num-of-chars)) var(--typewriterDelay) forwards,
+			blink var(--caret-blink-speed) steps(var(--num-of-chars)) infinite,
+			clear-caret 1ms var(--typewriterDuration) forwards; /* delay by the length it takes to type */
+	}
+
+	@keyframes typewriter {
+		to {					/* no need for 'from' if there are no initial changes */
+			left: 100%; /* will move 100% to the right */
+		}
+	}
+	@keyframes blink {
+		to { background: transparent; }
+	}
+	@keyframes clear-caret {
+		to { background: transparent; }
+	}
+}
+
 #dropdown { 
 	display: none; 
 	position: absolute;
@@ -356,81 +388,54 @@ nav {
 	flex-direction: column;
 }
 
-#mobile-resume-btn {
-
-	/*border: none;
-	border-top: 1px solid var(--gray-color);
-	border-bottom: 1px solid var(--gray-color);*/
-}
-
 @media (max-width: 1011px) { /* used to adjust project's card */
 	.project-info {
 		width: 90%;
 		height: 110%;
 	}
-	.project-title {
-		margin-top: 10px;
-	}
-	.project-btns {
-		justify-content: center;
-	}
+
+	.project-title { margin-top: 10px; }
+	
+	.project-btns { justify-content: center; }
 }
 
 @media (max-width: 560px) {	/* used to adjust navbar's menu */
 	.navbar-list { display: none; }
+	
 	#dropdown { display: block; }
+
+	#projects { margin-top: 40px }
+
+	/*_____________________Multi line typewriter_____________________ */
+	.multi-line-type {
+	  color: #0000;
+	  background:
+	    linear-gradient(-90deg, var(--orange-color) 5px, #0000 0) 10px 0, /* this is the caret */
+	    linear-gradient(black 0 0) 0 0;										/* this is the text */
+	  background-size: calc(var(--num-of-chars) * 1ch) 200%;
+	  -webkit-background-clip: padding-box, text;
+	  background-clip: padding-box, text;
+	  background-repeat: no-repeat;
+	  animation: 
+	   blink var(--caret-blink-speed) infinite steps(1),   
+	   type calc(var(--num-of-chars) * 200ms) steps(var(--num-of-chars)) forwards;
+	}
+	@keyframes blink {
+	  50% { background-position: 0 -100%, 0 0 }
+	}
+	@keyframes type {
+	  from { background-size: 0 200% }
+	}
 }
 
 /*__________________________________________ANIMATIONS__________________________________________*/
 
-/*_____________________TYPEWRITER_____________________*/
-#title::before, #title::after { /* pseudo element */
-	content: ''; 									/* need empty content to work */ 
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
-
-#title::before {	/* text is initially behind a background colored ribbon */
-	background: var(--bg-color);
-	/* 1s is the delay and forwards prevents the animation to reset */
-	animation: 
-		typewriter var(--typewriterSpeed) steps(var(--num-of-chars)) var(--typewriterDelay) forwards; 
-}
-
-#title::after {			/* this is the caret "text cursor" */
-	width: 0.125em;		/* width needs to be relative to the text in case it changes */
-	background: var(--orange-color);
-	animation: 
-		typewriter var(--typewriterSpeed) steps(var(--num-of-chars)) var(--typewriterDelay) forwards,
-		blink var(--caret-blink-speed) steps(var(--num-of-chars)) infinite,
-		clear-caret 1ms var(--typewriterDuration) forwards; /* delay by the length it takes to type */
-}
-
-@keyframes typewriter {
-	to {					/* no need for 'from' if there are no initial changes */
-		left: 100%; /* will move 100% to the right */
-	}
-}
-@keyframes blink {
-	to {
-		background: transparent;
-	}
-}
-@keyframes clear-caret {
-	to {
-		background: transparent;
-	}
-}
 /*_____________________FADE IN_____________________*/
 .fade-in-animation {
 	opacity: 0%;	/* keep it hidden */
 	animation: 
-		fade_in var(--fadeInSpeed) var(--typewriterDuration) forwards;		/* then it fades in (delay based on the first animation) */
+		fade_in var(--fadeInSpeed) var(--typewriterDuration) forwards;
 }
-
 @keyframes fade_in {
 	to { opacity: 100% }
 }
@@ -460,7 +465,7 @@ nav {
 /*_____________________FADE IN UP_____________________*/
 @keyframes fadeInUp {
 	to {
-		opacity: 100%;
+		opacity: 100%;							/* element need opacity 0% */
 		transform: translateY(0); 	/* move to normal position */
 	}
 }
