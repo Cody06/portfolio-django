@@ -34,7 +34,7 @@ function scroll_to_projects() {
 
 function scroll_to_contact() {
 	document.querySelector('#dropdown-content').style.display = 'none';
-	document.getElementById("footer").scrollIntoView();
+	document.getElementById("contact-info").scrollIntoView();
 }
 
 function show_resume() {
