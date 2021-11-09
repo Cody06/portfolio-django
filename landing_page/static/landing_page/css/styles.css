@@ -111,11 +111,11 @@ nav {
 }
 
 /*__________________________________________HEADER__________________________________________*/
-#header {
+header {
 	padding: 10px;
 	min-height: 600px;
 }
-#header:hover { cursor: default; } /* prevent mouse from changing when hovering over text */
+header:hover { cursor: default; } /* prevent mouse from changing when hovering over text */
 
 #title-container {
 	margin-top: 150px;
@@ -301,7 +301,7 @@ nav {
 
 #preview-images { display: none; }
 /*__________________________________________FOOTER__________________________________________*/
-#footer {
+footer {
 	padding: 10px 0px 50px 0px;
 	color: #a6a6a6;
 }
