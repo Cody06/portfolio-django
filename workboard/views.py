@@ -60,20 +60,23 @@ def create_board(request):
 	board_description = request.POST['board_description']
 	# public_visibility = request.POST.get("visibility") # true means public visibility (using - or _ returns None)
 
-	# Store them in the database
-	new_board = Board()
-	new_board.creator = User.objects.get(pk=request.user.id)
-	new_board.title = board_title
-	new_board.description = board_description
-	#new_board.public_visibility = public_visibility
-	new_board.save()
+	# Store them in the database (if not connected as a guest)
+	if (request.user.username != 'guest'):
+		new_board = Board()
+		new_board.creator = User.objects.get(pk=request.user.id)
+		new_board.title = board_title
+		new_board.description = board_description
+		#new_board.public_visibility = public_visibility
+		new_board.save()
 	
-	# Get the new board's id
-	board_id = new_board.id
+		# Get the new board's id
+		board_id = new_board.id
 
-	# Redirect to the new board (passing board_id argument to reverse)
-	return HttpResponseRedirect(reverse('workboard:board-page', kwargs={'board_id':board_id}))
+		# Redirect to the new board (passing board_id argument to reverse)
+		return HttpResponseRedirect(reverse('workboard:board-page', kwargs={'board_id':board_id}))
 
+	print("Guest mode - board not saved")
+	return HttpResponseRedirect(reverse('workboard:guest-view'))
 
 @csrf_exempt
 @login_required
@@ -152,7 +155,8 @@ def cards(request, col_id):
 		cards_for_column = Card.objects.filter(column=Column.objects.get(pk=col_id)).order_by('position')
 		return JsonResponse([card.serialize() for card in cards_for_column], safe=False) # Return an array of JASON data
 
-	elif request.method == 'POST': 		# save the card in the database
+	# save the card in the database
+	elif request.method == 'POST': 		
 		new_card_text = json.loads(request.body)['new_card_text']
 
 		# get the number of cards in that column to know the positioning of the card
@@ -167,7 +171,8 @@ def cards(request, col_id):
 		new_card.save()
 		return JsonResponse(new_card.serialize(), safe=False)
 
-	elif request.method == 'PUT':		# edit or delete card (we are passing the card_id)
+	# edit or delete card (we are passing the card_id)
+	elif request.method == 'PUT':
 		data = json.loads(request.body)
 		action = data['action']
 		card = Card.objects.get(pk=col_id)	# we are actually passing the card_id
@@ -200,7 +205,7 @@ def cards(request, col_id):
 #________________________________________________________DRAG AND DROP
 @csrf_exempt
 def drag_and_drop(request):
-	if request.method == 'PUT':
+	if request.method == 'PUT' and request.user.username != 'guest':
 		print("User dropped a new card")
 		data = json.loads(request.body)
 		print(data)
