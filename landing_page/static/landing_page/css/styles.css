@@ -194,7 +194,7 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 	align-items: center;  					/* vertical alignment */
 	background: var(--project-card-color);
 	position: relative;
-	transition: 350ms; 			/* use this when adding the attribute 'transform' */
+	transition: 200ms; 			/* use this when adding the attribute 'transform' */
 }
 
 .project-container:hover {
@@ -441,7 +441,7 @@ footer {
 /*_____________________UP DOWN_____________________*/
 /* Up down animation when hovering over element (element needs position: relative;) */
 .up-down-animation:hover {	
-	animation: up_down 350ms;
+	animation: up_down 200ms;
 	animation-fill-mode: forwards;
 }
 @keyframes up_down {
