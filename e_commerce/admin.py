@@ -3,7 +3,7 @@ from .models import Listing, Bid, Comment, Watchlist, Category
 
 # Customize the Django admin app
 class ListingAdmin(admin.ModelAdmin):
-	list_display = ("id", "title", "starting_bid", "seller", "category", "description", "active")
+	list_display = ("id", "title", "starting_bid", "seller", "category", "description", "active", "image_URL")
 
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ("id", "name")
