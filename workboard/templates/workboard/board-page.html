@@ -4,59 +4,61 @@
 {% block title %} - Board Page{% endblock %}
 
 {% block body %}
-<section id="board-header">
-	
-	<div id="editing-title">
-		<div class="inline-block">
-			{% csrf_token %}
-			<form onsubmit="save_edited_title({{board_obj.id}}); return false;">
-				<input type="text" id="updated-title" placeholder="{{board_obj.title}}" maxlength="50" required>
-				<input type="submit" value="Save">
-			</form>
-		</div>
-		<div class="inline-block">
-			<button id="cancel-title-edit" class="btn btn-link">Cancel</button>
-		</div>
-	</div>
 
-	<div id="default-board-header">
-		<div class="inline-block">
-			<h4 id="board-title">{{ board_obj.title}}</h4>
-		</div>
-
-		<!-- Add the archive buttons part of the title -->
-		{% if board_obj.archived %}	<!-- True means board is archived, make it unarchived -->
+<div id="board-canvas">
+	<section id="board-header">
+		
+		<div id="editing-title">
 			<div class="inline-block">
-				<button class="archive-btns btn btn-dark btn-sm" data-archived="False">Unarchive</button>
-			</div>
-		{% else %}
-			<!-- Edit the board's title -->
-			<div class="inline-block">
-				<button class="edit-board-btn btn btn-info btn-sm" data-boardid="{{board_obj.id}}">Edit</button>
+				{% csrf_token %}
+				<form onsubmit="save_edited_title({{board_obj.id}}); return false;">
+					<input type="text" id="updated-title" placeholder="{{board_obj.title}}" maxlength="50" required>
+					<input type="submit" value="Save">
+				</form>
 			</div>
 			<div class="inline-block">
-				<button class="archive-btns btn btn-secondary btn-sm" data-archived="True">Archive</button>
+				<button id="cancel-title-edit" class="btn btn-link">Cancel</button>
 			</div>
-		{% endif %}
-	</div>
-	
-	<!--<div>{{ board_obj.timestamp }}</div>-->
-</section>
+		</div>
 
-<section id="board-div">
+		<div id="default-board-header">
+			<div class="inline-block">
+				<h4 id="board-title">{{ board_obj.title}}</h4>
+			</div>
 
-	<div id="empty-board-msg">
-		<h6>This board has no columns or cards.</h6>
-		<button id="add-col-btn" class="add-col-form-btn btn btn-primary btn-sm">Add a column</button>
-	</div>
+			<!-- Add the archive buttons part of the title -->
+			{% if board_obj.archived %}	<!-- True means board is archived, make it unarchived -->
+				<div class="inline-block">
+					<button class="archive-btns btn btn-dark btn-sm" data-archived="False">Unarchive</button>
+				</div>
+			{% else %}
+				<!-- Edit the board's title -->
+				<div class="inline-block">
+					<button class="edit-board-btn btn btn-info btn-sm" data-boardid="{{board_obj.id}}">Edit</button>
+				</div>
+				<div class="inline-block">
+					<button class="archive-btns btn btn-secondary btn-sm" data-archived="True">Archive</button>
+				</div>
+			{% endif %}
+		</div>
+		
+		<!--<div>{{ board_obj.timestamp }}</div>-->
+	</section>
 
-	<div id="cols-div"></div>
+	<section id="board-div">
 
-	<div>
-		<button id="add-col-btn-lg" class="add-col-form-btn">+ Add column</button>
-	</div>
-</section>
+		<div id="empty-board-msg">
+			<h6>This board has no columns or cards.</h6>
+			<button id="add-col-btn" class="add-col-form-btn btn btn-primary btn-sm">Add a column</button>
+		</div>
 
+		<div id="cols-div"></div>
+
+		<div>
+			<button id="add-col-btn-lg" class="add-col-form-btn">+ Add column</button>
+		</div>
+	</section>
+</div>
 <!-- POP-UPS -->
 <div id="add-col-popup">
 	<h5>Add a column</h5><button id="close-form-btn" onclick="close_form()">x</button>
