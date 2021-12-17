@@ -127,7 +127,7 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 }
 
 #red-dot {
-	color: red;
+	color: var(--orange-color);
 	position: relative;
 	animation: 
 		dot_appear var(--red-dot-delay), /* show after typewriter finished */

@@ -1,10 +1,18 @@
+:root {
+	--dark-blue-trello: #094C72;
+	--medium-blue-trello: #0079Bf;
+	--light-blue-trello: #5BA4CF;
+}
+
 body {
-	background-color: white;  
+	/*background-color: red;*/	 
 }
 
 button:focus {	/* remove blue border around all buttons when clicking on them */
 	outline: none;
 }
+
+
 
 /*____________________________________Register + Login page____________________________________*/
 .auth-form {
@@ -30,8 +38,9 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 
 #create-board-form-btn {
 	width: 300px;
+	height: 50px;
 	padding: 5px;
-	margin: 20px 0px;	/* top-bottom right-left */
+	margin: 50px 0px;	/* top-bottom right-left */
 	border: none;
 	border-radius: 10px;
 	font-size: large;
@@ -98,16 +107,25 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 }
 .timestamp { font-size: 0.8rem; }
 /*____________________________________Board page style____________________________________*/
+nav {
+	background-color: var(--dark-blue-trello);
+	color: white;
+}
+.app-title {
+	font-size: 1.4rem;
+}
+.nav-link {
+	color: white !important;
+}
+
 #board-canvas {
-	background-color: #0079Bf;	/* Trello blue */
+	background-color: var(--medium-blue-trello);
 	height: 100vh;
 }
 
 #board-header {
 	height: 40px;
-	margin: 5px;
-	padding: 5px;
-	background-color: red;
+	padding: 10px;
 }
 
 #editing-title { display: none; }
@@ -116,7 +134,7 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 
 #board-title { 
 	color: white;
-	text-decoration: underline; 
+	background-color: var(--light-blue-trello);	
 }
 
 .edit-board-btn, .archive-btns { display: none; }
