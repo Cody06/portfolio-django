@@ -74,14 +74,14 @@ nav {
 #resume-btn:hover { text-decoration: underline; }
 #resume-btn:focus { outline: none; }	/* Remove outline after pressing button */
 
-#pdf-container {
+#pdf-modal {
 	position: fixed;
 	top: 70px;
 	display: none;
 	z-index: 1;
 }
 
-#pdf-container iframe {
+#pdf-modal iframe {
 	width: 80vw;
 	height: 90vh;
 	margin-left: 10vw;	/* centering the element */
@@ -90,7 +90,7 @@ nav {
 	border: none;
 }
 
-#pdf-container img {
+#pdf-modal img {
 	position: absolute;
 	margin-left: 5px;
 	padding: 3px;
@@ -98,7 +98,7 @@ nav {
 	border-radius: 50%;
 }
 
-#pdf-container img:hover { 
+#pdf-modal img:hover { 
 	cursor: pointer;
 	animation: rotate90 1s; 
 }
@@ -108,6 +108,8 @@ nav {
 
 /*__________________________________________HEADER__________________________________________*/
 header {
+	max-width: 1400px;
+	margin: auto;
 	padding: 10px;
 	min-height: 600px;
 }
@@ -116,7 +118,7 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 #title-container {
 	margin-top: 150px;
 	display: flex;
-	flex-flow: column;
+	flex-direction: column;
 	align-items: center;
 }
 
@@ -146,10 +148,14 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 #intro {
 	margin-top: 50px;
 	max-width: 580px;
-	margin-left: 10vw;
 	letter-spacing: 1px;
 }
-#logo-links { margin-left: 10vw; }
+
+/* Intro and logo links mobie responsiveness */
+@media (max-width: 1500px) {
+	#intro { margin: 50px 10vw 0 10vw; }
+	#logo-links { margin-left: 10vw; }
+}
 
 #logo-links a { 
 	margin-left: 20px;
@@ -177,6 +183,12 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 #logo-links img { position: relative; } /* used for up and down movement when hovering over */
 
 /*__________________________________________PROJECTS__________________________________________*/
+#projects {
+	display: flex;						/* display project cards in columns with horizontal centering */
+	flex-direction: column;
+	align-items: center;
+}
+
 #projects > p {
 	text-align: center;
 	font-size: 1.4rem;
@@ -184,7 +196,8 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 	color: #a6a6a6;
 }
 .project-container {
-	margin: 30px 15px;
+	max-width: 1400px;
+	margin: 20px 15px;
 	padding: 40px 15px;
 	border-radius: 8px;
 	box-shadow: 0 5px 5px #ccc;
@@ -198,7 +211,7 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 }
 
 .project-container:hover {
-	background: #ebf6f9;   			/* very light blue */
+	box-shadow: 0 10px 10px #ccc;	/* add more shadow when hovering over */
 	transform: scale(1.02);			/* enlarge the element */
 }
 
@@ -315,6 +328,7 @@ footer {
 #contact-info a { color: #a6a6a6; }
 
 /*__________________________________________MOBILE RESPONSIVENESS__________________________________________*/
+/* Desktop mode */
 @media (min-width: 561px) {
 	/*_____________________TYPEWRITER_____________________ (Single line) */
 	#title::before, #title::after { /* pseudo element */
@@ -353,7 +367,7 @@ footer {
 		to { background: transparent; }
 	}
 }
-
+/* Hamburger menu */
 #dropdown { 
 	display: none; 
 	position: absolute;
@@ -384,8 +398,9 @@ footer {
 	display: flex;
 	flex-direction: column;
 }
-.column-align > * { width: 100% } /* have all items in the same column with the same width */
+.column-align > * { width: 100%; } /* have all items in the same column with the same width */
 
+/* Tablet mode */
 @media (max-width: 1011px) { /* used to adjust project's card */
 	.project-info {
 		width: 90%;
@@ -397,12 +412,18 @@ footer {
 	.project-btns { justify-content: center; }
 }
 
-@media (max-width: 560px) {	/* used to adjust navbar's menu */
-	.navbar-list { display: none; }
+/* Mobile mode */
+@media (max-width: 560px) {	
+	.navbar-list { display: none; }	/* Adjust navbar's menu */
 	
 	#dropdown { display: block; }
 
-	#projects { margin-top: 40px }
+	#title-container { 
+		margin-top: 80px; /* reduce margin-top */ 
+		text-align: center;
+	} 
+
+	#projects { margin-top: 40px; }
 
 	/*_____________________Multi line typewriter_____________________ */
 	.multi-line-type {
@@ -419,10 +440,10 @@ footer {
 	   type calc(var(--num-of-chars) * 200ms) steps(var(--num-of-chars)) forwards;
 	}
 	@keyframes blink {
-	  50% { background-position: 0 -100%, 0 0 }
+	  50% { background-position: 0 -100%, 0 0; }
 	}
 	@keyframes type {
-	  from { background-size: 0 200% }
+	  from { background-size: 0 200%; }
 	}
 }
 
@@ -435,7 +456,7 @@ footer {
 		fade_in var(--fadeInSpeed) var(--typewriterDuration) forwards;
 }
 @keyframes fade_in {
-	to { opacity: 100% }
+	to { opacity: 100%; }
 }
 
 /*_____________________UP DOWN_____________________*/
@@ -445,9 +466,9 @@ footer {
 	animation-fill-mode: forwards;
 }
 @keyframes up_down {
-	0% {top: 0px}
-	50% {top: -5px}
-	100% {top: 0px}
+	0% { top: 0px; }
+	50% { top: -5px; }
+	100% { top: 0px; }
 }
 /*_____________________SLIDE FROM LEFT_____________________*/
 @keyframes slide_left {
@@ -458,7 +479,8 @@ footer {
 	40% { opacity: 100%; }
 	100% { 
 		left: 0px; 
-		opacity: 100%}
+		opacity: 100%;
+	}
 }
 /*_____________________FADE IN UP_____________________*/
 @keyframes fadeInUp {
@@ -470,7 +492,7 @@ footer {
 /*_____________________TITLE DOT_____________________*/
 @keyframes dot_appear {
 	0% { color: transparent; }
-	99.9% {color: transparent; }
+	99.9% { color: transparent; }
 	100% { color: red; }
 }
 @keyframes dot_drop {
