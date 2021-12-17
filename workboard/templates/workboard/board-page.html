@@ -68,7 +68,7 @@
 		{% csrf_token %}
 		<h6>Column name</h6>
 		<input type="text" id="col-name-input" class="form-control" autofocus 
-			placeholder="Enter a column name (To Do, In Progress, Done)" maxlength="30" required>
+			placeholder="Enter a column name (To Do, In Progress, Done)" maxlength="15" required>
 		<input type="submit" id="create-col-btn" class="btn btn-primary btn-sm popup-submit" value="Create column">
 	</form>
 </div>
@@ -79,7 +79,7 @@
 	<form id="edit-col-form" method="post">
 		{% csrf_token %}
 		<h6>Column name</h6>
-		<input type="text" id="edit-col-name-input" class="form-control" maxlength="30" required>
+		<input type="text" id="edit-col-name-input" class="form-control" maxlength="15" required>
 			<input type="submit" class="btn btn-warning btn-sm popup-submit" value="Update column">
 	</form>
 </div>

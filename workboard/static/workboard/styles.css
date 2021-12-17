@@ -111,20 +111,20 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 }
 .timestamp { font-size: 0.8rem; }
 /*____________________________________Board page style____________________________________*/
-nav {
-	background-color: var(--dark-blue-trello);
-	color: white;
-}
+nav { background-color: var(--dark-blue-trello); }
+
 .app-title {
 	font-size: 1.4rem;
+	color: white;
 }
-.nav-link {
-	color: white !important;
-}
+
+.nav-link { color: white !important; }
+.link-over:hover { background-color: var(--medium-blue-trello); }
 
 #board-canvas {
 	background-color: var(--medium-blue-trello);
-	height: 100vh;
+	height: calc(100vh - 56px);	/* view height - navbar-height */
+	/*height: 100vh;*/
 }
 
 #board-header {
@@ -164,8 +164,7 @@ nav {
 #empty-board-msg { 
 	display: none; /* Initially hidden */
 	color: white; 
-	display: flex;		/* center the message */
-	margin: auto;
+	margin: auto;	/* center the message */
 }  
 #add-col-btn {
 	color: white;
