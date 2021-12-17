@@ -12,7 +12,7 @@
 			<div class="inline-block">
 				{% csrf_token %}
 				<form onsubmit="save_edited_title({{board_obj.id}}); return false;">
-					<input type="text" id="updated-title" placeholder="{{board_obj.title}}" maxlength="50" required>
+					<input type="text" id="updated-title" placeholder="{{board_obj.title}}" maxlength="25" required>
 					<input type="submit" value="Save">
 				</form>
 			</div>
@@ -49,7 +49,7 @@
 
 		<div id="empty-board-msg">
 			<h6>This board has no columns or cards.</h6>
-			<button id="add-col-btn" class="add-col-form-btn btn btn-primary btn-sm">Add a column</button>
+			<button id="add-col-btn" class="add-col-form-btn btn btn-sm">Add a column</button>
 		</div>
 
 		<div id="cols-div"></div>

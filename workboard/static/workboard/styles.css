@@ -1,7 +1,10 @@
 :root {
 	--dark-blue-trello: #094C72;
-	--medium-blue-trello: #0079Bf;
-	--light-blue-trello: #5BA4CF;
+	--medium-blue-trello: #0079BF;
+	--light-blue-trello: #2B96D4;
+	--lightest-blue-trello: #56ABDC;
+	--column-header-color: #D9D9D9;
+	--column-color: #F2F2F2;
 }
 
 body {
@@ -45,10 +48,11 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	border-radius: 10px;
 	font-size: large;
 	color: white;
-	background-color: #4285F4;
+
+	background-color: #34A853;
 	box-shadow: 2px 2px 5px #aaaaaa;
 }
-#create-board-form-btn:hover { background-color: #2674f2; }
+#create-board-form-btn:hover { background-color: #2A8943; }
 
 #create-board-form {
 	display: none;		/* Have the form initially hidden */
@@ -88,8 +92,8 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	list-style: none;	/* remove bullet points */
 }
 
-.active-list-item { background-color: #34A853; }
-.active-list-item:hover { background-color: #2a8943; }
+.active-list-item { background-color: var(--light-blue-trello); }
+.active-list-item:hover { background-color: var(--medium-blue-trello); }
 
 .archived-list-item { background-color: #8C8C8C; }
 .archived-list-item:hover { background-color: #737373; }
@@ -124,17 +128,29 @@ nav {
 }
 
 #board-header {
-	height: 40px;
-	padding: 10px;
+	padding: 10px 0px 10px 10px;
 }
 
-#editing-title { display: none; }
+#editing-title { 
+	display: none; 
+	border: 1px solid red;
+}
+#updated-title { 
+	color: white;
+	background-color: var(--light-blue-trello);
+	border: none;
+	border-radius: 5px;
+}
 
 .inline-block { display: inline-block; }
 
 #board-title { 
 	color: white;
-	background-color: var(--light-blue-trello);	
+	font-weight: bold;
+	background-color: var(--light-blue-trello);
+	padding: 5px 8px;
+	margin: 0;
+	border-radius: 5px;
 }
 
 .edit-board-btn, .archive-btns { display: none; }
@@ -145,7 +161,19 @@ nav {
 	flex-wrap: wrap;
 }
 
-#empty-board-msg { display: none;	/* Initially hidden */ }
+#empty-board-msg { 
+	display: none; /* Initially hidden */
+	color: white; 
+	display: flex;		/* center the message */
+	margin: auto;
+}  
+#add-col-btn {
+	color: white;
+	background-color: var(--light-blue-trello);
+	display: flex;		/* center the button */
+	margin: auto;
+}
+#add-col-btn:hover { background-color: var(--lightest-blue-trello); }
 
 #add-col-popup, #edit-col-popup, #edit-card-popup {
 	display: none;
@@ -168,16 +196,17 @@ nav {
 .popup-submit { margin-top: 10px; }
 
 #add-col-btn-lg {	/* Large "+ Add column" button at the rightmost position of all existing columns */
+	color: white;
+	background-color: var(--light-blue-trello);
 	display: none;
 	height: 80px;
 	width: 300px;
 	margin-left: 5px;
-	border: 1px dashed grey;
+	border: none;
 	border-radius: 5px;
 }
 #add-col-btn-lg:hover { 
-	color: green;
-	border: 1px solid grey;
+	background-color: var(--lightest-blue-trello);
 }
 
 /*____________________________________Columns style____________________________________*/
@@ -189,7 +218,7 @@ nav {
 
 }
 .col-div {
-	background-color: #f2f2f2;
+	background-color: var(--column-color);
 	border-radius: 5px;
 	width: 300px;
 	position: relative; 	/* Need relative since using absolute for child .col-buttons */
@@ -202,7 +231,7 @@ nav {
 
 .col-div > h5 {	/* Column's title */
 	padding: 5px 5px 5px 10px;
-	background-color: #d9d9d9;
+	background-color: var(--column-header-color);
 	font-weight: bold;
 }
 
@@ -221,7 +250,7 @@ nav {
 }
 
 .col-buttons > button:hover, .dropbtn:hover, .card-div > button:hover {
-	color: lightblue;
+	color: var(--light-blue-trello);
 }
 
 .dropdown {		/* Column's drop down menu when pressing ... - needed to position the dropdown content */
@@ -232,15 +261,15 @@ nav {
 	position: absolute;
 	right: 0px;			/* Aligning menu to the right edge */
 	z-index: 1;
+	box-shadow: 2px 2px 5px #aaaaaa;
 }
 .dropdown-content button {
 	width: 130px;
-	background-color: #bfbfbf;
+	background-color: white;
 	text-align: left;
 	border: none;
-
 }
-.dropdown-content button:hover { background-color: lightblue; }
+.dropdown-content button:hover { background-color: var(--column-color); }
 
 #add-card-div { margin: 0px 5px; }  /* top-bottom right-left */
 
