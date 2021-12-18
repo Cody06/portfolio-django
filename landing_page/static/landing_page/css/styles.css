@@ -2,6 +2,7 @@
 
 :root {   /* custom properties (variables) */
 	--gray-color: #353A40;
+	--light-gray-color: #F0F0F0;
 	--orange-color:  #F2AA4CFF;
 	--bg-color: white;
 	
@@ -25,6 +26,10 @@
 
 html {
   scroll-behavior: smooth;	/* smooth scrolling when redirected to an element */
+}
+
+body {
+	background-image: linear-gradient(var(--bg-color), var(--light-gray-color));
 }
 
 nav {
@@ -264,7 +269,7 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 }
 .project-tools div {
 	font-size: 0.8rem;
-	background: #f0f0f0;
+	background: var(--light-gray-color);
 	border-radius: 5px;
 	margin-right: 5px;
 	margin-bottom: 5px;		/* Used for when wrapping around */
