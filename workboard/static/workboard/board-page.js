@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	const EDIT_BOARD_BTN = document.querySelector('.edit-board-btn');
-	if ( EDIT_BOARD_BTN !== null) { EDIT_BOARD_BTN.addEventListener('click', show_edit_title) }
+	if ( EDIT_BOARD_BTN !== null) { EDIT_BOARD_BTN.addEventListener('click', save_edit_title) }
 
 	const CANCEL_TITLE_EDIT = document.querySelector('#cancel-title-edit');
 	if (CANCEL_TITLE_EDIT !== null) {
@@ -35,14 +35,31 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 	close_dropdown();
+
+	// Prevent content editable to add a new line
+	document.querySelector('[contenteditable]').addEventListener('keydown', (evt) => {
+	    if (evt.keyCode === 13) {
+	        evt.preventDefault();
+	    }	
+	});
 });
 
-function show_edit_title() {
+
+function save_edit_title() {
+	const contenteditable = document.querySelector('[contenteditable]');
+	console.log(this.getAttribute('data-boardid'));		// get the boards' id throught the save edit button
+	console.log(contenteditable.textContent);
+}
+
+
+
+/*function show_edit_title() {
 	document.querySelector('#editing-title').style.display = "block";
 	document.querySelector('#default-board-header').style.display = "none";
 }
 
-function save_edited_title(board_id) {
+
+/* UNCOMMENT THIS function save_edited_title(board_id) {
 	const UPDATED_TITLE = document.querySelector('#updated-title').value;
 	fetch(`/workboard/board-page/${board_id}`, {
 		method: 'POST',
@@ -58,7 +75,7 @@ function save_edited_title(board_id) {
 	document.querySelector('#updated-title').value = '';			// clear user input after saving
 	document.querySelector('#editing-title').style.display = "none";
 	document.querySelector('#default-board-header').style.display = "block";
-}
+}*/
 
 function set_drag_and_drop(start) {
 	setTimeout(drag_and_drop, 500);	// This should run 0.5 seconds after fetch is done	

@@ -66,31 +66,61 @@ nav {
 	align-items: center;	/* align on Y axis */
 	float: right;
 }
+
+.navbar-list a { 
+	appearance: button; /* make similar to resume btn */
+	border-top: 2px solid transparent;
+}  
+.navbar-list a:hover { text-decoration: none; }
+
 .navbar-link {
 	color: white;
 	margin-right: 40px;
+	border-bottom: 2px solid transparent;
 }
-.navbar-link:hover { color: var(--orange-color); }
+.navbar-link:hover { color: white; border-bottom: 2px solid var(--orange-color); }
 
 #resume-btn {
 	border: none;
+	border-top: 2px solid transparent;
+	border-bottom: 2px solid transparent;
 	background: transparent;
 }
-#resume-btn:hover { text-decoration: underline; }
+#resume-btn:hover { border-bottom: 2px solid var(--orange-color); }
 #resume-btn:focus { outline: none; }	/* Remove outline after pressing button */
+
+#darken-overlay {
+	display: none;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	background-color: black;
+	opacity: 50%;
+	position: fixed;
+}
 
 #pdf-modal {
 	position: fixed;
 	top: 70px;
 	display: none;
-	z-index: 1;
+	z-index: 2;
+	animation: fadein 500ms;
+}
+@keyframes fadein {
+	from {
+		opacity: 0;
+		transform: scale(0.5);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1.0);
+	}
 }
 
 #pdf-modal iframe {
 	width: 80vw;
 	height: 90vh;
 	margin-left: 10vw;	/* centering the element */
-
 	border-radius: 8px;
 	border: none;
 }
@@ -99,7 +129,7 @@ nav {
 	position: absolute;
 	margin-left: 5px;
 	padding: 3px;
-	border: 1px solid var(--gray-color);
+	background: var(--orange-color);
 	border-radius: 50%;
 }
 

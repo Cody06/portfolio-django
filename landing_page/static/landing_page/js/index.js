@@ -45,18 +45,23 @@ function show_resume() {
 	const main_container = document.querySelector('#main-container');
 	if (pdf_modal.style.display === 'none') {
 		pdf_modal.style.display = 'block';
+		document.querySelector('#darken-overlay').style.display = 'block';
+		
 		main_container.style.filter = 'blur(8px)';
-		console.log('show PDF')
+		console.log('show PDF');
 	}
 	else if (pdf_modal.style.display === "") {	// Initially the style of the PDF container is an empty string
 		pdf_modal.style.display = 'block'
+		document.querySelector('#darken-overlay').style.display = 'block';
+		
 		main_container.style.filter = 'blur(8px)';
 		console.log('empty string style - show PDF')
 	}
 	else {
 		pdf_modal.style.display = 'none';
+		document.querySelector('#darken-overlay').style.display = 'none';
 		main_container.style.filter = 'blur(0px)';
-		console.log('hide PDF')
+		console.log('hide PDF');
 	}
 }
 
@@ -71,9 +76,10 @@ function close_resume() {
 			&& !event.target.matches('#mobile-resume-btn') && !event.target.matches('#contact-btn') ) {	
 			console.log('Clicked outside pdf-modal');
 			document.querySelector('#pdf-modal').style.display = 'none';
+			document.querySelector('#darken-overlay').style.display = 'none';
 			document.querySelector('#main-container').style.filter = 'blur(0px)';
+			
 		}
 	}
 }
-
 
