@@ -48,27 +48,34 @@
 		
 		<header>
 			<div id="title-container">
-				<h1 id="title"><span class="multi-line-type">Full Stack Developer</span><span id="red-dot">.</span></h1>
+				<h1 id="title"><span class="multi-line-type">Full Stack Developer</span><span id="title-dot">.</span></h1>
 				<p id="tools">Python | Django | JavaScript | React | HTML | CSS | Bootstrap | SQL</p>
 			</div>
 
-			<div id="intro" class="fade-in-animation">
-				<blockquote><q>If it's imaginable, then it can be built.</q></blockquote>
-				<p>I'm a software developer from Montreal, Canada who enjoys creating web applications. Although I have started with Java, C and Assembly during my bachelor in Information Systems at McGill University, I found my passion after graduation with full-stack tools such as Python and JavaScript.<br><br>
-				With a diverse background, I am eager to tackle any technical project.
-				</p>
+			<div id="header-second-container">
+				<div id="intro" class="fade-in-animation">
+					<blockquote><q>If it's imaginable, then it can be built.</q></blockquote>
+					<p>I'm a software developer from Montreal, Canada who enjoys creating web applications. Although I have started with Java, C and Assembly during my bachelor in Information Systems at McGill University, I found my passion after graduation with full-stack tools such as Python and JavaScript.<br><br>
+					With a diverse background, I am eager to tackle any technical project.
+					</p>
+				
+					<div id="logo-links">
+						<a href="https://github.com/Cody06" target="_blank" >
+							<img src="{% static 'landing_page/logos/github_square_50.png' %}" width="50" 
+							alt="Github link" class="up-down-animation">
+						</a>
+						<a href="http://www.linkedin.com/in/cody-miu" target="_blank">
+							<img src="{% static 'landing_page/logos/linkedin_square_50.png' %}" width="50"
+							alt="LinkedIn link" class="up-down-animation">
+						</a>
+					</div>
+				</div>
+
+				<div id="header-logo">
+					<img src="{% static 'landing_page/logos/fullstack-development-orange.png' %}">
+				</div>
 			</div>
 
-			<div id="logo-links">
-				<a href="https://github.com/Cody06" target="_blank" >
-					<img src="{% static 'landing_page/logos/github_square_50.png' %}" width="50" 
-					alt="Github link" class="up-down-animation">
-				</a>
-				<a href="http://www.linkedin.com/in/cody-miu" target="_blank">
-					<img src="{% static 'landing_page/logos/linkedin_square_50.png' %}" width="50"
-					alt="LinkedIn link" class="up-down-animation">
-				</a>
-			</div>
 		</header>
 
 		<main id="projects" class="fade-in-animation">

@@ -163,7 +163,7 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 	position: relative;
 }
 
-#red-dot {
+#title-dot {
 	color: var(--orange-color);
 	position: relative;
 	animation: 
@@ -180,16 +180,31 @@ header:hover { cursor: default; } /* prevent mouse from changing when hovering o
 	animation: fadeInUp var(--fadeInSpeed) var(--typewriterDuration) forwards;
 }
 
+#header-second-container {
+	padding: 50px 20px 20px 20px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
 #intro {
-	margin-top: 50px;
 	max-width: 580px;
 	letter-spacing: 1px;
 }
 
-/* Intro and logo links mobie responsiveness */
-@media (max-width: 1500px) {
-	#intro { margin: 50px 10vw 0 10vw; }
-	#logo-links { margin-left: 10vw; }
+#header-logo {
+	position: relative;  /* need relative pos for animation */
+	opacity: 0%;
+	animation: slide_right 1s var(--typewriterDuration) forwards;
+}
+#header-logo img {
+	max-width: 250px;
+	max-height: 250px;
+}
+
+@media (max-width: 899px) {
+	#header-logo { display: none; }
 }
 
 #logo-links a { 
@@ -505,7 +520,7 @@ footer {
 	50% { top: -5px; }
 	100% { top: 0px; }
 }
-/*_____________________SLIDE FROM LEFT_____________________*/
+/*_____________________SLIDE FROM LEFT or RIGHT_____________________*/
 @keyframes slide_left {
 	0% { 
 		left: -200px;
@@ -517,6 +532,19 @@ footer {
 		opacity: 100%;
 	}
 }
+
+@keyframes slide_right {
+	0% { 
+		right: -200px;
+		opacity: 0%;
+	}
+	40% { opacity: 80%; }
+	100% { 
+		right: 0px; 
+		opacity: 80%;
+	}
+}
+
 /*_____________________FADE IN UP_____________________*/
 @keyframes fadeInUp {
 	to {
