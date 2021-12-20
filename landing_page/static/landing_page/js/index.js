@@ -8,15 +8,20 @@ document.addEventListener('DOMContentLoaded', function() {
 	const PROJECTS_BTN = document.querySelector('#projects-btn');
 	if (PROJECTS_BTN !== null) { PROJECTS_BTN.addEventListener('click', scroll_to_projects); }
 
+	const MOBILE_PROJECTS_BTN = document.querySelector('#mobile-projects-btn');
+	if (MOBILE_PROJECTS_BTN !== null) { PROJECTS_BTN.addEventListener('click', scroll_to_projects); }
+
 	const MOBILE_RESUME_BTN = document.querySelector('#mobile-resume-btn');
 	if (MOBILE_RESUME_BTN !== null) { MOBILE_RESUME_BTN.addEventListener('click', show_resume); }
 
 	const CONTACT_BTN = document.querySelector('#contact-btn');
 	if (CONTACT_BTN !== null) { CONTACT_BTN.addEventListener('click', scroll_to_contact); }
+
+	const MOBILE_CONTACT_BTN = document.querySelector('#mobile-contact-btn');
+	if (MOBILE_CONTACT_BTN !== null) { CONTACT_BTN.addEventListener('click', scroll_to_contact); }
 });
 
 function show_dropdown() {
-
 	const DROPDOWN_CONTENT = document.querySelector('#dropdown-content');
 
 	if (DROPDOWN_CONTENT.style.display == 'none' || DROPDOWN_CONTENT.style.display == "") {
@@ -46,29 +51,34 @@ function show_resume() {
 	if (pdf_modal.style.display === 'none') {
 		pdf_modal.style.display = 'block';
 		document.querySelector('#darken-overlay').style.display = 'block';
-		
 		main_container.style.filter = 'blur(8px)';
+
+		prevent_scroll();
 		console.log('show PDF');
 	}
 	else if (pdf_modal.style.display === "") {	// Initially the style of the PDF container is an empty string
 		pdf_modal.style.display = 'block'
 		document.querySelector('#darken-overlay').style.display = 'block';
-		
 		main_container.style.filter = 'blur(8px)';
+		
+		prevent_scroll();
 		console.log('empty string style - show PDF')
 	}
 	else {
 		pdf_modal.style.display = 'none';
 		document.querySelector('#darken-overlay').style.display = 'none';
 		main_container.style.filter = 'blur(0px)';
+
+		resume_scroll();
 		console.log('hide PDF');
 	}
 }
 
-// Close resume display if we clicked outside its container
+
 function close_resume() {
+	// Close resume display if we clicked outside its container
 	window.onclick = function(event) {
-		console.log(event.target)
+		console.log(event.target);
 		const pdf_modal = document.querySelector('#pdf-modal');
 		// clicking on the pdf-modal doesn't return anything (if true, we clicked outside)
 		// clicking on any of the matches is not considered clicking outside the pdf container
@@ -78,8 +88,18 @@ function close_resume() {
 			document.querySelector('#pdf-modal').style.display = 'none';
 			document.querySelector('#darken-overlay').style.display = 'none';
 			document.querySelector('#main-container').style.filter = 'blur(0px)';
-			
+
+			resume_scroll();
 		}
 	}
 }
 
+
+function prevent_scroll() {
+	document.body.style.overflow = 'hidden';
+	document.querySelector('#pdf-modal').style.top = `${window.scrollY + 70}px`
+}
+
+function resume_scroll() {
+	document.body.style.overflow = 'visible';
+}

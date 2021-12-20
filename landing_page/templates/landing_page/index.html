@@ -19,20 +19,20 @@
 	<body>
 
 		<nav>
-			<div id="main-logo">Cody Miu</div>
-			
+			<div title="Hello!" class="main-logo right-left-animation">&lt; cody &gt;</div>
+	
 			<ul class="navbar-list inline-list">	<!-- Remove bullet points and add spaces between the links -->
-				<li><a class="navbar-link" href="#projects" title="View Projects">Projects</a></li>
-				<li><button class="navbar-link" id="resume-btn">Resume</button></li>
-				<li><a class="navbar-link" href="#contact-info" title="Contact info">Contact</a></li>
+				<li><button class="navbar-link" id="projects-btn" title="View Projects">Projects</button></li>
+				<li><button class="navbar-link" id="resume-btn" title="View Resume">Resume</button></li>
+				<li><button class="navbar-link" id="contact-btn" title="View Contact info">Contact</button></li>
 			</ul>
 
 			<div id="dropdown">
 				<button id="dropdown-btn"><img src="{% static 'landing_page/logos/dropdown_white_38.png' %}"></button>
 				<div id="dropdown-content" class="column-align">
-					<button id="projects-btn">Projects</button>
+					<button id="mobile-projects-btn">Projects</button>
 					<button id="mobile-resume-btn">Resume</button>
-					<button id="contact-btn">Contact</button>
+					<button id="mobile-contact-btn">Contact</button>
 				</div>
 			</div>
 		</nav>
@@ -80,6 +80,7 @@
 
 		<main id="projects" class="fade-in-animation">
 			<p>PROJECTS</p>
+	
 			<!--____________________________ Workboard ____________________________-->
 			<div class="project-container up-down-animation">
 
@@ -227,10 +228,14 @@
 					<td><a href="mailto: cody.miu@gmail.com" target="_blank">cody.miu@gmail.com</a></td>
 				</tr>
 					<td><img src="{% static 'landing_page/logos/linkedin_round_24.png' %}"></td>
-					<td><a href="http://www.linkedin.com/in/cody-miu" target="_blank">linkedin</a></td>
+					<td><a href="http://www.linkedin.com/in/cody-miu" target="_blank">Linkedin</a></td>
 				</tr>
 			</table>
 		</footer>
+
+		<!--<div>
+			<div class="main-logo">&lt;/ cody miu &gt;</div>
+		</div>-->
 		
 	</body>
 	<script src="{% static 'landing_page/js/lightbox-plus-jquery.min.js' %}"></script>
