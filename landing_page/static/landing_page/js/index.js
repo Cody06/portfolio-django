@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	if (PROJECTS_BTN !== null) { PROJECTS_BTN.addEventListener('click', scroll_to_projects); }
 
 	const MOBILE_PROJECTS_BTN = document.querySelector('#mobile-projects-btn');
-	if (MOBILE_PROJECTS_BTN !== null) { PROJECTS_BTN.addEventListener('click', scroll_to_projects); }
+	if (MOBILE_PROJECTS_BTN !== null) { MOBILE_PROJECTS_BTN.addEventListener('click', scroll_to_projects); }
 
 	const MOBILE_RESUME_BTN = document.querySelector('#mobile-resume-btn');
 	if (MOBILE_RESUME_BTN !== null) { MOBILE_RESUME_BTN.addEventListener('click', show_resume); }
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	if (CONTACT_BTN !== null) { CONTACT_BTN.addEventListener('click', scroll_to_contact); }
 
 	const MOBILE_CONTACT_BTN = document.querySelector('#mobile-contact-btn');
-	if (MOBILE_CONTACT_BTN !== null) { CONTACT_BTN.addEventListener('click', scroll_to_contact); }
+	if (MOBILE_CONTACT_BTN !== null) { MOBILE_CONTACT_BTN.addEventListener('click', scroll_to_contact); }
 });
 
 function show_dropdown() {
