@@ -4,18 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		button.onclick = add_col_form
 	});
 
-	const EDIT_BOARD_BTN = document.querySelector('.edit-board-btn');
-	if ( EDIT_BOARD_BTN !== null) { EDIT_BOARD_BTN.addEventListener('click', save_edit_title) }
-
-	const CANCEL_TITLE_EDIT = document.querySelector('#cancel-title-edit');
-	if (CANCEL_TITLE_EDIT !== null) {
-		CANCEL_TITLE_EDIT.addEventListener('click', () => {
-			console.log("CANCEL TITLE EDIT CLICKED")
-			document.querySelector('#editing-title').style.display = "none";
-			document.querySelector('#default-board-header').style.display = "block";
-		});
-	}
-
 	document.querySelectorAll('.archive-btns').forEach(function(button) { // archive/unarchive board
 		button.onclick = function() {
 			const PATH = window.location.pathname;						// get the board's id from the URL path
@@ -42,40 +30,45 @@ document.addEventListener('DOMContentLoaded', function() {
 	        evt.preventDefault();
 	    }	
 	});
+
+	document.querySelector('[contenteditable]').addEventListener('click', () => {
+		const EDIT_BOARD_TITLE = document.querySelector('#edit-board-btn');
+		EDIT_BOARD_TITLE.style.display = 'block';
+		EDIT_BOARD_TITLE.addEventListener('click', save_edit_title);
+
+		close_save_edit_title();
+	})
 });
 
 
 function save_edit_title() {
 	const contenteditable = document.querySelector('[contenteditable]');
-	console.log(this.getAttribute('data-boardid'));		// get the boards' id throught the save edit button
-	console.log(contenteditable.textContent);
-}
-
-
-
-/*function show_edit_title() {
-	document.querySelector('#editing-title').style.display = "block";
-	document.querySelector('#default-board-header').style.display = "none";
-}
-
-
-/* UNCOMMENT THIS function save_edited_title(board_id) {
-	const UPDATED_TITLE = document.querySelector('#updated-title').value;
-	fetch(`/workboard/board-page/${board_id}`, {
-		method: 'POST',
+	
+	fetch(`/workboard/board-page/${this.getAttribute('data-boardid')}`, {
+		method: 'PUT',
 		body: JSON.stringify({
-			new_title: UPDATED_TITLE
+			action: 'edit-title',
+			new_title: contenteditable.textContent
 		})
 	})
 	.then(response => response.json())
 	.then(message => {
 		console.log(message);
-	});
-	document.querySelector('#board-title').innerHTML = UPDATED_TITLE;
-	document.querySelector('#updated-title').value = '';			// clear user input after saving
-	document.querySelector('#editing-title').style.display = "none";
-	document.querySelector('#default-board-header').style.display = "block";
-}*/
+	})
+
+	document.querySelector('#edit-board-btn').style.display = 'none'
+}
+
+function close_save_edit_title() {
+	window.onclick = function(event) {
+		const edit_board_title_btn = document.querySelector('#edit-board-btn');
+		if ( event.target && !event.target.matches('#edit-board-btn') && !event.target.matches('[contenteditable]') ) {	
+			console.log("Clicked outside edit-board-btn")
+			document.querySelector('#edit-board-btn').style.display = 'none';
+		}
+	}
+}
+
 
 function set_drag_and_drop(start) {
 	setTimeout(drag_and_drop, 500);	// This should run 0.5 seconds after fetch is done	
@@ -275,18 +268,17 @@ function is_board_archived(bool) {
 
 function show_buttons() {
 	document.querySelector('.archive-btns').style.display = 'block';
-	document.querySelector('.edit-board-btn').style.display = 'block';
 }
 
 function hide_buttons() {
 	document.querySelector('.archive-btns').style.display = 'none';
-	document.querySelector('.edit-board-btn').style.display = 'none';
 }
+
 //______________________________________________COLUMNS
 function add_col_form() {
  	/* Show the add column form */
 	hide_empty_board_msg();
-	show_add_column_form();
+	show_add_col_form();
 	blur_background();	
 
 	// Create the column and save it in the database
@@ -365,9 +357,9 @@ function col_options(col_id, action) {
 	/* Either edit or delete the column */
 	const COL_NAME = document.querySelector(`#col-header-${col_id}`).innerHTML; // get the existing column's name
 	if (action == 'edit') {
-		document.querySelector('#edit-col-popup').style.display = 'block';			// show edit popup
+		document.querySelector('#edit-col-modal').style.display = 'block';			// show edit modal
 		blur_background();
-		document.querySelector('#edit-col-header').innerHTML = `Edit: ${COL_NAME}`;	// add some text to the popup	
+		document.querySelector('#edit-col-header').innerHTML = `Edit: ${COL_NAME}`;	// add some text to the modal	
 		document.querySelector('#edit-col-name-input').placeholder = COL_NAME;		// add existing column name
 
 		document.querySelector('#edit-col-form').addEventListener('submit', function() {
@@ -519,7 +511,7 @@ function card_options(card_id, action) {
 	// Prefill the text box
 	let existing_note = document.querySelector(`#card-text-${card_id}`).innerHTML;
 	if (action == 'edit') {
-		document.querySelector('#edit-card-popup').style.display = 'block';
+		document.querySelector('#edit-card-modal').style.display = 'block';
 		blur_background();
 		document.querySelector('#edit-card-text-input').value = existing_note;
 
@@ -567,9 +559,9 @@ function card_options(card_id, action) {
 
 //____________________________________ HELPER functions ____________________________________
 function close_form() {
-	document.querySelector('#add-col-popup').style.display = 'none';
-	document.querySelector('#edit-col-popup').style.display = 'none';
-	document.querySelector('#edit-card-popup').style.display = 'none';
+	document.querySelector('#add-col-modal').style.display = 'none';
+	document.querySelector('#edit-col-modal').style.display = 'none';
+	document.querySelector('#edit-card-modal').style.display = 'none';
 	unblur_background();
 	empty_board_or_not_btn();	// display the correct button
 }
@@ -604,17 +596,19 @@ function hide_add_col_btn_lg() {
 	document.querySelector('#add-col-btn-lg').style.display = 'none'; 		  // hide "+ Add column" button
 }
 
-function show_add_column_form() {
-	document.querySelector('#add-col-popup').style.display = 'block';
+function show_add_col_form() {
+	document.querySelector('#add-col-modal').style.display = 'block';
 }
 
 function blur_background() {
 	document.querySelector('#board-header').style.filter = 'blur(8px)';
 	document.querySelector('#board-div').style.filter = 'blur(8px)';
+	document.querySelector('#darken-overlay').style.display = 'block';
 }
 function unblur_background() {
 	document.querySelector('#board-header').style.filter = 'blur(0px)';
 	document.querySelector('#board-div').style.filter = 'blur(0px)';
+	document.querySelector('#darken-overlay').style.display = 'none';
 }
 // Practice code
 	// This has a lot of errors for the drag and drop function (className doesn't get updated after dragend)

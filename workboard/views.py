@@ -85,22 +85,22 @@ def board_page(request, board_id):
 		return render(request, 'workboard/board-page.html', {
 			'board_obj': Board.objects.get(pk=board_id)
 		})
-	elif request.method == 'POST':
-		data = json.loads(request.body)
-		new_title = data['new_title']
-
-		board = Board.objects.get(pk=board_id)
-		board.title = new_title
-		board.save()
-
-		return JsonResponse({'message': f"Board title updated: {new_title}"}, status=201)
 	elif request.method == "PUT":
 		data = json.loads(request.body)
 
-		board = Board.objects.get(pk=board_id)
-		board.archived = data['archive_board']	# will pass either True or False to archive
-		board.save()
-		return JsonResponse({'message': f"Board archived: {data['archive_board']}"}, status=201)
+		if data['action'] == 'edit-title':
+			new_title = data['new_title']
+
+			board = Board.objects.get(pk=board_id)
+			board.title = new_title
+			board.save()
+
+			return JsonResponse({'message': f"Board title updated: {new_title}"}, status=201)
+		else:
+			board = Board.objects.get(pk=board_id)
+			board.archived = data['archive_board']	# will pass either True or False to archive
+			board.save()
+			return JsonResponse({'message': f"Board archived: {data['archive_board']}"}, status=201)
 	else:
 		return JsonResponse({'error': "GET OR PUT request required"}, status=400)
 

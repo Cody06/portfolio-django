@@ -5,8 +5,10 @@
 
 {% block body %}
 {% if user.is_authenticated %}
-<div id="create-board-form">
-	<h5>Create new board</h5><button id="close-form-btn">x</button>
+<div id="darken-overlay"></div>
+
+<div id="create-board-modal">
+	<h5 class="center-modal-title">Create a new board</h5><button class="close-form-btn">x</button>
 	<hr>
 	<!-- Create a new board, show the form only when button is clicked -->
 	<form action="{% url 'workboard:create-board' %}" method="post">
@@ -33,7 +35,7 @@
 			<label for="board_private">Private</label><br>
 		</div>-->
 		<div class="center-btn">
-		<input type="submit" class="btn btn-primary" value="Create Board">
+			<input type="submit" class="btn btn-primary" value="Create Board">
 		</div>
 	</form>
 </div>

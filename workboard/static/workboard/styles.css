@@ -4,13 +4,18 @@
 	--light-blue-trello: #2B96D4;
 	--lightest-blue-trello: #56ABDC;
 	--column-header-color: #D9D9D9;
-	--column-color: #F2F2F2;
 
-	--light-gray-golor: #F0F0F0;
+	--light-gray-color: #F2F2F2;
+
+	--border-radius-default: 7px;
+
 }
-
+* {
+	padding: 0;
+	margin: 0;
+}
 body {
-	background-color: var(--light-gray-golor);
+	background-color: var(--light-gray-color);
 }
 
 button:focus {	/* remove blue border around all buttons when clicking on them */
@@ -23,7 +28,7 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	padding: 20px;
 	border: 1px solid darkgrey;
 	border-radius: 10px;
-	box-shadow: 10px 10px 5px #aaaaaa; 	/* h-offset v-offset blur */
+	box-shadow: 10px 10px 5px #aaa; 	/* h-offset v-offset blur */
 	text-align: center;					/* center all inputs in the form */
 	background-color: #f1f1f1;
 }
@@ -45,47 +50,56 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	padding: 5px;
 	margin: 50px 0px;	/* top-bottom right-left */
 	border: none;
-	border-radius: 10px;
+	border-radius: var(--border-radius-default);
 	font-size: large;
 	color: white;
 
 	background-color: #34A853;
-	box-shadow: 2px 2px 5px #aaaaaa;
+	box-shadow: 2px 2px 5px #aaa;
 }
 #create-board-form-btn:hover { background-color: #2A8943; }
 
-#create-board-form {
+#darken-overlay {
+	display: none;
+	positioN: absolute;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: black;
+	opacity: 70%;
+	z-index: 1;
+}
+
+#create-board-modal {
 	display: none;		/* Have the form initially hidden */
-	background-color: #f1f1f1;
+	background-color: var(--light-gray-color);
 	width: 400px;
 	padding: 5px;
-	border-radius: 10px;
-	box-shadow: 10px 10px 5px #aaaaaa;
-	position: fixed;		/* Need fixed since using absolute for child #close-form-btn */
+	border-radius: var(--border-radius-default);
+	position: fixed;		/* Need fixed since using absolute for child .close-form-btn */
 	top: 80px;
 	left: 50vw;				/* Left margin of the form is at 50% of the window */
 	margin-left: -200px;	/* The middle of the form is at the middle of the window */
-	z-index: 1;
+	z-index: 2;
 }
-#create-board-form h5 {	/* Select only the header child of the form */
+
+.center-modal-title {
 	text-align: center;
 	margin-top: 10px;
 }
 
 .form-input { margin-bottom: 10px; } /* Add some spacing between the form's inputs */
 
-.center-btn {
-	text-align: center;
-	margin-bottom: 10px;
-}
-#close-form-btn {	/* Position close form <button> 'X' in the top right corner */
+.center-btn { text-align: center; }
+
+.close-form-btn {	/* Position.close form <button> 'X' in the top right corner */
 	border: none;
 	background-color: transparent;
 	position: absolute;
 	top: 2px;
-	right: 2px;
+	right: 7px;
 }
-#close-form-btn:hover { color: red; }
+.close-form-btn:hover { color: red; }
 
 .boards-list {
 	padding: 0;			/* remove indentation from ul */
@@ -106,8 +120,8 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	padding: 8px;
 	width: 100%;
 	border: none;
-	border-radius: 10px;
-	box-shadow: 2px 2px 5px #aaaaaa;
+	border-radius: var(--border-radius-default);
+	box-shadow: 2px 2px 5px #aaa;
 }
 .timestamp { font-size: 0.8rem; }
 /*____________________________________Board page style____________________________________*/
@@ -121,25 +135,13 @@ nav { background-color: var(--dark-blue-trello); }
 .nav-link { color: white !important; }
 .link-over:hover { background-color: var(--medium-blue-trello); }
 
-#board-canvas {
+#board-container {
 	background-color: var(--medium-blue-trello);
 	height: calc(100vh - 56px);	/* view height - navbar-height */
-	/*height: 100vh;*/
 }
 
 #board-header {
 	padding: 10px 0px 10px 10px;
-}
-
-#editing-title { 
-	display: none; 
-	border: 1px solid red;
-}
-#updated-title { 
-	color: white;
-	background-color: var(--light-blue-trello);
-	border: none;
-	border-radius: 5px;
 }
 
 .inline-block { display: inline-block; }
@@ -150,10 +152,13 @@ nav { background-color: var(--dark-blue-trello); }
 	background-color: var(--light-blue-trello);
 	padding: 5px 8px;
 	margin: 0;
-	border-radius: 5px;
+	border-radius: var(--border-radius-default);
 }
 
-.edit-board-btn, .archive-btns { display: none; }
+#edit-board-btn, .archive-btns { 
+	display: none; 
+	margin-left: 10px;
+}
 
 #board-div {
 	margin: 5px;
@@ -174,25 +179,21 @@ nav { background-color: var(--dark-blue-trello); }
 }
 #add-col-btn:hover { background-color: var(--lightest-blue-trello); }
 
-#add-col-popup, #edit-col-popup, #edit-card-popup {
+#add-col-modal, #edit-col-modal, #edit-card-modal {
 	display: none;
-	background-color: #d9d9d9;
+	background-color: var(--light-gray-color);
 	width: 400px;
-	height: 200px;
 	padding: 5px;
-	border-radius: 10px;
-	box-shadow: 10px 10px 5px #aaaaaa;
+	border-radius: var(--border-radius-default);
 	/* Position (fixed) in the high middle of the screen on top of the document */
-	position: fixed; 		/* Need fixed since using absolute for child #close-form-btn */
+	position: fixed; 		/* Need fixed since using absolute for child .close-form-btn */
 	top: 80px;
 	left: 50vw;				/* Align the left edge of the element at 50% of the window */
 	margin-left: -200px;	/* Move left margin back the halfway mark (half-width of the element 400/2) */
 	z-index: 2;				/* Position on top of document elements */
 }
 
-#add-col-popup h5, #edit-col-popup h5 { margin-top: 5px}
-
-.popup-submit { margin-top: 10px; }
+#add-col-modal h5, #edit-col-modal h5 { margin-top: 5px}
 
 #add-col-btn-lg {	/* Large "+ Add column" button at the rightmost position of all existing columns */
 	color: white;
@@ -202,7 +203,7 @@ nav { background-color: var(--dark-blue-trello); }
 	width: 300px;
 	margin-left: 5px;
 	border: none;
-	border-radius: 5px;
+	border-radius: var(--border-radius-default);
 }
 #add-col-btn-lg:hover { 
 	background-color: var(--lightest-blue-trello);
@@ -217,8 +218,8 @@ nav { background-color: var(--dark-blue-trello); }
 
 }
 .col-div {
-	background-color: var(--column-color);
-	border-radius: 5px;
+	background-color: var(--light-gray-color);
+	border-radius: var(--border-radius-default);
 	width: 300px;
 	position: relative; 	/* Need relative since using absolute for child .col-buttons */
 	margin-left: 5px;
@@ -260,7 +261,7 @@ nav { background-color: var(--dark-blue-trello); }
 	position: absolute;
 	right: 0px;			/* Aligning menu to the right edge */
 	z-index: 1;
-	box-shadow: 2px 2px 5px #aaaaaa;
+	box-shadow: 2px 2px 5px #aaa;
 }
 .dropdown-content button {
 	width: 130px;
@@ -268,7 +269,7 @@ nav { background-color: var(--dark-blue-trello); }
 	text-align: left;
 	border: none;
 }
-.dropdown-content button:hover { background-color: var(--column-color); }
+.dropdown-content button:hover { background-color: var(--light-gray-color); }
 
 #add-card-div { margin: 0px 5px; }  /* top-bottom right-left */
 
@@ -284,7 +285,7 @@ nav { background-color: var(--dark-blue-trello); }
 	padding: 5px;
 	margin: 0px 5px 7px 5px; /* top right bottom left */
 	border-radius: 5px;
-	box-shadow: 2px 2px 5px #aaaaaa;
+	box-shadow: 2px 2px 5px #aaa;
 }
 
 .card-buttons {
