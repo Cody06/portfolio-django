@@ -43,6 +43,8 @@
 	</section>
 </div>
 
+<div id="archived-layer"></div>
+
 <!-- Modals -->
 <div id="darken-overlay"></div>
 
@@ -51,7 +53,7 @@
 	<hr>
 	<form id="create-col-form" method="post">
 		{% csrf_token %}
-		<h6><strong>Column name<</strong></h6>
+		<h6><strong>Column name</strong></h6>
 		<input type="text" id="col-name-input" class="form-control form-input" autofocus 
 			placeholder="Enter a column name (To Do, In Progress, Done)" maxlength="15" required>
 		<div class="center-btn">

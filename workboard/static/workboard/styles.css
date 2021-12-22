@@ -113,6 +113,18 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 .archived-list-item { background-color: #8C8C8C; }
 .archived-list-item:hover { background-color: #737373; }
 
+#archived-layer {
+	display: none;
+	position: absolute;
+	top: 56px;
+	display: none;
+	width: 100vw;
+	height: calc(100vh - 56px);
+	background-color: black;
+	opacity: 50%;
+	z-index: 3;
+}
+
 .boards-list button {
 	color: white;
 	font-size: large;
@@ -158,7 +170,9 @@ nav { background-color: var(--dark-blue-trello); }
 
 #edit-board-btn, .archive-btns { 
 	display: none; 
+	position: relative;
 	margin-left: 10px;
+	z-index: 4;
 }
 
 #board-div {

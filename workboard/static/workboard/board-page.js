@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			fetch(`/workboard/board-page/${BOARD_ID}`, {
 				method: 'PUT',
 				body: JSON.stringify({
+					action: 'archive-board',
 					archive_board: archive_board
 				})
 			})
@@ -237,17 +238,17 @@ function is_board_archived(bool) {
 	/* Check if we display an archived or unarchived board */
 	if (bool) {	// board is archived
 		console.log("board is archived");
+		document.querySelector('#archived-layer').style.display = 'block';
 		// disable all buttons except the archive btns
 		document.querySelectorAll('button:not(.archive-btns)').forEach(function(button) {
 			button.disabled = true;
-			button.style.backgroundColor = "light";
+			button.style.backgroundColor = 'light';
 		});
 
 		document.querySelectorAll('.draggable').forEach(function(draggable) {
 			draggable.setAttribute('draggable', false);	// prevent drag and drop
 			draggable.classList.remove('draggable');	// prevent cursor to change when hovering over
 		})
-		document.querySelector('body').style.color = "grey";
 
 		document.querySelector('.archive-btns').style.display = 'block';
 		
@@ -258,6 +259,7 @@ function is_board_archived(bool) {
 	
 	} else {	// board is unarchived
 		console.log("board is unarchived");
+		document.querySelector('#archived-layer').style.display = 'none'
 		set_drag_and_drop();	// allow drag and drop
 
 		const BOARD_HEADER = document.querySelector('#board-header');
