@@ -474,7 +474,9 @@ function create_card_HTML(cards, index) {
 	CARD_DIV.className = 'card-div draggable';	// the card will be a draggable element
 	CARD_DIV.setAttribute('draggable', true);	// make the card draggable
 	CARD_DIV.innerHTML = `
+		
 		<div class="card-buttons">
+			
 			<div class="dropdown">		
 				<button onclick="show_dropdown_card(${card_id})" class="dropbtn">&#183;&#183;&#183;</button>
 				
@@ -602,13 +604,13 @@ function show_add_col_form() {
 
 function blur_background() {
 	document.querySelector('#board-header').style.filter = 'blur(8px)';
-	document.querySelector('#board-div').style.filter = 'blur(8px)';
 	document.querySelector('#darken-overlay').style.display = 'block';
+	document.querySelector('#board-div').style.filter = 'blur(8px)';
 }
 function unblur_background() {
 	document.querySelector('#board-header').style.filter = 'blur(0px)';
-	document.querySelector('#board-div').style.filter = 'blur(0px)';
 	document.querySelector('#darken-overlay').style.display = 'none';
+	document.querySelector('#board-div').style.filter = 'blur(0px)';
 }
 // Practice code
 	// This has a lot of errors for the drag and drop function (className doesn't get updated after dragend)

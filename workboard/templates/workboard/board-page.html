@@ -47,11 +47,11 @@
 <div id="darken-overlay"></div>
 
 <div id="add-col-modal">
-	<h5 class="center-modal-title">Add a column</h5><button class="close-form-btn" onclick="close_form()">x</button>
+	<h5 class="center-modal-title"><strong>Add a column</strong></h5><button class="close-form-btn" onclick="close_form()">x</button>
 	<hr>
 	<form id="create-col-form" method="post">
 		{% csrf_token %}
-		<h6>Column name</h6>
+		<h6><strong>Column name<</strong></h6>
 		<input type="text" id="col-name-input" class="form-control form-input" autofocus 
 			placeholder="Enter a column name (To Do, In Progress, Done)" maxlength="15" required>
 		<div class="center-btn">
@@ -61,11 +61,11 @@
 </div>
 
 <div id="edit-col-modal">
-	<h5 id="edit-col-header" class="center-modal-title"></h5><button class="close-form-btn" onclick="close_form()">x</button>
+	<h5 class="center-modal-title"><strong id="edit-col-header"></strong></h5><button class="close-form-btn" onclick="close_form()">x</button>
 	<hr>
 	<form id="edit-col-form" method="post">
 		{% csrf_token %}
-		<h6>Column name</h6>
+		<h6><strong>Column name</strong></h6>
 		<input type="text" id="edit-col-name-input" class="form-control form-input" maxlength="15" required>
 		<div class="center-btn">
 			<input type="submit" class="btn btn-warning" value="Update column">
@@ -74,11 +74,11 @@
 </div>
 
 <div id="edit-card-modal">
-	<h5 class="center-modal-title">Edit card</h5><button class="close-form-btn" onclick="close_form()">x</button>
+	<h5 class="center-modal-title"><strong>Edit card</strong></h5><button class="close-form-btn" onclick="close_form()">x</button>
 	<hr>
 	<form id="edit-card-form" method="post">
 		{% csrf_token %}
-		<h6>Card</h6>
+		<h6><strong>Card</strong></h6>
 		<textarea id="edit-card-text-input" class="form-control h-25 form-input" maxlength="300" required></textarea><!-- h-25: max height of 25%-->
 		<div class="center-btn">
 			<input type="submit" class="btn btn-warning" value="Update card">

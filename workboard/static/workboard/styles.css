@@ -9,6 +9,8 @@
 
 	--border-radius-default: 7px;
 
+	--fadein-speed: 300ms;
+
 }
 * {
 	padding: 0;
@@ -26,9 +28,8 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 .auth-form {
 	margin-top: 20px;
 	padding: 20px;
-	border: 1px solid darkgrey;
 	border-radius: 10px;
-	box-shadow: 10px 10px 5px #aaa; 	/* h-offset v-offset blur */
+	box-shadow: 2px 2px 5px #aaa; 	/* h-offset v-offset blur */
 	text-align: center;					/* center all inputs in the form */
 	background-color: #f1f1f1;
 }
@@ -53,7 +54,6 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	border-radius: var(--border-radius-default);
 	font-size: large;
 	color: white;
-
 	background-color: #34A853;
 	box-shadow: 2px 2px 5px #aaa;
 }
@@ -81,6 +81,7 @@ button:focus {	/* remove blue border around all buttons when clicking on them */
 	left: 50vw;				/* Left margin of the form is at 50% of the window */
 	margin-left: -200px;	/* The middle of the form is at the middle of the window */
 	z-index: 2;
+	animation: fadein var(--fadein-speed) forwards;
 }
 
 .center-modal-title {
@@ -191,6 +192,7 @@ nav { background-color: var(--dark-blue-trello); }
 	left: 50vw;				/* Align the left edge of the element at 50% of the window */
 	margin-left: -200px;	/* Move left margin back the halfway mark (half-width of the element 400/2) */
 	z-index: 2;				/* Position on top of document elements */
+	animation: fadein var(--fadein-speed) forwards;
 }
 
 #add-col-modal h5, #edit-col-modal h5 { margin-top: 5px}
@@ -248,10 +250,7 @@ nav { background-color: var(--dark-blue-trello); }
 	padding: 5px;
 	background-color: transparent;
 }
-
-.col-buttons > button:hover, .dropbtn:hover, .card-div > button:hover {
-	color: var(--light-blue-trello);
-}
+.col-buttons > button:hover, .dropbtn:hover, .card-div > button:hover { color: var(--light-blue-trello); }
 
 .dropdown {		/* Column's drop down menu when pressing ... - needed to position the dropdown content */
 	position: relative;
@@ -261,15 +260,16 @@ nav { background-color: var(--dark-blue-trello); }
 	position: absolute;
 	right: 0px;			/* Aligning menu to the right edge */
 	z-index: 1;
-	box-shadow: 2px 2px 5px #aaa;
+	box-shadow: 0 2px 5px #aaa;
 }
 .dropdown-content button {
 	width: 130px;
 	background-color: white;
 	text-align: left;
 	border: none;
+	padding: 5px;
 }
-.dropdown-content button:hover { background-color: var(--light-gray-color); }
+.dropdown-content button:hover { background-color: var(--lightest-blue-trello); }
 
 #add-card-div { margin: 0px 5px; }  /* top-bottom right-left */
 
@@ -285,17 +285,15 @@ nav { background-color: var(--dark-blue-trello); }
 	padding: 5px;
 	margin: 0px 5px 7px 5px; /* top right bottom left */
 	border-radius: 5px;
-	box-shadow: 2px 2px 5px #aaa;
+	box-shadow: 0 2px 5px #aaa;
 }
 
 .card-buttons {
 	position: absolute;
 	top: 0px;
-	right: 0px;
-	border: none;
-	background-color: transparent;
+	right: 4px;
 }
-.card-buttons > .dropdown > .dropbtn {
+.card-buttons > .dropdown > button {
 	border: none;
 	background-color: transparent;
 }
@@ -314,4 +312,14 @@ nav { background-color: var(--dark-blue-trello); }
 
 .draggable.dragging { /* Select any draggable with the dragging class */
 	opacity: 0.5;
+}
+
+/*____________________________________Animation____________________________________*/
+@keyframes fadein {
+	from {
+		transform: scale(0.1);
+	}
+	to {
+		transform: scale(1);
+	}
 }
