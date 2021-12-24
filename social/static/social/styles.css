@@ -1,7 +1,165 @@
-main {
-	padding: 10px;
-	font-size: normal;
+:root {
+	--box-shadow-default:  0 2px 2px #ccc;
+	--light-blue: #1DA1F2;	/* Twitter blue */
+	--lightest-blue: #6EC2F7;  /* Use this for when we are clicking on the post textarea */
+	--normal-blue: #0D8BD9;
+	--light-gray: #DFE7EC;
+	--extra-light-gray: #F5F8FA;
 }
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: var(--extra-light-gray);
+}
+#top-banner {
+	background: var(--light-blue);
+	opacity: 80%;
+	box-shadow: var(--box-shadow-default);
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+#top-banner h2 {
+	color: white;
+	max-width: 1350px;
+	margin: auto;
+}
+
+nav {
+	max-width: 1400px;
+	margin: auto;
+}
+
+main {
+	display: flex;
+	max-width: 1400px;
+	margin: auto;
+	justify-content: space space-evenly; /* along the main axis */
+	align-items: flex-start; /* along the cross axis */
+	/*border: 1px solid orange;*/
+}
+
+.ligthgray-text { color: lightgray; }
+
+#new-post {
+	margin-bottom: 10px;
+}
+/* When we click in the text-box, make the button less blue */
+#new-post-form input[type="submit"] {
+	border: 5px solid red;
+	color: white;
+	background: var(--light-blue);
+	padding: 5px;
+	width: 80px;
+	border: none;
+	border-radius: 15px;
+}
+#new-post-form input[type="submit"]:hover { background: var(--normal-blue); }
+
+
+/*__________________________________________LEFT ASIDE__________________________________________*/
+#left-aside {
+	margin: 5px;
+	padding: 0 10px 10px 10px;
+	width: 20vw;
+	box-shadow: var(--box-shadow-default);
+	border-radius: 10px;
+}
+
+nav .nav-item {
+	height: 60px;
+	display: flex;
+	align-items: center;
+}
+
+nav a {
+	color: black;
+	text-decoration: none;
+	padding: 10px;
+	margin-left: 12px;
+	border-radius: 30px;
+}
+
+nav a:hover, #dropdown-btn:hover {
+	color: black;
+	text-decoration: none;
+	background: var(--light-gray);
+}
+
+nav img {
+	margin-right: 10px;
+}
+
+#dropdown {
+	position: relative;
+}
+#dropdown-btn {
+	padding: 10px;
+	margin-left: 12px;
+	background: transparent;
+	border: none;
+	border-radius: 30px;
+}
+
+#dropdown-content {
+	position: absolute;
+	display: none;
+	width: 80px;
+	border: 1px solid purple;
+	left: 0;
+	top: 0;
+}
+
+#dropdown-content button {
+	display: block;
+	width: 100%;
+}
+
+#main-post-btn {
+	color: white;
+	font-weight: bold;
+	padding: 10px;
+	width: 90%;
+	margin: auto;
+	background: var(--light-blue);
+	border: none;
+	border-radius: 30px;
+}
+#main-post-btn:hover { background: var(--normal-blue); }
+
+/*__________________________________________POSTS CONTAINER__________________________________________*/
+#posts-container {
+	margin: 5px;
+	width: 60vw;
+	/*border: 1px solid green;*/
+}
+
+#all-posts-view > h2 {
+	text-align: center;
+}
+
+/*__________________________________________FOLLOWING__________________________________________*/
+#following-posts > h3 {
+	text-align: center;
+}
+
+
+/*__________________________________________RIGHT ASIDE__________________________________________*/
+#right-aside {
+	margin: 5px;
+	width: 20vw;
+	border: 1px solid red;
+}
+#right-aside a {
+	border-radius: 10px;
+	box-shadow: var(--box-shadow-default);
+}
+
+
 
 .div-border {
 	border: 1px solid lightgray;
@@ -10,7 +168,7 @@ main {
 	position: relative;
 }
 
-.ligthgray-text { color: lightgray; }
+
 
 /* Center the table */
 table {	
@@ -24,28 +182,34 @@ td { text-align: center; }
 .follow-data { font-size: 80%; }
 
 #follow-btn, #unfollow-btn {
-	width: 80px;
+	font-size: 0.9rem;
 	border: none;
 	border-radius: 15px;
+	box-shadow: var(--box-shadow-default);
+	padding: 5px;
+	width: 80px;
 }
 
 /* Remove blue border when clicking on the button */
 #follow-btn:focus, #unfollow-btn:focus { outline: 0; }
 
-#follow-btn { background-color: SkyBlue;  }
+#follow-btn { 
+	background: black;
+	color: white;
+}
 
 .edit-btn {
 	border: none;
-	background-color: #e6e6e6;
+	background: #e6e6e6;
 }
 
 .edit-btn:hover {
-	background-color: #a6a6a6;
+	background: #a6a6a6;
 }
 
 .like-btn {
 	border: none;
 	outline: none !important; /* remove outline when clicking the like button */
 	padding: 0px;
-	background-color: transparent;			
+	background: transparent;			
 }

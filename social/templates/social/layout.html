@@ -15,8 +15,12 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Network</a>
+        <div id="top-banner">
+            <h2><strong>Social</strong></h2>
+        </div>
+
+        <!--<nav class="navbar navbar-expand">
+            <span class="app-title"><strong>Social</strong></span>
           
             <div>
               <ul class="navbar-nav mr-auto">
@@ -45,11 +49,63 @@
                 {% endif %}
               </ul>
             </div>
-          </nav>
+          </nav>-->
         
+
         <main>
-            {% block body %}
-            {% endblock %}
+            <aside id="left-aside">
+                <nav>
+                  <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a id="all-posts" href="{% url 'social:index' %}"><img src="{% static 'social/icons/home_icon.svg' %}" width="25">All Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'social:profile-page' user.username %}"><img src="{% static 'social/icons/profile_icon.svg' %}" width="25"><strong>Profile: {{ user.username }}</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'social:following' user.username %}"><img src="{% static 'social/icons/following_icon.svg' %}" width="25">Following</a>
+                        </li>
+                        <li class="nav-item">
+                            <div id="dropdown">
+                                <button id="dropdown-btn"><img src="{% static 'social/icons/more_icon.svg' %}" width="25">More</button>
+                                <div id="dropdown-content">
+                                    <button id="settings-btn">Settings</button>
+                                    <button>
+                                        <a id="logout-btn" href="{% url 'social:logout' %}">Log Out</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <button id="main-post-btn">Post</button>
+                        </li>
+
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="{% url 'social:login' %}">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'social:register' %}">Register</a>
+                        </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+            </aside>
+
+            <sction id="posts-container">
+                {% block body %}
+                {% endblock %}
+            </sction>
+
+            <aside id="right-aside">
+                <!-- source: https://weatherwidget.io/ -->
+                <a class="weatherwidget-io" href="https://forecast7.com/en/45d50n73d57/montreal/" data-label_1="MONTREAL" data-label_2="WEATHER" data-theme="original" >MONTREAL WEATHER</a>
+                <script>
+                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                </script>
+            </aside>
         </main>
 
     </body>

@@ -4,9 +4,10 @@
 {% block title %} - Following {% endblock %}
 
 {% block body %}
-	<h3>Posts from people you follow:</h3>
+<div id="following-posts">
+     <h3>People you follow</h3>
 
-	{% for post in users_we_follow_posts %}
+     {% for post in users_we_follow_posts %}
           <div class="div-border">
                <p>
                     <a href="{% url 'social:profile-page' post.creator.username %}">
@@ -17,17 +18,17 @@
                <div class="ligthgray-text">{{ post.timestamp }}</div>
                <div>
                     <button data-postid="{{post.id}}" class="like-btn">
-                         <img src="../../static/social/like-logo.png" alt="Like logo" width="20">
+                         <img src="{% static 'social/like-logo.png' %}" alt="Like logo" width="20">
                     </button>
                     <span id="likesID-{{post.id}}" class="ligthgray-text">{{ post.likes }}</span>
                </div>
                <!-- IMPLEMENT LATER<div>Comment</div>-->
           </div>
-    {% empty %}
-    	<p>You are not following anyone.</p>
-    {% endfor %}
+     {% empty %}
+     	<p>You are not following anyone.</p>
+     {% endfor %}
 
-    {% if displayPagination %}
+     {% if displayPagination %}
      <nav aria-label="Page navigation between posts">
           <!-- Aligning the pagination components in the middle with flexbox -->
           <ul class="pagination justify-content-center">  
@@ -45,6 +46,7 @@
           </ul>
      </nav>
      {% endif %}
+</div>
 
 {% endblock %}
 

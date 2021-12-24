@@ -40,11 +40,11 @@
             <div>
                 {% if user.is_authenticated %}
                     <button data-postid="{{post.id}}" class="like-btn">
-                        <img src="../../static/social/like-logo.png" alt="Like logo" width="20">
+                        <img src="{% static 'social/like-logo.png' %}" alt="Like logo" width="20">
                     </button>
                     <span id="likesID-{{post.id}}" class="ligthgray-text">{{ post.likes }}</span>
                 {% else %}
-                    <img src="../../static/social/like-logo.png" alt="Like logo" width="20">
+                    <img src="{% static 'social/like-logo.png' %}" alt="Like logo" width="20">
                     <span id="likesID-{{post.id}}" class="ligthgray-text">{{ post.likes }}</span>
                 {% endif %}
              </div>

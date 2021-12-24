@@ -2,13 +2,18 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 	const newPostForm = document.querySelector('#new-post-form');
-	if (newPostForm !== null) { newPostForm.addEventListener('submit', send_post) }
+	if (newPostForm !== null) { newPostForm.addEventListener('submit', send_post); }
 	
 	const follow_btn = document.querySelector('#follow-btn');
-	if (follow_btn !== null) { follow_btn.addEventListener('click', follow_user) }
+	if (follow_btn !== null) { follow_btn.addEventListener('click', follow_user); }
 
 	const unfollow_btn = document.querySelector('#unfollow-btn');
-	if (unfollow_btn !== null) { unfollow_btn.addEventListener('click', unfollow_user) }
+	if (unfollow_btn !== null) { unfollow_btn.addEventListener('click', unfollow_user); }
+
+	const more_btn = document.querySelector('#dropdown-btn');
+	if (more_btn !== null) { more_btn.addEventListener('click', show_dropdown); }
+
+	clicked_outside_dropdow();
 
 	// Check if we are on a page with an edit button
 	if (document.querySelector('.edit-btn') !== null) { edit_post() }
@@ -107,4 +112,19 @@ function unfollow_user(event) {
 	.then(response => {
 		location.reload();	// Simply reload the current page
 	})
+}
+
+function show_dropdown(event) {
+	console.log("Dropdown pressed")
+	document.querySelector('#dropdown-content').style.display = 'block';
+}
+
+function clicked_outside_dropdow() {
+	// Close resume display if we clicked outside its container
+	window.onclick = function(event) {
+		if ( event.target && !event.target.matches('#dropdown-btn') ) {	
+			console.log('Clicked outside pdf-modal');
+			document.querySelector('#dropdown-content').style.display = 'none';
+		}
+	}
 }
