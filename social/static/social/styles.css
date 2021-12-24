@@ -45,6 +45,16 @@ main {
 
 .ligthgray-text { color: lightgray; }
 
+.new-post-container {
+	border: 1px solid lightgray;
+	padding: 10px;
+	margin-bottom: 5px;
+	position: relative;
+	min-height: 128px;
+}
+
+#new-post-form { margin-bottom: 48px; } /* keep the post button inside the new-post-container when growing the textarea */
+
 #new-post {
 	margin-bottom: 10px;
 }
@@ -57,6 +67,8 @@ main {
 	width: 80px;
 	border: none;
 	border-radius: 15px;
+	position: absolute;
+	right: 12px;
 }
 #new-post-form input[type="submit"]:hover { background: var(--normal-blue); }
 
@@ -142,6 +154,24 @@ nav img {
 	text-align: center;
 }
 
+.post-header {
+	border: 1px solid orange;
+}
+
+.post-container {
+	border: 1px solid green;
+}
+
+.post-buttons {
+	border: 1px solid red;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.post-buttons button {
+	margin-left: 50px;
+}
+
 /*__________________________________________FOLLOWING__________________________________________*/
 #following-posts > h3 {
 	text-align: center;
@@ -161,12 +191,6 @@ nav img {
 
 
 
-.div-border {
-	border: 1px solid lightgray;
-	padding: 10px;
-	margin-bottom: 5px;
-	position: relative;
-}
 
 
 
