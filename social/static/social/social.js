@@ -115,7 +115,6 @@ function unfollow_user(event) {
 }
 
 function show_dropdown(event) {
-	console.log("Dropdown pressed")
 	document.querySelector('#dropdown-content').style.display = 'block';
 }
 
@@ -123,7 +122,6 @@ function clicked_outside_dropdow() {
 	// Close resume display if we clicked outside its container
 	window.onclick = function(event) {
 		if ( event.target && !event.target.matches('#dropdown-btn') ) {	
-			console.log('Clicked outside pdf-modal');
 			document.querySelector('#dropdown-content').style.display = 'none';
 		}
 	}

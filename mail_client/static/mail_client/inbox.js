@@ -62,7 +62,6 @@ function send_email(event) {
   })
   .then(response => response.json())
   .then(result => {
-    //console.log(result);  // uncomment to test for errors
     if (result.hasOwnProperty('error')) {
       alert(result['error']);
     }
