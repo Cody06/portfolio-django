@@ -8,7 +8,7 @@
 	
 	--typewriterSpeed: 2s;
 	--typewriterDelay: 1s;			/* delay until the typewriter animation starts */
-	--num-of-chars: 21;					/* text length */
+	--num-of-chars: 19;					/* page title text length */
 	--typewriterDuration: calc(var(--typewriterSpeed) + var(--typewriterDelay));
 	--caret-blink-speed: 530ms; /* text cursor blink speed */
 
