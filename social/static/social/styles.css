@@ -40,7 +40,6 @@ main {
 	margin: auto;
 	justify-content: space space-evenly; /* along the main axis */
 	align-items: flex-start; /* along the cross axis */
-	/*border: 1px solid orange;*/
 }
 
 .ligthgray-text { color: lightgray; }
@@ -147,23 +146,13 @@ nav img {
 #posts-container {
 	margin: 5px;
 	width: 60vw;
-	/*border: 1px solid green;*/
 }
 
 #all-posts-view > h2 {
 	text-align: center;
 }
 
-.post-header {
-	border: 1px solid orange;
-}
-
-.post-container {
-	border: 1px solid green;
-}
-
 .post-buttons {
-	border: 1px solid red;
 	display: flex;
 	justify-content: space-evenly;
 }
@@ -182,17 +171,12 @@ nav img {
 #right-aside {
 	margin: 5px;
 	width: 20vw;
-	border: 1px solid red;
 }
+
 #right-aside a {
 	border-radius: 10px;
 	box-shadow: var(--box-shadow-default);
 }
-
-
-
-
-
 
 /* Center the table */
 table {	
