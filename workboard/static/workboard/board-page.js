@@ -644,27 +644,3 @@ function unblur_background() {
   document.querySelector("#darken-overlay").style.display = "none";
   document.querySelector("#board-div").style.filter = "blur(0px)";
 }
-// Practice code
-// This has a lot of errors for the drag and drop function (className doesn't get updated after dragend)
-/*for (let i = 0, num_cards = draggables.length; i < num_cards; i++) {
-		draggables[i].addEventListener('dragstart', () => {
-			console.log(`	-> START - ${draggables[i].id}`);
-			draggables[i].classList.add('dragging');				// add opacity
-			console.log(`		className = ${draggables[i].className}`);
-		});
-		draggables[i].addEventListener('dragend', () => {
-			console.log(`	-X END - ${draggables[i].id}`);
-			draggables[i].classList.remove('dragging');				// remove opacity
-			console.log(`		className = ${draggables[i].className}`);
-		})
-	}
-
-	for (let [j, num_cols] = [0, containers.length]; j < num_cols; j++) {
-		containers[j].addEventListener('dragover', ev => {
-			console.log(`	..dragOver - ${containers[j].id}`);
-			const draggable = document.querySelector('.dragging');
-			console.log(draggable);
-			containers[j].appendChild(draggable);
-			console.log(`	..dragOver finished`);
-		})
-	}*/
