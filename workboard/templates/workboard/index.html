@@ -1,90 +1,101 @@
-{% extends 'workboard/layout.html' %}
-{% load static %}
-
-{% block title %} - Home {% endblock %}
-
-{% block body %}
-{% if user.is_authenticated %}
+{% extends 'workboard/layout.html' %} {% load static %} {% block title %} - Home
+{% endblock %} {% block body %} {% if user.is_authenticated %}
 <div id="darken-overlay"></div>
 
 <div id="create-board-modal">
-	<h5 class="center-modal-title"><strong>Create a new board</strong></h5><button class="close-form-btn">x</button>
-	<hr>
-	<!-- Create a new board, show the form only when button is clicked -->
-	<form action="{% url 'workboard:create-board' %}" method="post">
-		{% csrf_token %}
-		
-		<div class="form-input">
-			<label><strong>Board title</strong></label>
-			<input type="text" name="board_title" class="form-control"
-				placeholder="Board title" maxlength="50" required>
-		</div>
+  <h5 class="center-modal-title"><strong>Create a new board</strong></h5>
+  <button class="close-form-btn">x</button>
+  <hr />
+  <!-- Create a new board, show the form only when button is clicked -->
+  <form action="{% url 'workboard:create-board' %}" method="post">
+    {% csrf_token %}
 
-		<div class="form-input">
-			<label><strong>Description</strong> (optional)</label>
-			<textarea name="board_description" class="form-control" maxlength="300" rows="3"></textarea>
-		</div>
+    <div class="form-input">
+      <label><strong>Board title</strong></label>
+      <input
+        type="text"
+        name="board_title"
+        class="form-control"
+        placeholder="Board title"
+        maxlength="50"
+        required
+      />
+    </div>
 
-		<!--<div> #### To implement at a later date
-			<h6><strong>Visibility</strong></h6>
-			
-			<input type="radio" id="board_public" name="visibility" value="True">
-			<label for="board_public">Public</label><br>
+    <div class="form-input">
+      <label><strong>Description</strong> (optional)</label>
+      <textarea
+        name="board_description"
+        class="form-control"
+        maxlength="300"
+        rows="3"
+      ></textarea>
+    </div>
 
-			<input type="radio" id="board_private" name="visibility" value="False" checked>
-			<label for="board_private">Private</label><br>
-		</div>-->
-		<div class="center-btn">
-			<input type="submit" class="btn btn-primary" value="Create Board">
-		</div>
-	</form>
+    <div class="center-btn">
+      <input type="submit" class="btn btn-primary" value="Create Board" />
+    </div>
+  </form>
 </div>
 
 <div class="flex-container">
-	<div class="flexbox-item">
+  <div class="flexbox-item">
+    <div id="new-board-btn">
+      <button id="create-board-form-btn">New Board</button>
+    </div>
 
-		<div id="new-board-btn">
-			<button id="create-board-form-btn">New Board</button>
-		</div>
-		
-		<div id="more-boards">
-			<h5>Your boards</h5>
-			<ul class="boards-list">
-				{% for board in personal_boards %}
-				<!-- Adding a button inside the anchor tag -->
-					<li>
-						<a href="{% url 'workboard:board-page' board.id %}">
-							<button class="active-list-item">{{ board.title }}<br><span class="timestamp">Created: {{ board.timestamp }}</span></button>
-						</a>
-					</li>
-				{% empty %}
-					<li>You don't have any active boards.</li>
-				{% endfor%}
-			</ul>
-{% endif %}
-			<!-- Show all archived boards -->
-			{% if archived_boards %}
-				<h5>Archived boards</h5>
-			{% endif %}
-			<ul class="boards-list">
-				{% for board in archived_boards %}
-					<li>
-						<a href="{% url 'workboard:board-page' board.id %}">
-							<button class="archived-list-item">{{ board.title }}<br><span class="timestamp">Created: {{ board.timestamp }}</span></button>
-						</a>
-					</li>
-				{% endfor %}
-			</ul>
-		</div>
-
-	</div>
+    <div id="more-boards">
+      <h5>Your boards</h5>
+      <ul class="boards-list">
+        {% for board in personal_boards %}
+        <!-- Adding a button inside the anchor tag -->
+        <li>
+          <a href="{% url 'workboard:board-page' board.id %}">
+            <button class="active-list-item">
+              {{ board.title }}<br /><span class="timestamp"
+                >Created: {{ board.timestamp }}</span
+              >
+            </button>
+          </a>
+        </li>
+        {% empty %}
+        <li>You don't have any active boards.</li>
+        {% endfor%}
+      </ul>
+      {% endif %}
+      <!-- Show all archived boards -->
+      {% if archived_boards %}
+      <h5>Archived boards</h5>
+      {% endif %}
+      <ul class="boards-list">
+        {% for board in archived_boards %}
+        <li>
+          <a href="{% url 'workboard:board-page' board.id %}">
+            <button class="archived-list-item">
+              {{ board.title }}<br /><span class="timestamp"
+                >Created: {{ board.timestamp }}</span
+              >
+            </button>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 </div>
 
 <script>
-!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+  !(function (d, s, id) {
+    var js,
+      fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://weatherwidget.io/js/widget.min.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }
+  })(document, "script", "weatherwidget-io-js");
 </script>
-{% endblock %}
-
-{% block script %}
-	<script src="{% static 'workboard/index.js' %}"></script>
+{% endblock %} {% block script %}
+<script src="{% static 'workboard/index.js' %}"></script>
 {% endblock %}

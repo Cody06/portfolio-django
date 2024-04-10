@@ -58,15 +58,11 @@ def create_board(request):
 	# Get the user Board inputs
 	board_title = request.POST['board_title']
 	board_description = request.POST['board_description']
-	# public_visibility = request.POST.get("visibility") # true means public visibility (using - or _ returns None)
 
-	# Store them in the database (if not connected as a guest)
-	#if (request.user.username != 'guest'):
 	new_board = Board()
 	new_board.creator = User.objects.get(pk=request.user.id)
 	new_board.title = board_title
 	new_board.description = board_description
-	#new_board.public_visibility = public_visibility
 	new_board.save()
 
 	# Get the new board's id
@@ -74,9 +70,6 @@ def create_board(request):
 
 	# Redirect to the new board (passing board_id argument to reverse)
 	return HttpResponseRedirect(reverse('workboard:board-page', kwargs={'board_id':board_id}))
-
-	#print("Guest mode - board not saved")
-	#return HttpResponseRedirect(reverse('workboard:guest-view'))
 
 @csrf_exempt
 @login_required

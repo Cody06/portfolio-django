@@ -1,46 +1,56 @@
-{% extends 'workboard/layout.html' %}
-{% load static %}
-
-{% block title %} - Board Page{% endblock %}
-
-{% block body %}
+{% extends 'workboard/layout.html' %} {% load static %} {% block title %} -
+Board Page{% endblock %} {% block body %}
 
 <div id="board-container">
+  <section id="board-header">
+    <div class="inline-block">
+      <h4 id="board-title" contenteditable="true">{{ board_obj.title}}</h4>
+    </div>
 
-	<section id="board-header">
-		<div class="inline-block">
-			<h4 id="board-title" contenteditable="true">{{ board_obj.title}}</h4>
-		</div>
+    <!-- Add the archive buttons part of the title -->
+    {% if board_obj.archived %}
+    <!-- True means board is archived, make it unarchived -->
+    <div class="inline-block">
+      <button class="archive-btns btn btn-dark btn-sm" data-archived="False">
+        Unarchive
+      </button>
+    </div>
+    {% else %}
+    <!-- Edit the board's title -->
+    <div class="inline-block">
+      <button
+        id="edit-board-btn"
+        class="btn btn-info btn-sm"
+        data-boardid="{{board_obj.id}}"
+      >
+        Save Edit
+      </button>
+    </div>
+    <div class="inline-block">
+      <button
+        class="archive-btns btn btn-secondary btn-sm"
+        data-archived="True"
+      >
+        Archive
+      </button>
+    </div>
+    {% endif %}
+  </section>
 
-		<!-- Add the archive buttons part of the title -->
-		{% if board_obj.archived %}	<!-- True means board is archived, make it unarchived -->
-			<div class="inline-block">
-				<button class="archive-btns btn btn-dark btn-sm" data-archived="False">Unarchive</button>
-			</div>
-		{% else %}
-			<!-- Edit the board's title -->
-			<div class="inline-block">
-				<button id="edit-board-btn" class="btn btn-info btn-sm" data-boardid="{{board_obj.id}}">Save Edit</button>
-			</div>
-			<div class="inline-block">
-				<button class="archive-btns btn btn-secondary btn-sm" data-archived="True">Archive</button>
-			</div>
-		{% endif %}
-		<!--<div>{{ board_obj.timestamp }}</div>-->
-	</section>
+  <section id="board-div">
+    <div id="empty-board-msg">
+      <h6>This board has no columns or cards.</h6>
+      <button id="add-col-btn" class="add-col-form-btn btn btn-sm">
+        Add a column
+      </button>
+    </div>
 
-	<section id="board-div">
-		<div id="empty-board-msg">
-			<h6>This board has no columns or cards.</h6>
-			<button id="add-col-btn" class="add-col-form-btn btn btn-sm">Add a column</button>
-		</div>
+    <div id="cols-div"></div>
 
-		<div id="cols-div"></div>
-
-		<div>
-			<button id="add-col-btn-lg" class="add-col-form-btn">+ Add column</button>
-		</div>
-	</section>
+    <div>
+      <button id="add-col-btn-lg" class="add-col-form-btn">+ Add column</button>
+    </div>
+  </section>
 </div>
 
 <div id="archived-layer"></div>
@@ -49,47 +59,67 @@
 <div id="darken-overlay"></div>
 
 <div id="add-col-modal">
-	<h5 class="center-modal-title"><strong>Add a column</strong></h5><button class="close-form-btn" onclick="close_form()">x</button>
-	<hr>
-	<form id="create-col-form" method="post">
-		{% csrf_token %}
-		<h6><strong>Column name</strong></h6>
-		<input type="text" id="col-name-input" class="form-control form-input" autofocus 
-			placeholder="Enter a column name (To Do, In Progress, Done)" maxlength="15" required>
-		<div class="center-btn">
-			<input type="submit" class="btn btn-primary" value="Create column">
-		</div>
-	</form>
+  <h5 class="center-modal-title"><strong>Add a column</strong></h5>
+  <button class="close-form-btn" onclick="close_form()">x</button>
+  <hr />
+  <form id="create-col-form" method="post">
+    {% csrf_token %}
+    <h6><strong>Column name</strong></h6>
+    <input
+      type="text"
+      id="col-name-input"
+      class="form-control form-input"
+      autofocus
+      placeholder="Enter a column name (To Do, In Progress, Done)"
+      maxlength="15"
+      required
+    />
+    <div class="center-btn">
+      <input type="submit" class="btn btn-primary" value="Create column" />
+    </div>
+  </form>
 </div>
 
 <div id="edit-col-modal">
-	<h5 class="center-modal-title"><strong id="edit-col-header"></strong></h5><button class="close-form-btn" onclick="close_form()">x</button>
-	<hr>
-	<form id="edit-col-form" method="post">
-		{% csrf_token %}
-		<h6><strong>Column name</strong></h6>
-		<input type="text" id="edit-col-name-input" class="form-control form-input" maxlength="15" required>
-		<div class="center-btn">
-			<input type="submit" class="btn btn-warning" value="Update column">
-		</div>
-	</form>
+  <h5 class="center-modal-title"><strong id="edit-col-header"></strong></h5>
+  <button class="close-form-btn" onclick="close_form()">x</button>
+  <hr />
+  <form id="edit-col-form" method="post">
+    {% csrf_token %}
+    <h6><strong>Column name</strong></h6>
+    <input
+      type="text"
+      id="edit-col-name-input"
+      class="form-control form-input"
+      maxlength="15"
+      required
+    />
+    <div class="center-btn">
+      <input type="submit" class="btn btn-warning" value="Update column" />
+    </div>
+  </form>
 </div>
 
 <div id="edit-card-modal">
-	<h5 class="center-modal-title"><strong>Edit card</strong></h5><button class="close-form-btn" onclick="close_form()">x</button>
-	<hr>
-	<form id="edit-card-form" method="post">
-		{% csrf_token %}
-		<h6><strong>Card</strong></h6>
-		<textarea id="edit-card-text-input" class="form-control h-25 form-input" maxlength="300" required></textarea><!-- h-25: max height of 25%-->
-		<div class="center-btn">
-			<input type="submit" class="btn btn-warning" value="Update card">
-		</div>
-	</form>
+  <h5 class="center-modal-title"><strong>Edit card</strong></h5>
+  <button class="close-form-btn" onclick="close_form()">x</button>
+  <hr />
+  <form id="edit-card-form" method="post">
+    {% csrf_token %}
+    <h6><strong>Card</strong></h6>
+    <textarea
+      id="edit-card-text-input"
+      class="form-control h-25 form-input"
+      maxlength="300"
+      required
+    ></textarea
+    ><!-- h-25: max height of 25%-->
+    <div class="center-btn">
+      <input type="submit" class="btn btn-warning" value="Update card" />
+    </div>
+  </form>
 </div>
 
-{% endblock %}
-
-{% block script %}
-	<script src="{% static 'workboard/board-page.js' %}"></script>
+{% endblock %} {% block script %}
+<script src="{% static 'workboard/board-page.js' %}"></script>
 {% endblock %}
