@@ -1,78 +1,93 @@
 <!-- This is the profile page of each user when NOT logged in -->
-{% extends "social/layout.html" %}
-{% load static %}
+{% extends "social/layout.html" %} {% load static %} {% block title %} - Profile
+{% endblock %} {% block body %}
+<table id="profile-page-header">
+  <tr>
+    <td><h3>{{ userProfileObject.username }}'s profile</h3></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <table id="follow-table">
+        <tr>
+          <td class="follow-data">
+            <b>{{ userProfileObject.number_of_followers }}</b>
+          </td>
+          <td class="follow-data">
+            <b>{{ userProfileObject.number_of_followings }}</b>
+          </td>
+        </tr>
+        <tr>
+          <td class="follow-data">followers</td>
+          <td class="follow-data">following</td>
+        </tr>
+      </table>
+    </td>
+    <td></td>
+  </tr>
+</table>
 
-{% block title %} - Profile {% endblock %}
-
-{% block body %}
-	<table id="profile-page-header">
-		<tr>
-			<td><h3>{{ userProfileObject.username }}'s profile</h3></td>
-			<td>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<table id="follow-table">
-					<tr>
-						<td class="follow-data"><b>{{ userProfileObject.number_of_followers }}</b></td>
-						<td class="follow-data"><b>{{ userProfileObject.number_of_followings }}</b></td>
-					</tr>
-					<tr>
-						<td class="follow-data">followers</td>
-						<td class="follow-data">following</td>
-					</tr>
-				</table>
-			</td>
-			<td></td>
-		</tr>
-	</table>
-
-	{% for post in userPosts%}
-        <div class="div-border">
-            <p><b>{{ post.creator.username }}</b></p>
-            <!-- Show the edit button if the profile's page belongs to the logged user -->
-            {% if loggedUser.username == userProfileObject.username %}
-                <button data-postid="{{post.id}}" class="edit-btn">Edit</button>
-            {% endif %}
-            <div id="postID-{{post.id}}">{{ post.post }}</div>
-            <div class="ligthgray-text">{{ post.timestamp }}</div>
-            <div>
-                {% if user.is_authenticated %}
-                    <button data-postid="{{post.id}}" class="like-btn">
-                        <img src="{% static 'social/like-logo.png' %}" alt="Like logo" width="20">
-                    </button>
-                    <span id="likesID-{{post.id}}" class="ligthgray-text">{{ post.likes }}</span>
-                {% else %}
-                    <img src="{% static 'social/like-logo.png' %}" alt="Like logo" width="20">
-                    <span id="likesID-{{post.id}}" class="ligthgray-text">{{ post.likes }}</span>
-                {% endif %}
-             </div>
-            <!-- IMPLEMENT LATER <div>Comment</div>-->
-        </div>
-    {% endfor %} 
-
-    {% if displayPagination %}
-        <!-- Source: https://docs.djangoproject.com/en/3.0/topics/pagination/ -->
-        <nav aria-label="Page navigation between posts">
-            <!-- Aligning the pagination components in the middle with flexbox -->
-            <ul class="pagination justify-content-center">  
-                {% if userPosts.has_previous %}
-                    <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ userPosts.previous_page_number }}">&laquo;</a></li>
-                {% endif %}
-
-                    <li class="page-item"><a class="page-link" href="#">{{ userPosts.number }}</a></li>
-
-                {% if userPosts.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ userPosts.next_page_number }}">&raquo;</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ userPosts.paginator.num_pages }}">last</a></li>
-                {% endif %}
-            </ul>
-        </nav>
+{% for post in userPosts%}
+<div class="div-border">
+  <p><b>{{ post.creator.username }}</b></p>
+  <!-- Show the edit button if the profile's page belongs to the logged user -->
+  {% if loggedUser.username == userProfileObject.username %}
+  <button data-postid="{{post.id}}" class="edit-btn">Edit</button>
+  {% endif %}
+  <div id="postID-{{post.id}}">{{ post.post }}</div>
+  <div class="ligthgray-text">{{ post.timestamp }}</div>
+  <div>
+    {% if user.is_authenticated %}
+    <button data-postid="{{post.id}}" class="like-btn">
+      <img
+        src="{% static 'social/like-logo.png' %}"
+        alt="Like logo"
+        width="20"
+      />
+    </button>
+    <span id="likesID-{{post.id}}" class="ligthgray-text"
+      >{{ post.likes }}</span
+    >
+    {% else %}
+    <img src="{% static 'social/like-logo.png' %}" alt="Like logo" width="20" />
+    <span id="likesID-{{post.id}}" class="ligthgray-text"
+      >{{ post.likes }}</span
+    >
     {% endif %}
-{% endblock %}
+  </div>
+</div>
+{% endfor %} {% if displayPagination %}
+<!-- Source: https://docs.djangoproject.com/en/3.0/topics/pagination/ -->
+<nav aria-label="Page navigation between posts">
+  <!-- Aligning the pagination components in the middle with flexbox -->
+  <ul class="pagination justify-content-center">
+    {% if userPosts.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ userPosts.previous_page_number }}"
+        >&laquo;</a
+      >
+    </li>
+    {% endif %}
 
-{% block script %}
-    <script src="{% static 'social/social.js' %}"></script>
+    <li class="page-item">
+      <a class="page-link" href="#">{{ userPosts.number }}</a>
+    </li>
+
+    {% if userPosts.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ userPosts.next_page_number }}"
+        >&raquo;</a
+      >
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ userPosts.paginator.num_pages }}"
+        >last</a
+      >
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %} {% endblock %} {% block script %}
+<script src="{% static 'social/social.js' %}"></script>
 {% endblock %}

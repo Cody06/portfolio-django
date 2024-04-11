@@ -2,111 +2,115 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charste="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Social Network{% block title %}{% endblock %}</title>
-        <link rel="icon" href="{% static 'landing_page/logos/cm-logo.png' %}">
+  <head>
+    <meta charste="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Network{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'landing_page/logos/cm-logo.png' %}" />
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{% static 'social/styles.css' %}" rel="stylesheet">
-        {% block script %}
-        {% endblock %}
-    </head>
-    <body>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link href="{% static 'social/styles.css' %}" rel="stylesheet" />
+    {% block script %} {% endblock %}
+  </head>
+  <body>
+    <div id="top-banner">
+      <h2><strong>Social</strong></h2>
+    </div>
 
-        <div id="top-banner">
-            <h2><strong>Social</strong></h2>
-        </div>
+    <main>
+      <aside id="left-aside">
+        <nav>
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a id="all-posts" href="{% url 'social:index' %}"
+                ><img
+                  src="{% static 'social/icons/home_icon.svg' %}"
+                  width="25"
+                />All Posts</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'social:profile-page' user.username %}"
+                ><img
+                  src="{% static 'social/icons/profile_icon.svg' %}"
+                  width="25"
+                /><strong>Profile: {{ user.username }}</strong></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'social:following' user.username %}"
+                ><img
+                  src="{% static 'social/icons/following_icon.svg' %}"
+                  width="25"
+                />Following</a
+              >
+            </li>
+            <li class="nav-item">
+              <div id="dropdown">
+                <button id="dropdown-btn">
+                  <img
+                    src="{% static 'social/icons/more_icon.svg' %}"
+                    width="25"
+                  />More
+                </button>
+                <div id="dropdown-content">
+                  <button id="settings-btn">Settings</button>
+                  <button>
+                    <a id="logout-btn" href="{% url 'social:logout' %}"
+                      >Log Out</a
+                    >
+                  </button>
+                </div>
+              </div>
+            </li>
 
-        <!--<nav class="navbar navbar-expand">
-            <span class="app-title"><strong>Social</strong></span>
-          
-            <div>
-              <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'social:profile-page' user.username %}"><strong>{{ user.username }}</strong></a>
-                    </li>
-                {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'social:index' %}" id="all-posts">All Posts</a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'social:following' user.username %}">Following</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'social:logout' %}">Log Out</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'social:login' %}">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'social:register' %}">Register</a>
-                    </li>
-                {% endif %}
-              </ul>
-            </div>
-          </nav>-->
-        
+            <li class="nav-item">
+              <button id="main-post-btn">Post</button>
+            </li>
 
-        <main>
-            <aside id="left-aside">
-                <nav>
-                  <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a id="all-posts" href="{% url 'social:index' %}"><img src="{% static 'social/icons/home_icon.svg' %}" width="25">All Posts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a  href="{% url 'social:profile-page' user.username %}"><img src="{% static 'social/icons/profile_icon.svg' %}" width="25"><strong>Profile: {{ user.username }}</strong></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'social:following' user.username %}"><img src="{% static 'social/icons/following_icon.svg' %}" width="25">Following</a>
-                        </li>
-                        <li class="nav-item">
-                            <div id="dropdown">
-                                <button id="dropdown-btn"><img src="{% static 'social/icons/more_icon.svg' %}" width="25">More</button>
-                                <div id="dropdown-content">
-                                    <button id="settings-btn">Settings</button>
-                                    <button>
-                                        <a id="logout-btn" href="{% url 'social:logout' %}">Log Out</a>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
+            {% else %}
+            <li class="nav-item">
+              <a href="{% url 'social:login' %}">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'social:register' %}">Register</a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </aside>
 
-                        <li class="nav-item">
-                            <button id="main-post-btn">Post</button>
-                        </li>
+      <sction id="posts-container"> {% block body %} {% endblock %} </sction>
 
-                    {% else %}
-                        <li class="nav-item">
-                            <a href="{% url 'social:login' %}">Log In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'social:register' %}">Register</a>
-                        </li>
-                    {% endif %}
-                  </ul>
-                </nav>
-            </aside>
-
-            <sction id="posts-container">
-                {% block body %}
-                {% endblock %}
-            </sction>
-
-            <aside id="right-aside">
-                <!-- source: https://weatherwidget.io/ -->
-                <a class="weatherwidget-io" href="https://forecast7.com/en/45d50n73d57/montreal/" data-label_1="MONTREAL" data-label_2="WEATHER" data-theme="original" >MONTREAL WEATHER</a>
-                <script>
-                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-                </script>
-            </aside>
-        </main>
-
-    </body>
+      <aside id="right-aside">
+        <!-- source: https://weatherwidget.io/ -->
+        <a
+          class="weatherwidget-io"
+          href="https://forecast7.com/en/45d50n73d57/montreal/"
+          data-label_1="MONTREAL"
+          data-label_2="WEATHER"
+          data-theme="original"
+          >MONTREAL WEATHER</a
+        >
+        <script>
+          !(function (d, s, id) {
+            var js,
+              fjs = d.getElementsByTagName(s)[0];
+            if (!d.getElementById(id)) {
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "https://weatherwidget.io/js/widget.min.js";
+              fjs.parentNode.insertBefore(js, fjs);
+            }
+          })(document, "script", "weatherwidget-io-js");
+        </script>
+      </aside>
+    </main>
+  </body>
 </html>

@@ -1,102 +1,133 @@
-{% extends "social/layout.html" %}
-{% load static %}
+{% extends "social/layout.html" %} {% load static %} {% block body %}
+<section id="all-posts-view">
+  <h2>All Posts</h2>
 
-{% block body %}
-    <section id="all-posts-view">
-        <h2>All Posts</h2>
+  {% if user.is_authenticated %}
+  <div id="new-post-view" class="new-post-container">
+    <form id="new-post-form">
+      <!--{% csrf_token %} WILL IMPLEMENT THIS LATER exempt for now-->
+      <textarea
+        id="new-post"
+        class="form-control"
+        placeholder="What's on your mind?"
+        maxlength="280"
+      ></textarea>
+      <input type="submit" value="Post" />
+    </form>
+  </div>
+  {% endif %} {% for post in allPosts %}
+  <div class="div-border">
+    <div class="post-header">
+      <a href="{% url 'social:profile-page' post.creator.username %}">
+        <strong>{{ post.creator.username }}</strong>
+      </a>
+      <span class="ligthgray-text">{{ post.timestamp }}</span>
+    </div>
 
-        {% if user.is_authenticated %}
-        <div id="new-post-view" class="new-post-container">
+    <!-- This displays the actual post -->
+    <div id="postID-{{post.id}}" class="post-container">{{ post.post }}</div>
 
-            <form id="new-post-form">
-                <!--{% csrf_token %} WILL IMPLEMENT THIS LATER exempt for now-->
-                <textarea id="new-post" class="form-control" placeholder="What's on your mind?" maxlength="280"></textarea>
-                <input type="submit" value="Post">
-            </form>
-        </div>
+    <div class="post-buttons">
+      {% if user.is_authenticated %}
+      <div class="buttons-and-data">
+        <button data-postid="{{post.id}}" class="like-btn">
+          <img
+            src="{% static 'social/icons/like_icon.svg' %}"
+            alt="Like icon"
+            width="20"
+          />
+        </button>
+        <span id="likesID-{{post.id}}" class="ligthgray-text"
+          >{{ post.likes }}</span
+        >
+      </div>
+
+      <div class="buttons-and-data">
+        <button>
+          <img
+            src="{% static 'social/icons/comment_icon.svg' %}"
+            alt="Comment icon"
+            width="20"
+          />
+        </button>
+        <span id="commentsID-" class="ligthgray-text">0</span>
+      </div>
+
+      <div class="buttons-and-data">
+        <button>
+          <img
+            src="{% static 'social/icons/share_icon.svg' %}"
+            alt="Share icon"
+            width="20"
+          />
+        </button>
+        <span id="sharessID-" class="ligthgray-text">0</span>
+      </div>
+
+      <div class="buttons-and-data">
+        <!-- Show the edit button only for the logged user that created the post -->
+        {% if user.username == post.creator.username %}
+        <button data-postid="{{post.id}}" class="edit-btn">Edit</button>
         {% endif %}
+      </div>
 
-        {% for post in allPosts %}
-            <div class="div-border">
-                <div class="post-header">
-                    <a href="{% url 'social:profile-page' post.creator.username %}">
-                        <strong>{{ post.creator.username }}</strong>
-                    </a>
-                    <span class="ligthgray-text">{{ post.timestamp }}</span>
-                </div>
+      {% else %}
+      <div class="buttons-and-data">
+        <img
+          src="{% static 'social/icons/like_icon.svg' %}"
+          alt="Like icon"
+          width="20"
+        />
+        <span id="likesID-{{post.id}}" class="ligthgray-text"
+          >{{ post.likes }}</span
+        >
+      </div>
 
-                <!-- This displays the actual post -->
-                <div id="postID-{{post.id}}" class="post-container">{{ post.post }}</div>
-                
-                <div class="post-buttons">
-                    {% if user.is_authenticated %}
-                        <div class="buttons-and-data">
-                            <button data-postid="{{post.id}}" class="like-btn">
-                                <img src="{% static 'social/icons/like_icon.svg' %}" alt="Like icon" width="20">
-                            </button>
-                            <span id="likesID-{{post.id}}" class="ligthgray-text">{{ post.likes }}</span>
-                        </div>
-                        
-                        <div class="buttons-and-data">
-                            <button>
-                                <img src="{% static 'social/icons/comment_icon.svg' %}" alt="Comment icon" width="20">
-                            </button>
-                            <span id="commentsID-" class="ligthgray-text">0</span>
-                        </div>
+      <div class="buttons-and-data">
+        <img
+          src="{% static 'social/icons/comment_icon.svg' %}"
+          alt="Comment icon"
+          width="20"
+        />
+        <span id="commentsID-" class="ligthgray-text">0</span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %} {% if displayPagination %}
+  <!-- Source: https://docs.djangoproject.com/en/3.0/topics/pagination/ -->
+  <nav aria-label="Page navigation between posts">
+    <!-- Aligning the pagination components in the middle with flexbox -->
+    <ul class="pagination justify-content-center">
+      {% if allPosts.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ allPosts.previous_page_number }}"
+          >&laquo;</a
+        >
+      </li>
+      {% endif %}
 
-                        <div class="buttons-and-data">
-                            <button>
-                                <img src="{% static 'social/icons/share_icon.svg' %}" alt="Share icon" width="20">
-                            </button>
-                            <span id="sharessID-" class="ligthgray-text">0</span>
-                        </div>
+      <li class="page-item">
+        <a class="page-link" href="#">{{ allPosts.number }}</a>
+      </li>
 
-                        <div class="buttons-and-data">
-                            <!-- Show the edit button only for the logged user that created the post -->
-                            {% if user.username == post.creator.username %}
-                            <button data-postid="{{post.id}}" class="edit-btn">Edit</button>
-                            {% endif %}
-                        </div>                
-
-                    {% else %}
-                        <div class="buttons-and-data">
-                            <img src="{% static 'social/icons/like_icon.svg' %}" alt="Like icon" width="20">
-                            <span id="likesID-{{post.id}}" class="ligthgray-text">{{ post.likes }}</span>
-                        </div> 
-                        
-                        <div class="buttons-and-data">
-                            <img src="{% static 'social/icons/comment_icon.svg' %}" alt="Comment icon" width="20">
-                            <span id="commentsID-" class="ligthgray-text">0</span>
-                        </div>
-                    {% endif %}
-                 </div>
-                 
-                 <!-- IMPLEMENT LATER<div>Comment</div>-->
-            </div>
-        {% endfor %}
-
-        {% if displayPagination %}
-        <!-- Source: https://docs.djangoproject.com/en/3.0/topics/pagination/ -->
-        <nav aria-label="Page navigation between posts">
-            <!-- Aligning the pagination components in the middle with flexbox -->
-            <ul class="pagination justify-content-center">  
-                {% if allPosts.has_previous %}
-                    <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ allPosts.previous_page_number }}">&laquo;</a></li>
-                {% endif %}
-
-                    <li class="page-item"><a class="page-link" href="#">{{ allPosts.number }}</a></li>
-
-                {% if allPosts.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ allPosts.next_page_number }}">&raquo;</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ allPosts.paginator.num_pages }}">last</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-        {% endif %}
-    </section>
-{% endblock %}
-
-{% block script %}
-    <script src="{% static 'social/social.js' %}"></script>
+      {% if allPosts.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ allPosts.next_page_number }}"
+          >&raquo;</a
+        >
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ allPosts.paginator.num_pages }}"
+          >last</a
+        >
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+</section>
+{% endblock %} {% block script %}
+<script src="{% static 'social/social.js' %}"></script>
 {% endblock %}
