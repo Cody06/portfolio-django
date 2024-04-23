@@ -1,120 +1,143 @@
-{% extends "commerce/layout.html" %}
-{% load humanize %}<!-- Format large numbers with comma 1/3 (settings.py for 3/3)-->
+{% extends "commerce/layout.html" %} {% load humanize %}<!-- Format large numbers with comma 1/3 (settings.py for 3/3)-->
 
-{% block title %} - Listing: {{listing.title }} {% endblock %}
+{% block title %} - Listing: {{listing.title }} {% endblock %} {% block body %}
+<h2>
+  Listing: {{ listing.title }}{% if not listing.active %} (CLOSED){% endif %}
+</h2>
 
-{% block body %}
-	<h2>Listing: {{ listing.title }}{% if not listing.active %} (CLOSED){% endif %}</h2> 
-    
-    {% if listing.seller.username == currentUser.username %}
-        <p>You are the owner of this listing</p>
-    
-    {% else %}
-        
-        {% if listing.active %}
-        	<form action="{% url 'commerce:listing' listing.id %}" method="post">
-                {% csrf_token %}
-                <!-- Check which button to display -->
-                {% if inWatchlist %}
-                    <input type="submit" name="{{ watchlist_btn }}" value="- Watchlist" class="btn btn-secondary" style="font-size:12px;padding:2px;" title="Remove from watchlist">
-                {% else %}
-                    <input type="submit" name="{{ watchlist_btn }}" value="+ Watchlist" class="btn btn-primary" style="font-size:12px;padding:2px;" title="Add to watchlist">
-                {% endif %}
-            </form>
-        {% endif %}
+{% if listing.seller.username == currentUser.username %}
+<p>You are the owner of this listing</p>
 
-    {% endif %}
-    <br>
-	
-    {% if listing.image_URL %} <!-- Show image if it was provided -->
-    	<img src="{{ listing.image_URL}}" alt="{{ listing.title }}" width="200">
-    {% else %}
-    	<img src="../static/commerce/No_image_available.png" alt="No image" width="200">
-    {% endif %}
+{% else %} {% if listing.active %}
+<form action="{% url 'commerce:listing' listing.id %}" method="post">
+  {% csrf_token %} {% if inWatchlist %}
+  <input
+    type="submit"
+    name="{{ watchlist_btn }}"
+    value="- Watchlist"
+    class="btn btn-secondary"
+    style="font-size: 12px; padding: 2px"
+    title="Remove from watchlist"
+  />
+  {% else %}
+  <input
+    type="submit"
+    name="{{ watchlist_btn }}"
+    value="+ Watchlist"
+    class="btn btn-primary"
+    style="font-size: 12px; padding: 2px"
+    title="Add to watchlist"
+  />
+  {% endif %}
+</form>
+{% endif %} {% endif %}
+<br />
 
-    {% if listing.description %}
-    	<p>{{ listing.description }}</p>
-    {% endif %}
+{% if listing.image_URL %}
+<img src="{{ listing.image_URL}}" alt="{{ listing.title }}" width="200" />
+{% else %}
+<img
+  src="../static/commerce/No_image_available.png"
+  alt="No image"
+  width="200"
+/>
+{% endif %} {% if listing.description %}
+<p>{{ listing.description }}</p>
+{% endif %} {% if listing.current_bid == 0 %}
+<h2>${{ listing.starting_bid|intcomma }}</h2>
+<!-- Format large numbers with comma 2/3-->
+{% else %}
+<h2>${{ listing.current_bid|intcomma }}</h2>
+<!-- Format large numbers with comma 2/3-->
+{% endif %}
 
-    <!-- Check if we display the starting or current bid -->
-    {% if listing.current_bid == 0 %}
-        <h2>${{ listing.starting_bid|intcomma }}</h2><!-- Format large numbers with comma 2/3-->
-    {% else %}
-        <h2>${{ listing.current_bid|intcomma }}</h2><!-- Format large numbers with comma 2/3-->
-    {% endif %}
-    
+<p>
+  {{ listing.number_of_bids }} bid(s) so far. {% if highestBid.user.username ==
+  currentUser.username and not listing.active %} Congratulations! You won this
+  bid! {% elif highestBid.user.username == currentUser.username %} Your bid is
+  the current bid. {% elif listing.number_of_bids == 0 %} Start bidding. {% else
+  %}
+  <b>{{ highestBid.user.username }}</b> has the highest bid {% endif %}
+</p>
 
-    <p>
-        {{ listing.number_of_bids }} bid(s) so far.
-        {% if highestBid.user.username == currentUser.username and not listing.active %}
-            Congratulations! You won this bid! 
-        {% elif highestBid.user.username == currentUser.username %}
-            Your bid is the current bid.
-        {% elif listing.number_of_bids == 0 %}
-            Start bidding.
-        {% else %}
-            <b>{{ highestBid.user.username }}</b> has the highest bid
-        {% endif %}
-    </p>
+{% if listing.active %} {% if listing.seller.username == currentUser.username %}
+<form action="{% url 'commerce:listing' listing.id %}" method="post">
+  {% csrf_token %}
+  <input type="submit" name="close_listing_btn" value="Close Listing" />
+</form>
 
-    {% if listing.active %}
-        {% if listing.seller.username == currentUser.username %}
-            <form action="{% url 'commerce:listing' listing.id %}" method="post">
-                {% csrf_token %}
-                <input type="submit" name="close_listing_btn" value="Close Listing">
-            </form>
-        
-        {% else %}
-        
-            <form action="{% url 'commerce:listing' listing.id %}" method="post">
-                {% csrf_token %}
-                <!-- Will not accept bids with decimals -->
-            	<input type="number" name="bid_amount" min="0" step=".01"><!-- Allow 2 decimal places with step -->
-                {% if error %}
-                    <span style="color:red;">{{ error }}</span>
-                {% else %}
-                    <span style="color:green;">{{ success }}</span>
-                {% endif %}
-                <br>
-            	<input type="submit" name="place_bid_btn" value="Place Bid" class="btn btn-primary" style="margin:10px 0px 20px 0px;" title="Bid must be equal to starting bid or greater than existing bids">
-            </form>
-           
-        {% endif %}
+{% else %}
 
-    {% endif %}
-    <h3>Details</h3>
-    <ul>
-    	<li>Listed by: {{ listing.seller.username }}</li>
-        {% if listing.category %}
-    	   <li>Category: {{ listing.category }}</li>
-        {% endif %}
-    </ul>
+<form action="{% url 'commerce:listing' listing.id %}" method="post">
+  {% csrf_token %}
+  <!-- Will not accept bids with decimals -->
+  <input
+    type="number"
+    name="bid_amount"
+    min="0"
+    step=".01"
+  /><!-- Allow 2 decimal places with step -->
+  {% if error %}
+  <span style="color: red">{{ error }}</span>
+  {% else %}
+  <span style="color: green">{{ success }}</span>
+  {% endif %}
+  <br />
+  <input
+    type="submit"
+    name="place_bid_btn"
+    value="Place Bid"
+    class="btn btn-primary"
+    style="margin: 10px 0px 20px 0px"
+    title="Bid must be equal to starting bid or greater than existing bids"
+  />
+</form>
 
-    <hr>
-    <h3>Comments Section</h3>
-    {% if listing.active %}
-        <form action="{% url 'commerce:listing' listing.id %}" method="post" id="inputComment">
-            {% csrf_token %}
-            <textarea name="comment" maxlength="280" rows="4" cols="50"></textarea><br>
-            <input type="submit" name="comment_btn" value="Post Comment">
-        </form>
-    {% else %} <!-- Show a closed version of the post comment section -->
-        <form>
-            {% csrf_token %}
-            <textarea placeholder="Comment section is closed" rows="4" cols="50" disabled></textarea><br>
-            <input type="submit" value="Post Comment" disabled>
-        </form>
-    {% endif %}
+{% endif %} {% endif %}
+<h3>Details</h3>
+<ul>
+  <li>Listed by: {{ listing.seller.username }}</li>
+  {% if listing.category %}
+  <li>Category: {{ listing.category }}</li>
+  {% endif %}
+</ul>
 
-    <h4 style="margin:10px 0px">Other comments:</h4>
+<hr />
+<h3>Comments Section</h3>
+{% if listing.active %}
+<form
+  action="{% url 'commerce:listing' listing.id %}"
+  method="post"
+  id="inputComment"
+>
+  {% csrf_token %}
+  <textarea name="comment" maxlength="280" rows="4" cols="50"></textarea><br />
+  <input type="submit" name="comment_btn" value="Post Comment" />
+</form>
+{% else %}
+<form>
+  {% csrf_token %}
+  <textarea
+    placeholder="Comment section is closed"
+    rows="4"
+    cols="50"
+    disabled
+  ></textarea
+  ><br />
+  <input type="submit" value="Post Comment" disabled />
+</form>
+{% endif %}
 
-    {% for comment in comments %}
-        <div style="boder:1px solid lightgrey;">
-            <h6>{{ comment.user.username }} <span style="font-size: 80%;color: grey;">- {{ comment.date }}</span></h6>
-            <p>{{ comment.comment }}</p>
-        </div>
-    {% empty %}
-        <p>Comment section is empty.</p>
-    {% endfor %}
+<h4 style="margin: 10px 0px">Other comments:</h4>
 
-{% endblock %}
+{% for comment in comments %}
+<div style="boder: 1px solid lightgrey">
+  <h6>
+    {{ comment.user.username }}
+    <span style="font-size: 80%; color: grey">- {{ comment.date }}</span>
+  </h6>
+  <p>{{ comment.comment }}</p>
+</div>
+{% empty %}
+<p>Comment section is empty.</p>
+{% endfor %} {% endblock %}
