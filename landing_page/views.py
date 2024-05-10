@@ -8,7 +8,6 @@ from .models import User
 
 # Create your views here.
 def index(request):
-	print("- landing_pate index()")
 	return render(request, 'landing_page/index.html')
 
 
@@ -17,7 +16,6 @@ def home_redirect(request):
 
 
 def login_view(request):
-	print("- landing_pate: login_view()")
 	return render(request, 'landing_page/login.html')
 
 

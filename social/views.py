@@ -37,9 +37,7 @@ def guest_path(request):
     # Check if guest account already exists
     try:
         guest = User.objects.get(username='guest')
-        print(" - Guest account exists")
     except User.DoesNotExist:
-        print(" - Guest account does NOT exist")
         return HttpResponse("Guest account does not exist")
     login(request, guest)
     return HttpResponseRedirect(reverse('social:index'))    # ensure we redirect to the index of workboard

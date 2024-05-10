@@ -25,9 +25,7 @@ def guest_path(request):
     # Check if guest account already exists
     try:
         guest = User.objects.get(username='guest')
-        print(" - Guest account exists")
     except User.DoesNotExist:
-        print(" - Guest account does NOT exist")
         return HttpResponse("Guest account does not exist")
     login(request, guest)
     return HttpResponseRedirect(reverse('mail_client:index'))    # ensure we redirect to the index of workboard
@@ -180,7 +178,6 @@ def register(request):
             user = User.objects.create_user(email, email, password)
             user.save()
         except IntegrityError as e:
-            print(e)
             return render(request, "mail_client/register.html", {
                 "message": "Email address already taken."
             })

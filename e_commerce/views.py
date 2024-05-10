@@ -32,9 +32,7 @@ def guest_path(request):
     # Check if guest account already exists
     try:
         guest = User.objects.get(username='guest')
-        print(" - Guest account exists")
     except User.DoesNotExist:
-        print(" - Guest account does NOT exist")
         return HttpResponse("Guest account does not exist")
     login(request, guest)
     request.session["userID"] = guest.id              # Save the user's id in the session
